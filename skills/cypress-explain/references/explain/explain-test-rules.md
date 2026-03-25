@@ -41,7 +41,7 @@ When the user asks why a test is flaky or why it failed, emphasize dependencies,
 
 6. Best Practices
 
-    Check if the `cypress-author` skill is available. If it is consult the authoring references in that skill to identify best practices for using Cypress and compare against the test.
+    In one short pass, note where the test diverges from what sections 1-5 already imply and from authoritative Cypress docs.
 
 7. Corrections
 

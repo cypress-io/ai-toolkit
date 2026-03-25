@@ -1,4 +1,4 @@
-# Cypress Explain Test
+# Cypress Explain
 
 An agent skill that helps you describe, understand, and critique existing Cypress tests so you can spot gaps, problems, and ways to make them stronger.
 
@@ -57,7 +57,7 @@ For the AI power users, consider defining your own rules and skills with specifi
 
 Think of this skill as just setting up some general guidelines - you may need to focus the prompt a bit by pointing at specific files or calling out things you *don't* want it to do. These should improve as you write more tests and the skill has more material to reference.
 
-Underneath it all, the chosen model will have an outsized impact on speed vs quality behavior. Are you getting fabulous results but it's too slow? Try a lighter, faster model like Claude Haiku or Gemini Flash. Things speedy but not getting great tests? Try a heavier, slower model like Claude Opus or Gemini Pro.
+Underneath it all, the chosen model will have an outsized impact on speed vs quality behavior. Are you getting fabulous results but it's too slow? Try a lighter, faster model like Claude Haiku or Gemini Flash. Things speedy but not getting great explanations? Try a heavier, slower model like Claude Opus or Gemini Pro.
 
 ## Development
 
