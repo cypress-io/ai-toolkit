@@ -11,7 +11,10 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Review the Cypress support file if one exists for the targeted testing type.
 - Review the project's `package.json` to understand available libraries and the version of Cypress being used.
   - If the Cypress version cannot be determined run `npx cypress --version` in the project root. As a fallback, assume the newest version of Cypress is being used.
-- Review existing Cypress tests to see if a test already exists for the area or behavior being tested. If one is found prefer updating or extending it over creating a new spec file unless the user specified otherwise.
+- If there are existing Cypress tests in the project:
+  - Look for an existing test file for the targeted area or component. Prefer updating or extending it over creating a new spec file unless the user specified otherwise.
+  - If no existing test file is found, look for Cypress tests closely related to the task being accomplished. Attempt to identify one to three examples closely related to the feature, behavior, or component you are writing tests for.
+- When reviewing existing project content, including files suggested by agent configuration, always prefer searching for specific content inside files (`grep`) rather than reading the entire file.
 
 ## Style
 - Use clear, concise, and descriptive test titles in Cypress. 
@@ -20,7 +23,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
   - If updating an existing title, remove ambiguity and ensure it reflects the current test logic.
 - Add explicit assertions.
 - Keep tests deterministic and stable.
-- Match the formatting, style, and conventions of any existing Cypress tests in this project.
+- Match the formatting, style, and conventions of any related Cypress tests that were identified.
 - Match the project's language (TypeScript vs JavaScript) and existing type patterns (e.g. typed custom commands, Cypress types)
 - Attempt to reuse existing helpers, including Cypress Custom Commands
 - Attempt to determine the version of Cypress being used. Suggest only logic and commands available in the version of Cypress being used in the project.

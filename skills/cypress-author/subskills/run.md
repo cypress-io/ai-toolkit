@@ -1,4 +1,4 @@
-# Cypress TestSmith Run
+# Cypress Run
 
 You are responding to a newly-created or newly-changed Cypress test and need to decide whether to run the Cypress test to validate it and, if so, how to do so.
 

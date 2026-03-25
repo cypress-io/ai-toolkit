@@ -1,6 +1,6 @@
 # Run Cypress Test Rules
 
-Follow these rules unless requested otherwise:
+Only attempt to run the Cypress test if the user requests it.
 
 ## Setup
 

@@ -39,7 +39,11 @@ When the user asks why a test is flaky or why it failed, emphasize dependencies,
     - missing assertions
     - overly long tests
 
-6. Corrections
+6. Best Practices
+
+    Check if the `cypress-author` skill is available. If it is consult the authoring references in that skill to identify best practices for using Cypress and compare against the test.
+
+7. Corrections
 
     - Attempt to associate the title for the test and parent blocks to the identified test behavior. If misleading or incorrect titles are found then mention them in the output and suggest corrections.
     - Do not assume comments are always correct. If misleading or incorrect comments are found then mention them in the output and suggest corrections.
