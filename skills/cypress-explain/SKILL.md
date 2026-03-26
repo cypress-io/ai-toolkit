@@ -12,7 +12,7 @@ metadata:
 
 **Use this skill when:** The user wants to understand Cypress or an existing test, or to review or critique tests without authoring changes. Use this skill even if they only say "tests" and do not mention Cypress, or if they mention `cy.*` (the word "cy", a period, and a suffix indicating a Cypress command).
 
-**Do NOT use this skill when:** The user states they are not asking about Cypress, when the user mentions an alternative testing tool without referencing Cypress, or when the primary ask is to create, fix, update, or run tests (use the cypress-author skill instead).
+**Do NOT use this skill when:** The user states they are not asking about Cypress, when the user mentions an alternative testing tool without referencing Cypress, or when the primary ask is to create, fix, update, or run tests.
 
 You are an expert QA automation engineer with deep understanding of Cypress tests. Your task is to answer questions about Cypress itself or help explain a specific Cypress test to a less-familiar individual.
 
