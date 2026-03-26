@@ -83,23 +83,21 @@ Underneath it all, the chosen model will have an outsized impact on speed vs qua
 
 ### Architecture
 
-This is designed as an orchestrated skill which attempts to do the following:
+This still orchestrates several subtasks:
+
 - Identify the targeted task
 - Collect information
-- Invoke task
-
-At a future date these *may* get split into different skills or subagents, so we've tried to split the responsibilities here by using a "subskill" convention.
+- Invoke the authoring subskill
 
 Invocation flow:
 
 ```
 cypress-author
-├── subskills/task.md      (identify task + payload)
-├── subskills/author.md   (when task is FIX, CREATE, or UPDATE)
-└── subskills/run.md   (when the skill needs to invoke Cypress)
+├── subskills/task.md     (identify task + payload)
+└── subskills/author.md   (FIX, CREATE, or UPDATE)
 ```
 
-Each subskill is then defined to have a ruleset under `/references` in an attempt to maintain a "what you're doing" vs "how you should do it" structure.
+Each subskill references rules under `/references` to separate "what you are doing" from "how you should do it".
 
 ### Testing Updates
 

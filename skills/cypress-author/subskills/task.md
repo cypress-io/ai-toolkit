@@ -33,6 +33,30 @@ If no type has been explicitly identified then attempt to infer from the spec fi
 | **E2E**       | `cypress/e2e/**/*.cy.ts` | Critical user journeys, validating multiple functional areas, live validation |
 | **Component** | `cypress/component/**/*.cy.{jsx,tsx}` | Isolated UI behaviors within an identified UI Component (React, Vue.js, etc), no network communication or routing  |
 
+## Handoff to author
+
+When moving to [author.md](./author.md), pass a single coherent payload:
+
+| Field | Description |
+| ----- | ----------- |
+| `task` | `FIX`, `UPDATE`, or `CREATE` |
+| `spec` | Spec filepath (or suggested path for new specs) |
+| `test` | Optional: `describe` / `it` path or line |
+| `type` | `E2E` or `CT` (required to be settled before authoring; infer per **Testing Type** above or ask) |
+| `instructions` | What to fix, change, or build |
+
+Example (illustrative):
+
+```json
+{
+  "task": "UPDATE",
+  "spec": "cypress/e2e/login.cy.ts",
+  "test": "Login / should show validation errors",
+  "type": "E2E",
+  "instructions": "Assert the new error message copy for empty password."
+}
+```
+
 ## Act
 
 After determining the task being performed ensure the needed information has been provided. If the request is ambiguous (e.g. "fix my tests", "update the spec") ask which spec file or what problem to address before proceeding. If needed information has not been provided and cannot be reliably inferred from the conversation, stop and ask the user to supply it.

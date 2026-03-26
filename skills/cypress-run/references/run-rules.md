@@ -8,9 +8,9 @@ You MUST read and follow [./env.md](./env.md) before attempting to invoke Cypres
 
 ## Intent
 
-Review the conversation to determine whether the impacted spec or test should be executed.
-- Changes that do not impact the test functionality should not be run. This includes changes isolated to comments and formatting.
-- Always respect instructions from the user regarding whether or not to run the test
+- **Explicit run request:** If the user asked to run, execute, or verify tests (with or without a spec path), treat that as the primary intent. Run the narrowest sensible target (spec or single test) unless they asked for the full suite or a script implies otherwise. Skip execution only when setup is unsafe or impossible (explain why), or the request is hopelessly ambiguous (ask for spec path or script).
+- **After authoring or edits:** If the conversation is mainly about code changes and running is optional, do not run solely for comment-only or formatting-only edits. If the user asked you to validate a change, run as requested.
+- Always respect the user’s instructions on whether or not to run, and on headed vs headless, env, or scripts when stated.
 
 ## Understand
 
