@@ -1,6 +1,6 @@
 ---
 name: cypress-explain
-description: "Explains Cypress tests (E2E and component tests), and answers questions about Cypress use and behavior. Use when the user asks to explain how a test works, explain how Cypress works, review or critique a test without writing code. Apply even when the user does not say 'Cypress' (e.g. 'explain this test'). Prefer the cypress-author skill when the user wants to create, fix, update, or run tests."
+description: "Explains Cypress tests (E2E and component tests), and answers questions about Cypress use and behavior. Use when the user asks to explain how a test works, explain how Cypress works, review or critique a test without writing code. Apply even when the user does not say 'Cypress' (e.g. 'explain this test'). Prefer the cypress-author skill when the user wants to create, fix, or update tests."
 model: inherit
 background: false
 allowed-tools: Read
