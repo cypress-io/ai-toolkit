@@ -1,10 +1,24 @@
-# Cypress Author
+# Cypress Run
 
 Helps refine and improve the Cypress experience in your AI Agent-of-Choice.
 
-- Creating, updating, or fixing Cypress tests
+- Running Cypress tests
 
-There's a huge body of knowledge out there for Cypress tests which is incredible for LLM's to train and learn on. Unfortunately it's not always the latest (and sometimes not the greatest 😬), especially as Cypress continually releases new features and improvements. This skill attempts to steer your Cypress-related interactions with guidelines, hints, and enhancements to deliver higher-quality, more performant, and more maintainable artifacts.
+## Issues
+
+Cypress was designed with human users and CI flows in mind; however, new agentic workflows can hit bottlenecks and limtiations. This skill will work toward improving or working around these issues to improve the mechanisms for using Cypress.
+
+### User Shell
+
+Agents operate in a shell that may not match how humans run the suite: the app under test and backing services often need to be up with the right ports, env vars, and secrets, while Cypress itself may assume a headed browser, a display, or project-specific npm scripts that don't translate cleanly to non-interactive automation.
+
+### Flakiness and "Run Until Green" workflows
+
+Tests can be slow or flaky, so "run until green" loops burn time and tokens, and failures surface as detailed but token-expensive logs that are easy to misread without knowing whether the failure is environment (permissions, network, missing baseUrl), data, or the test itself.
+
+### Targeting
+
+Agents risk running the wrong target (whole suite vs one spec), skipping setup steps documented only in team habit, or leaving orphan processes; orchestration, isolation, and clear run boundaries matter as much as the test code.
 
 ## Installation
 
@@ -48,7 +62,7 @@ You can encourage the LLM to create AI-powered tests using the brand-new `cy.pro
 
 ### How do I know it's working?
 
-Each agent is different, but usually you can look in the conversation history to ensure your agent is invoking the `cypress-author` skill based on your prompt. You should also see a friendly message from the skill to let you know it's done.
+Each agent is different, but usually you can look in the conversation history to ensure your agent is invoking the `cypress-arun` skill based on your prompt. You should also see a friendly message from the skill to let you know it's done.
 
 ### Why isn't the skill triggering?
 
@@ -56,20 +70,17 @@ Each agent is different, but usually you can look in the conversation history to
 2. The skill attempts to listen for test-related language but depending on your agent, model, and other skills it may not be triggered. You can improve your odds by using the word "Cypress".
 3. Most agents allow you to verify a skill is installed and/or force a skill to be used by using a slash command (above).
 
-### The skill is inflating my token use - why?
+### The skill triggers but isn't running my tests correctly
 
-This skill adds some good general purpose guidelines that may or may not help, depending on your use case. Try the following:
+1. Verify you have the latest version of the skill and the latest version of Cypress.
+2. If you have custom scripts/targets that handle setup/teardown or other orchestration you may need to point the agent in that direction.
+3. 
 
-1. We suggest that the skill review your project config (including support files) and a small set of related tests to try to match your patterns and formatting, but this search process consumes tokens and might find some very large files. You can help by suggesting the skill do "minimal exploration" or "don't worry about matching/reusing existing content", or do the work yourself and point the skill where it needs to look ("use my_spec.cy.js as a pattern")
-2. Review your `AGENTS.md`, `CLAUDE.md`, etc agentic files - these often refer agents to files that are certainly *helpful* but can be bloated or of limited value. Consider adding instructions to refine how agents use those files (only use for XYZ, search by component name inside this file, etc). 
-
-### I don't like the tests it's writing - what can I do?
+### It's still not working the way I want - what can I do?
 
 **Is it something general-purpose or otherwise would apply to others? Consider contributing to this skill!**
 
 You can supply as much or as little context as you want when triggering the skill. Add steps, instructions, patterns, and anti-patterns to help inform the model and it will be mixed in with the instructions the skill supplies.
-
-The skill will leverage any existing Cypress configuration and Cypress tests, so generally you'll get better results as your test suite grows.
 
 For the AI power users, consider defining your own rules and skills with specific overrides and customizations. As this skill asks the model to, for example, write an e2e test you can have your own skill that triggers on that phrasing to enhance what the model is instructed with automatically.
 
@@ -81,29 +92,7 @@ Underneath it all, the chosen model will have an outsized impact on speed vs qua
 
 ## Development
 
-### Architecture
-
-This is designed as an orchestrated skill which attempts to do the following:
-- Identify the targeted task
-- Collect information
-- Invoke task
-
-At a future date these *may* get split into different skills or subagents, so we've tried to split the responsibilities here by using a "subskill" convention.
-
-Invocation flow:
-
-```
-cypress-author
-├── subskills/task.md      (identify task + payload)
-├── subskills/author.md   (when task is FIX, CREATE, or UPDATE)
-└── subskills/run.md   (when the skill needs to invoke Cypress)
-```
-
-Each subskill is then defined to have a ruleset under `/references` in an attempt to maintain a "what you're doing" vs "how you should do it" structure.
-
-### Testing Updates
-
 Remove and reinstall this skill *globally* (remove the `-g` to make it project-specific). To avoid doubt you may want to verify you only have one or the other so you're confident your changes are getting picked up.
 
-`npx skills remove cypress-author -a claude-code -g`
-`npx skills add ../cypress-author -a claude-code -g`
+`npx skills remove cypress-run -a claude-code -g`
+`npx skills add ../cypress-run -a claude-code -g`

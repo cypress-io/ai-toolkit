@@ -10,34 +10,19 @@ You will be supplied preceding conversation and context and will need to analyze
 - Fix or improve existing tests: `FIX`
 - Update existing test to add/remove/modify behavior: `UPDATE`
 - Create new test(s): `CREATE`
-- Run a targeted spec file or test: `RUN`
 
 ## Acquire Information
 
-For type `FIX`
+You need to acquire the following information to help inform your task. Some of this information may have been supplied in the conversation and other pieces may be evident from context and location.
+
 - `spec`: The spec filepath
 - `test`: A path to a specific test in that spec file (using the names of `describe` and `it` blocks) or a line number (optional)
-- `instructions`: The observed problem - this could be a description or a stacktrace
-
-For type `UPDATE`:
-- `spec`: The spec filepath
-- `test`: A path to a specific test in that spec file (using the names of `describe` and `it` blocks) or a line number (optional)
-- `instructions`: A description of the change that needs to be made
-
-For type `CREATE`
-- `spec`: The spec filepath, or a suggested path for a new spec file if one does not exist yet
-- `test`: A path to a specific test in that spec file (using the names of `describe` and `it` blocks) or a line number (optional)
-- `type`: Whether to build an E2E or Component Test (required for CREATE)
-- `instructions`: A description of the functionality that must be tested
-
-For type `RUN`
-- `spec`: The spec filepath (required)
-- `test`: A path to a specific test in that spec file (using the names of `describe` and `it` blocks) or a line number (optional; omit to run the whole spec)
-- `instructions`: Optional context (e.g. "run after fix" or "validate this spec")
+- `type`: Whether the target is an E2E or Component Test
+- `instructions`: The task to accomplish
 
 ### Testing Type
 
-For tasks that require the testing type, review the conversation and look for explicit references to:
+Cypress features two different types of tests - knowing the targeted type will inform how to understand and write the needed test. Review the conversation and look for explicit references to:
 - "E2E", "End to End": `E2E`
 - "CT", "Component", "Angular", "React", "Vue": `CT`
 
@@ -50,57 +35,4 @@ If no type has been explicitly identified then attempt to infer from the spec fi
 
 ## Act
 
-After determining the task being performed ensure the needed information has been provided. If the request is ambiguous (e.g. "fix my tests", "update the spec") ask which spec file or what problem to address before returning a payload. If needed information has not been provided and cannot be reliably inferred from the conversation, stop and ask the user to supply it.
-
-**Required by task:** The JSON schema below uses a minimal `required` set. In practice:
-- **FIX**, **UPDATE**: require `spec`.
-- **CREATE**: require `spec` (or a suggested path for a new file) and `type` (E2E or CT).
-- **RUN**: require `spec`; `test` is optional to target a single test within the spec.
-
-## Output
-
-Return data to the orchestrator as structured JSON.
-
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Task Specification",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["task", "instructions"],
-  "properties": {
-    "task": {
-      "type": "string",
-      "enum": ["FIX", "CREATE", "UPDATE", "RUN"],
-      "description": "The type of task to perform."
-    },
-    "spec": {
-      "type": "string",
-      "description": "Filepath to the spec file."
-    },
-    "test": {
-      "description": "A path to a specific test using describe/it names, or a line number in the spec file.",
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "Test path using describe/it names (e.g., 'User API > GET /users > returns 200')."
-        },
-        {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Line number within the spec file."
-        }
-      ]
-    },
-    "type": {
-      "type": "string",
-      "enum": ["E2E", "CT"],
-      "description": "The type of test."
-    },
-    "instructions": {
-      "type": "string",
-      "description": "A description of the task to accomplish."
-    }
-  }
-}
-```
+After determining the task being performed ensure the needed information has been provided. If the request is ambiguous (e.g. "fix my tests", "update the spec") ask which spec file or what problem to address before proceeding. If needed information has not been provided and cannot be reliably inferred from the conversation, stop and ask the user to supply it.

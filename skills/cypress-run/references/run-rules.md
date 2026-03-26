@@ -4,7 +4,7 @@ Only attempt to run the Cypress test if the user requests it.
 
 ## Setup
 
-You MUST read and follow [../setup/env.md](../setup/env.md) before attempting to invoke Cypress, including attempts to run tests.
+You MUST read and follow [./env.md](./env.md) before attempting to invoke Cypress, including attempts to run tests.
 
 ## Intent
 
