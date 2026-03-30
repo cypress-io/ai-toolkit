@@ -1,5 +1,9 @@
 # Cypress AI Toolkit
 
+<p align="center">
+  <img src="./assets/cypress-logotype.svg" alt="Cypress" width="240" />
+</p>
+
 Open-source building blocks that help AI tools write better Cypress tests.
 
 ---
