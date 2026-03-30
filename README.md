@@ -1,34 +1,73 @@
 # Cypress AI Toolkit
 
-> Fast, flexible, and open tooling for building intelligent workflows with Cypress.
+Open-source building blocks that help AI tools write better Cypress tests.
 
-Cypress AI Toolkit is the open-source home for reusable AI tooling that extend the capabilities of **Cypress**. It provides a growing collection of composable building blocks for automation, reasoning, and integrations—designed for developers who want to ship smarter features faster.
+---
 
-## Why Cypress AI Toolkit?
+## The problem this solves
 
-AI is moving fast, and not every tool is created the same. These AI tools aim to help improve the experience working with Cypress by better informing, guiding, and enhancing your chosen AI toolset to help you write better, faster, more reliable Cypress tests.
+AI coding assistants can write Cypress tests. What they struggle with is writing *good* Cypress tests.
 
-## Features
+Without guidance, AI tools default to patterns that technically work but produce brittle, hard-to-maintain test code. They underuse the Cypress API, misapply selectors, and ignore testing best practices that experienced Cypress developers internalize over time.
 
-We're starting with Skills but we envision more coming in the future, especially as the community shows us all the awesome AI power they've unlocked!
+The Cypress AI Toolkit gives your AI tools that context so they produce tests you actually want to ship.
 
-* **Foundational Skills**
-  Small, composable instruction sets that can be reused and customized across projects.
+---
 
-* **Extensible by design**
-  Easily add your own skills or customize existing ones.
+## What's in the toolkit
 
-* **Framework-agnostic**
-  Works with your stack - no lock-in. The only thing you need is Cypress and some AI!
+### Skills
 
-* **Open ecosystem**
-  Community-driven and continuously evolving.
+Skills are composable instruction sets designed to be loaded into your AI tool before it generates or reviews Cypress code.
+
+Each skill targets a specific area of Cypress usage. You can use them individually or combine them for more complex workflows.
+
+Skills work with any AI tool that accepts system prompts or custom instructions, including:
+
+- Claude (claude.ai, Claude Code, API)
+- Cursor
+- GitHub Copilot (Workspace and Chat)
+- Any tool that supports Model Context Protocol (MCP)
+
+### What's coming
+
+We're building toward a broader toolkit.
+
+The community will help shape what gets prioritized. If you're already unlocking AI-powered Cypress workflows, we want to hear how. [Open an issue](https://github.com/cypress-io/ai-toolkit/issues) or [open a PR](https://github.com/cypress-io/ai-toolkit/pulls).
+
+---
+
+## Getting started
+
+1. Browse the available skills in this repository.
+2. Load the skill that matches what you're working on into your AI tool.
+3. Prompt your AI tool as you normally would. Your AI tool will apply Cypress-specific guidance automatically.
+
+Detailed usage instructions are included with each skill.
+
+---
+
+## Who this is for
+
+The Cypress AI Toolkit is for developers who:
+
+- Already use Cypress for end-to-end or component testing
+- Are using AI coding tools and want better Cypress output from them
+- Want to standardize AI-generated test quality across a team
+
+You do not need to be an AI expert to use it. You need Cypress and an AI tool.
+
+---
 
 ## Contributing
 
-We welcome contributions of all kinds - new skills, improvements, bug fixes, and ideas.
+We welcome contributions of all kinds: new skills, improvements to existing ones, bug reports, and ideas.
 
-Please read our [contributing guide](./CONTRIBUTING.md) for more details.
+If you've built something that makes AI tools smarter about Cypress, this is the right place to share it.
+
+Read the [contributing guide](./CONTRIBUTING.md) to get started.
+
+---
 
 ## License
 
