@@ -10,6 +10,10 @@ Thank you for helping improve this project. Contributions make the toolkit more 
 
 You do not need permission to open a pull request. Small, focused PRs are easier to review and merge.
 
+## Community help
+
+Other Cypress users often share tips in the [Cypress Discord](https://on.cypress.io/discord). You can find **community** peer support here.
+
 ## Before you start
 
 1. **Explore the repo** — Read the README and browse the existing repository so your change fits how the toolkit is organized.
