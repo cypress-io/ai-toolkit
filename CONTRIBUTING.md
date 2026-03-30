@@ -1,20 +1,27 @@
 # Contributing to Cypress AI Toolkit
 
-Thanks for taking the time to contribute! 😄
+Thank you for helping improve this project. Contributions make the toolkit more useful for everyone who uses AI tools with Cypress.
 
-AI is a rapidly-evolving space and we are excited to have such a vast user community that's eager to share their knowledge and enhance how Cypress is used!
+## Ways to contribute
 
-## Where to Begin?
+- **Skills** — Add a new skill under `skills/` or refine an existing one (clearer prompts, better examples, narrower scope).
+- **Documentation** — Improve the root [README](./README.md) or other guides.
+- **Feedback** — [Open an issue](https://github.com/cypress-io/ai-toolkit/issues) to report problems, suggest enhancements, or describe workflows we should support.
 
-We encourage users to get familiar with the existing tools in this repository. This will grow over time and you may find there's something here that does what you need.
+You do not need permission to open a pull request. Small, focused PRs are easier to review and merge.
 
-* Join the Cypress Discord and answer questions. Teaching others how to add/improve/enhance their Cypress workflows is incredibly powerful!
-* Write some documentation or improve our existing docs.
+## Before you start
 
-Want to share your AI savvy with the broader Cypress community, or help us improve these tools? If you see an issue, you can open an issue and (if you're up to it) submit a fix. Our team welcome open source contributions!
+1. **Explore the repo** — Read the README and browse the existing repository so your change fits how the toolkit is organized.
+2. **Check existing work** — Search [open and closed issues](https://github.com/cypress-io/ai-toolkit/issues) to avoid duplicating effort.
+3. **Big or ambiguous ideas** — If you are unsure whether a skill belongs here or overlaps something else, start with an issue so we can align before you invest a lot of time.
 
-Have an idea for a new tool? We encourage starting a discussion on Discord to gauge support and verify it isn't reinventing the wheel before diving into the code/prompts. If it's a good idea that will help the community power up their Cypress use with AI it's a great candidate to add to this repository!
+## Pull requests
+
+- Keep each PR focused on one concern (one skill, one doc, or one class of fix).
+- Describe **what** changed and **why**, and link to a related issue when there is one.
+- For skill changes, mention how you **tried the content** with an AI tool (which tool, what kind of prompt), so reviewers can reason about real-world use.
 
 ## Code of Conduct
 
-All contributors are expected to abide by our Code of Conduct.
+All contributors are expected to follow the [Cypress Code of Conduct](https://github.com/cypress-io/cypress/blob/develop/CODE_OF_CONDUCT.md).
