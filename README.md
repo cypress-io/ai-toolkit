@@ -1,4 +1,4 @@
-# Cypress AI Toolkit
+# ✨ Cypress AI Toolkit
 
 <p align="center">
   <img src="./assets/cypress-logotype-dark.svg#gh-light-mode-only" alt="Cypress" width="240" />
