@@ -18,7 +18,7 @@ Other Cypress users often share tips in the [Cypress Discord](https://on.cypress
 
 1. **Explore the repo** — Read the README and browse the existing repository so your change fits how the toolkit is organized.
 2. **Check existing work** — Search [open and closed issues](https://github.com/cypress-io/ai-toolkit/issues) to avoid duplicating effort.
-3. **Big or ambiguous ideas** — If you are unsure whether a skill belongs here or overlaps something else, start with an issue so we can align before you invest a lot of time.
+3. **Big or ambiguous ideas** — If you are unsure whether it belongs here or overlaps with something else, start with an issue so we can align before you invest a lot of time.
 
 ## Pull requests
 
