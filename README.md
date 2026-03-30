@@ -7,6 +7,8 @@
 
 Open-source building blocks that help AI tools write better Cypress tests.
 
+Cypress also ships AI capabilities in the App and Cypress Cloud - such as `cy.prompt()`, Studio AI, Cloud MCP, Test Intent and Error Summaries, and UI Coverage test generation. Learn more in the [Cypress AI documentation](https://docs.cypress.io/cloud/features/cypress-ai-features).
+
 ---
 
 ## The problem this solves
