@@ -26,6 +26,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Match the formatting, style, and conventions of any related Cypress tests that were identified.
 - Match the project's language (TypeScript vs JavaScript) and existing type patterns (e.g. typed custom commands, Cypress types)
 - Attempt to reuse existing helpers, including Cypress Custom Commands
+- Look for existing Cypress fixture files - consider using or generating to match existing project conventions.
 - Attempt to determine the version of Cypress being used. Suggest only logic and commands available in the version of Cypress being used in the project.
 - Include code comments to aid a future maintainer.
 
@@ -59,11 +60,12 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Use:
   - implicit retries
   - `cy.intercept()` + `cy.wait('@alias')`
-  - assertions that retry automatically.
+  - assertions that retry automatically
+  - assertions that verify the next state of the application with an increased `timeout` configuration (e.g. `cy.get('[data-cy="title"]', { timeout: 10000 })`)
 
 ## Network
 - Stub or intercept network requests when useful.
-- Use cy.intercept() for controlling responses or waiting for calls.
+- Use `cy.intercept()` for controlling responses or waiting for calls.
 
 ## Configuration
 - Prefer extracting configuration into the `cypress.config.js|ts` file
