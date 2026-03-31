@@ -9,8 +9,6 @@ Open-source building blocks that help AI tools write better Cypress tests.
 
 Cypress also ships AI capabilities in the App and Cypress Cloud - such as `cy.prompt()`, Studio AI, Cloud MCP, Test Intent and Error Summaries, and UI Coverage test generation. Learn more in the [Cypress AI documentation](https://docs.cypress.io/cloud/features/cypress-ai-features).
 
----
-
 ## The problem this solves
 
 AI coding assistants can write Cypress tests. What they struggle with is writing *good* Cypress tests.
@@ -18,8 +16,6 @@ AI coding assistants can write Cypress tests. What they struggle with is writing
 Without guidance, AI tools default to patterns that technically work but produce brittle, hard-to-maintain test code. They underuse the Cypress API, misapply selectors, and ignore testing best practices that experienced Cypress developers internalize over time.
 
 The Cypress AI Toolkit gives your AI tools that context so they produce tests you actually want to ship.
-
----
 
 ## What's in the toolkit
 
@@ -42,8 +38,6 @@ We're building toward a broader toolkit.
 
 The community will help shape what gets prioritized. If you're already unlocking AI-powered Cypress workflows, we want to hear how. [Open an issue](https://github.com/cypress-io/ai-toolkit/issues) or [open a PR](https://github.com/cypress-io/ai-toolkit/pulls).
 
----
-
 ## Getting started
 
 1. Browse the available skills in this repository.
@@ -51,8 +45,6 @@ The community will help shape what gets prioritized. If you're already unlocking
 3. Prompt your AI tool as you normally would. Your AI tool will apply Cypress-specific guidance automatically.
 
 Detailed usage instructions are included with each skill.
-
----
 
 ## Who this is for
 
@@ -64,8 +56,6 @@ The Cypress AI Toolkit is for developers who:
 
 You do not need to be an AI expert to use it. You need Cypress and an AI tool.
 
----
-
 ## Contributing
 
 We welcome contributions of all kinds: new skills, improvements to existing ones, bug reports, and ideas.
@@ -73,8 +63,6 @@ We welcome contributions of all kinds: new skills, improvements to existing ones
 If you've built something that makes AI tools smarter about Cypress, this is the right place to share it.
 
 Read the [contributing guide](./CONTRIBUTING.md) to get started.
-
----
 
 ## License
 
