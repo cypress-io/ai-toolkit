@@ -2,7 +2,7 @@
 
 ## Running Cypress
 
-If Cypress needs to be executed, including installation, verifying version, or for running tests, you MUST follow these instructions.
+If Cypress needs to be executed, including installation, verifying version, or running tests, you MUST follow these instructions.
 
 ### Determine package manager
 

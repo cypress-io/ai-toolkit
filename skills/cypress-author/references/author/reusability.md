@@ -6,11 +6,11 @@ Consider extracting repeated or reusable content.
 
 Prefer `before` and `beforeEach` hooks for required setup and configuration. Consider extracting existing test content into a shared hook if similar steps are needed in a new test. 
 
-Code in `before` hooks is only run once, and between the tests Cypress removes all aliases, so subsequent tests may not have access to them. Always prefer defining aliases in `beforeEach` over `before`.
+Always prefer defining aliases in `beforeEach` over `before`. Code in `before` hooks is only run once, and between the tests Cypress removes all aliases, so subsequent tests may not have access to them.
 
 ## Repeated browser state
 
-Consider the `cy.session` command for situations where browser state (such as authentication) is repeatedly established.
+Consider the `cy.session` command for situations where browser state (such as authentication in cookies, localStorage, or sessionStorage) is repeatedly established.
 
 ## Custom Commands
 

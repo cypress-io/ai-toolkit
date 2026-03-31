@@ -12,7 +12,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Review the project's `package.json` to understand available libraries and the version of Cypress being used.
   - If the Cypress version cannot be determined run `npx cypress --version` in the project root. As a fallback, assume the newest version of Cypress is being used.
 - If there are existing Cypress tests in the project:
-  - Look for an existing test file for the targeted area or component. Prefer updating or extending it over creating a new spec file unless the user specified otherwise.
+  - Look for an existing spec file for the targeted area or component. Prefer updating or extending an existing spec file over creating a new spec file unless the user specified otherwise.
   - If no existing test file is found, look for Cypress tests closely related to the task being accomplished. Attempt to identify one to three examples closely related to the feature, behavior, or component you are writing tests for.
 - When reviewing existing project content, including files suggested by agent configuration, always prefer searching for specific content inside files (`grep`) rather than reading the entire file.
 
@@ -43,7 +43,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Use aliases (.as()) or closures (.then()) to access results, never assign Cypress command results to variables
 
 ## Element Identification
-- Review existing Cypress tests for `Cypress.ElementSelector` configuration. Always prefer this.
+- Review existing Cypress tests for `Cypress.ElementSelector` configuration. Always prioritize selectors by the order configured here.
 - Otherwise, prefer stable selectors in this order:
   1. `data-cy`, `data-test`, `data-testid`, `data-test-id`, `data-qa` attributes
   2. `id`, `name` attributes
@@ -67,7 +67,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 
 ## Configuration
 - Prefer extracting configuration into the `cypress.config.js|ts` file
-- Prefer configuring `baseUrl` and using cy.visit('/path') instead of full URLs.
+- Prefer configuring `baseUrl` and using `cy.visit('/path')` instead of full URLs.
 
 ## Security
 - Use cy.env() for credentials, passwords, or secrets.

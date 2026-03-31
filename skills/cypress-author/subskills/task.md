@@ -26,12 +26,12 @@ Cypress features two different types of tests - knowing the targeted type will i
 - "E2E", "End to End": `E2E`
 - "CT", "Component", "Angular", "React", "Vue": `CT`
 
-If no type has been explicitly identified then attempt to infer from the spec filepath and project configuration. Check `cypress.config.js` or `cypress.config.ts` for configured e2e/component paths, and infer from common layout (e.g. `cypress/e2e/` → E2E, `cypress/component/` or `.cy.{jsx,tsx}` → CT). If the type is still ambiguous then stop and prompt the user to supply it. If they are unsure or ask for more information provide a summary of what each type is meant for.
+If no type has been explicitly identified then attempt to infer from the spec filepath and project configuration. Check `cypress.config.js` or `cypress.config.ts` for configured e2e/component paths via a `specPattern`, and infer from common layout (e.g. `cypress/e2e/` → E2E, `cypress/component/` or `.cy.{jsx,tsx}` → CT). If the type is still ambiguous then stop and prompt the user to supply it. If they are unsure or ask for more information provide a summary of what each type is meant for.
 
 | Type          | Location                                                            | When to use |
 | ------------- | --------------------------------------| ------------------------------------------------------------------------ |
-| **E2E**       | `cypress/e2e/**/*.cy.ts` | Critical user journeys, validating multiple functional areas, live validation |
-| **Component** | `cypress/component/**/*.cy.{jsx,tsx}` | Isolated UI behaviors within an identified UI Component (React, Vue.js, etc), no network communication or routing  |
+| **E2E**       | `cypress/e2e/**/*.cy.ts` | Critical user journeys, validating multiple functional areas, testing URL behavior, testing reload or browser history behavior, visiting URLs or cross-origin navigation, testing via natural language, testing auth or wanting to cache and restore cookies, localStorage, or sessionStorage |
+| **Component** | `cypress/component/**/*.cy.{jsx,tsx}` | Isolated UI behaviors based on state within an identified UI Component (React, Vue.js, or Angular), testing mounting components, testing design system components, no network communication or routing  |
 
 ## Handoff to author
 

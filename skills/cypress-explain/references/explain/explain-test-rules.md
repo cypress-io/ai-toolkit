@@ -33,6 +33,7 @@ When the user asks why a test is flaky or why it failed, emphasize dependencies,
 
     Common Cypress test risks:
     - brittle selectors
+    - mixing async and sync code
     - timing assumptions
     - unnecessary `cy.wait()`
     - UI coupling
