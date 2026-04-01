@@ -1,122 +1,140 @@
 # Skills
 
-Skills are supplements that can be added to your Agent of Choice to trigger additional instructions or context based on certain keywords of workflows.
+Skills are instruction sets your AI tool loads to apply Cypress-specific knowledge when generating or reviewing test code.
 
-There's a huge body of knowledge out there for Cypress which is incredible for LLM's to train and learn on. Unfortunately it's not always the latest (and sometimes not the greatest 😬), especially as Cypress continually releases new features and improvements. This skill attempts to steer your Cypress-related interactions with guidelines, hints, and enhancements to deliver higher-quality, more performant, and more maintainable artifacts.
+There is a large body of Cypress content available for AI models to learn from. Not all of it reflects the latest APIs, and not all of it reflects best practices. Skills steer your AI toward what good looks like today.
 
 ## Installation
 
-### Tool-based
+### With the `skills` package (recommended)
 
-Take a look at [skills.sh](https://skills.sh/) - there are instructions for using the [skills](https://www.npmjs.com/package/skills) package to automatically install and manage skills.
+```sh
+npx skills add https://github.com/cypress-io/ai-toolkit/blob/main/skills/cypress-author -g
+```
 
-For example, `npx skills add https://github.com/cypress-io/ai-toolkit/blob/main/skills/cypress-author -g`
+See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
 
-### Manual
+### Manually
+
 1. Determine your Agent-of-Choice; this could be Cursor, Claude, or many others
-2. Decide if you want this skill to be global or scoped to a single project - this will impact where to install the Skill.
-3. Based on the above, find your Agent's skills install directory.
-  - If you want a global Cursor skill this would be `{USER_HOME}/.cursor/skills`
-  - If you want it project-scoped in Claude: `{PROJECT_DIR}/.claude/skills`
-4. Copy corresponding skill directory into that install directory so you end up with `..../skills/{SKILL_NAME}`
+1. Decide whether you want the skill installed globally or scoped to a single project.
+3. Copy the skill directory into your agent's skills install location:
+  - If you want a global **Cursor** skill this would be `{USER_HOME}/.cursor/skills`
+  - If you want it project-scoped in **Claude**: `{PROJECT_DIR}/.claude/skills`
 
-### Updates
+The skill directory should end up at `.../skills/{SKILL_NAME}`.
+
+## Updates
 
 Skills don't have a robust auto-update capability (yet), so we strongly encourage you to check back from time to time. The `skills` package referenced above includes an update check capability but you need to trigger it yourself - note that this only works for skills added to a *project* (rather than globally) so they are tracked as a project-level dependency.
 
-## Use
+## How skills are triggered
 
-Once installed, skills are triggered by the agent+model comparing your keywords and intents with subjects the skill claims to understand. You may need to rephrase or add specificity to your prompts to get it to trigger in your environment. Each skill (below) documents the sort of keywords and language it listens for. Most agents also support a "slash command" to directly trigger a skill (e.g `/cypress-author ...`).
+Skills activate based on keywords and intent in your prompts. Most agents also support a slash command to invoke a skill directly, for example `/cypress-author`. If a skill isn't triggering, see [Troubleshooting](#troubleshooting).
 
-## Skills
+## Available skills
 
 ### [`cypress-author`](./cypress-author)
 
-This skill attempts to listen for prompts related to creating, updating, or fixing tests and injects content and instructions to improve the process of authoring Cypress tests. It attempts to fill in the gaps using standard best-practice hints and referring to existing content when possible, but you can refine or override any behaviors just like you would with any prompt.
+Creates, updates, and fixes Cypress end-to-end (E2E) and component tests. You don't need to say "Cypress" for it to activate. Phrases like "write a test for this file" or "fix the failing spec" are enough.
 
-#### Prompt examples
+The skill reads your project before writing anything (your config, existing specs, custom commands, and fixtures) so the tests produced match your conventions rather than generic ones.
 
-**Basic Test Creation**
-> Write a test for this file
+The more context you give it, the better the output.
 
-**Detailed Test Creation**
-> Add new tests for the `/login` page.
+#### Example prompts
+
+**Create a component test:**
+> Write component tests for the CheckoutSummary component. It should render correctly with an empty cart, show a line item for each product, and disable the "Place order" button when stock is unavailable.
+
+**Create an end-to-end test with specific requirements:**
+> Add new e2e tests for the `/login` page.
 > The tests should:
 > * Test form validation and error handling
 > * Use these credentials - username `cypress`, password `testing`
 > * Run the tests twice - once with a 800x600px viewport and again with 2048x1536px
 
-**Supercharged Tests**
+**Write AI-powered tests using natural language steps:**
 
 You can encourage the LLM to create AI-powered tests using the brand-new `cy.prompt` command by supplying an ordered list of steps and referencing words like AI or "self-healing".
 
-> Write a test that uses AI to:
+> Write an e2e test that uses AI to:
 > 1. Visit the shopping cart page
 > 2. Remove the "Vegetables" item from the cart
 > 3. Increase the quantity of the "Chocolate" item to 99
 
-**Fix a Test**
-> The "verify the skill" Cypress test in `skill.cy.ts` is failing with an EPERM error. Fix it.
+**Fix a failing test:**
+> The "verify there are 2 notifications" Cypress test in `notifications.cy.ts` is failing with an '.notification is not visible' error. Fix it.
+
+**Fix a flaky test:**
+>The "submits the contact form" test in cypress/e2e/contact.cy.ts is failing intermittently with a timeout on cy.get('[data-cy="success-banner"]'). Fix it.
+
+**Update an existing test:**
+>Update the "should show validation errors" test in cypress/e2e/login.cy.ts to assert the new error message copy for an empty password field.
+
+**Add coverage to an existing spec:**
+
+>Review cypress/e2e/search.cy.ts and add tests for the empty state when no results are found and the error state when the search API fails.
 
 ### [`cypress-explain`](./cypress-explain)
 
-An agent skill that helps you describe, understand, and critique existing Cypress tests so you can spot gaps, problems, and ways to make them stronger.
+Helps you understand, describe, and critique existing Cypress tests. Use this skill when you want to audit a test suite, onboard a new team member, or understand why a test is brittle before rewriting it.
 
-This skill is built for teams who already have Cypress specs or are just getting started and want clearer narratives of what each test does, how it relates to the app under test, and where the suite might be thin, brittle, or out of date. Use it to walk through flows step by step, translate commands and patterns into plain language, and surface missing coverage, flaky or over-coupled selectors, weak assertions, and practical enhancements—from small refactors to broader test-design improvements—without replacing your authoring workflow.
+This skill translates Cypress commands and patterns into plain language, surfaces missing coverage, and identifies weak selectors, flaky assertions, and over-coupled tests. It is built to complement `cypress-author`, not replace it.
 
-#### Prompt examples
+#### Example prompts
 
-**Answer Cypress Questions**
-> Does Cypress support async/await?
+**Explain a Cypress concept:**
+>How does cy.intercept() work, and when should I use cy.wait('@alias') with it?
 
-**Planning**
-> How could I write a Cypress test that uses AI to validate my application?
+**Explain a specific test before editing it:**
+>Explain what the "completes checkout as a guest" test in cypress/e2e/checkout.cy.ts is actually verifying, step by step.
 
-**Explain Tests**
+**Audit a spec for quality issues:**
+>Review cypress/e2e/dashboard.cy.ts. Flag any tests that are likely to be flaky, over-coupled to implementation details, or missing meaningful assertions.
 
-> Explain this Cypress test
+**Understand why a pattern is used:**
 
-**Improve Tests**
-> Review this e2e test. Identify potential issues and suggest improvements.
+>This test uses cy.intercept() and cy.wait('@alias') before clicking the submit button. Why, and what would break if it were removed?
 
-## FAQ
+**Get a plain-language summary for a non-technical stakeholder**
+>Summarize what the tests in cypress/e2e/onboarding.cy.ts cover in plain language, as if explaining it to a product manager.
 
-### How do I know it's working?
+## Troubleshooting
+
+### How do I know the skill is triggering?
 
 Each agent is different, but usually you can look in the conversation history to ensure your agent is invoking the skill based on your prompt - the agent will typically print out that fact.
 
-### Why isn't the skill triggering?
+### The skill isn't triggering
 
 1. Verify it's installed and configured in the appropriate context. Skills can be user or project specific and the setup depends on your Agent of Choice.
 2. Skills attempt to listen for keywords and concepts, but depending on your agent, model, and other skills it may not be triggered. You can improve your odds by using the word "Cypress".
 3. Most agents allow you to verify a skill is installed and/or force a skill to be used by using a slash command (above).
 
-### The skill is inflating my token use - why?
+### The skill is using too many tokens
 
-Skills adds some good general purpose guidelines that may or may not help, depending on your use case. Try the following:
+Skills sometimes prompt the agent to read foundational files like your `package.json` or Cypress config. Limit this by telling the agent to do "minimal exploration," or point it directly at the file you want it to use: "use `my_spec.cy.js` as a pattern."
 
-1. Skills sometimes point the agent to "foundational" files like your package.json or Cypress config - these may be very large for your project or point to very large resources. You can help by suggesting the skill do "minimal exploration" or "don't worry about matching/reusing existing content", or do the work yourself and point the skill where it needs to look ("use my_spec.cy.js as a pattern")
-2. Review your `AGENTS.md`, `CLAUDE.md`, etc agentic files - these often refer agents to files that are certainly *helpful* but can be bloated or of limited value. Consider adding instructions to refine how agents use those files (only use for XYZ, search by component name inside this file, etc). 
+Also review your `AGENTS.md`, `CLAUDE.md`, or similar agentic config files. These often reference files that are helpful in principle but large in practice. Consider adding instructions to scope how agents use them.
 
-### I don't like what the skill is doing - what can I do?
+### The output isn't what I want*
 
-**Is it something general-purpose or otherwise would apply to others? Consider contributing to this skill!**
+Skills set general guidelines. Add your own steps, instructions, or anti-patterns directly in your prompt to override or extend them. The skill will mix your additions with its own.
 
-You can supply as much or as little context as you want when triggering skills. Add steps, instructions, patterns, and anti-patterns to help inform the model and it will be mixed in with the instructions the skill supplies.
+For teams with consistent preferences, consider contributing your improvements back to this repo, or define a project-level skill that builds on top of the defaults.
 
-Skills will generally also be able to lean on any existing Cypress configuration and tests, so generally you'll get better results as your test suite grows.
+### Results are slow
 
-For the AI power users, consider defining your own rules and skills with specific overrides and customizations. As this skill asks the model to, for example, write an e2e test you can have your own skill that triggers on that phrasing to enhance what the model is instructed with automatically.
+The model you choose has the biggest impact on speed vs. quality. For faster results, try a faster model. For higher-quality output where speed matters less, try a larger, slower model.
 
-### I'm getting bad/slow results
-
-Think of this skill as just setting up some general guidelines - you may need to focus the prompt a bit by pointing at specific files or calling out things you *don't* want it to do. These should improve as you write more tests and the skill has more material to reference.
-
-Underneath it all, the chosen model will have an outsized impact on speed vs quality behavior. Are you getting fabulous results but it's too slow? Try a lighter, faster model like Claude Haiku or Gemini Flash. Things speedy but not getting great tests? Try a heavier, slower model like Claude Opus or Gemini Pro.
-
-## Development
+## Remove or reinstall skill
 
 Remove and reinstall this skill *globally* (remove the `-g` to make it project-specific). To avoid doubt you may want to verify you only have one or the other so you're confident your changes are getting picked up.
 
 `npx skills remove cypress-author -a claude-code -g`
 `npx skills add ../cypress-author -a claude-code -g`
+
+## Contributing
+
+If you've found something a skill gets wrong, or you've built an improvement that would help others, we want to hear from you. Read the [contributing guide](../CONTRIBUTING.md) to get started.

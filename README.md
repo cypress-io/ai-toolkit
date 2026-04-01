@@ -21,16 +21,16 @@ The Cypress AI Toolkit gives your AI tools that context so they produce tests yo
 
 ### Skills
 
-Skills are composable instruction sets designed to be loaded into your AI tool before it generates or reviews Cypress code.
+Skills are instruction sets your AI tool loads to apply Cypress-specific knowledge when generating or reviewing test code. They fill the gap between what an AI learned during training and what current, well-written Cypress tests actually look like.
 
-Each skill targets a specific area of Cypress usage. You can use them individually or combine them for more complex workflows.
+Two skills are available now:
 
-Skills work with any AI tool that accepts system prompts or custom instructions, including:
+- **[`cypress-author`](./skills/README.md#cypress-author)** — Improves how AI tools create, update, and fix Cypress tests. Use it when you're writing new tests or fixing broken ones.
+- **[`cypress-explain`](./skills/README.md#cypress-explain)** — Helps you understand, describe, and critique existing tests. Use it when auditing a suite, onboarding a new team member, or investigating a brittle test before rewriting it.
 
-- Claude (claude.ai, Claude Code, API)
-- Cursor
-- GitHub Copilot (Workspace and Chat)
-- Any tool that supports Model Context Protocol (MCP)
+Skills work with any AI tool that accepts custom instructions, including Claude, Cursor, and GitHub Copilot.
+
+See the [skills documentation](./skills/README.md) for installation instructions, example prompts, and troubleshooting.
 
 ### What's coming
 
