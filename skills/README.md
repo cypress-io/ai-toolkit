@@ -17,7 +17,7 @@ See [skills.sh](https://skills.sh/) for full documentation, including how to upd
 ### Manually
 
 1. Determine your Agent-of-Choice; this could be Cursor, Claude, or many others
-1. Decide whether you want the skill installed globally or scoped to a single project.
+2. Decide whether you want the skill installed globally or scoped to a single project.
 3. Copy the skill directory into your agent's skills install location:
   - If you want a global **Cursor** skill this would be `{USER_HOME}/.cursor/skills`
   - If you want it project-scoped in **Claude**: `{PROJECT_DIR}/.claude/skills`
