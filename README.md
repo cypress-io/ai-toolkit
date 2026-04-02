@@ -5,7 +5,9 @@
 
 # ✨ Cypress AI Toolkit
 
-Open-source building blocks that unlock repeatable, high-confidence Cypress workflows for your AI tool.
+Open-source Cypress AI skills, built by the Cypress team. Works with Claude, Cursor, GitHub Copilot, and more.
+
+Your AI tool is capable. It just does not know Cypress the way you do. The toolkit fixes that with skills, context, and guidance built by the team that built Cypress.
 
 Cypress also ships AI capabilities in the App and Cypress Cloud - such as [`cy.prompt()`](https://docs.cypress.io/api/commands/prompt), Studio AI, Cloud MCP, Test Intent and Error Summaries, and UI Coverage test generation. Learn more in the [Cypress AI documentation](https://docs.cypress.io/cloud/features/cypress-ai-features).
 
