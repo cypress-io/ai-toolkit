@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "cypress-cloud": {
+      "url": "https://mcp.cypress.io/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:CYPRESS_MCP_TOKEN}"
+      }
+    }
+  }
+}

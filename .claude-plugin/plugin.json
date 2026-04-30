@@ -1,0 +1,24 @@
+{
+  "name": "cypress",
+  "displayName": "Cypress",
+  "version": "1.0.0",
+  "description": "Create, update, and fix Cypress tests. Connect to Cypress Cloud to see test results and use data to manage your test suite.",
+  "author": {
+    "name": "Cypress.io",
+    "email": "support@cypress.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "cursor",
+    "plugin",
+    "cypress",
+    "ai",
+    "testing",
+    "automation",
+    "qa"
+  ],
+  "repository": "https://github.com/cypress-io/ai-toolkit",
+  "homepage": "https://www.cypress.io",
+  "skills": "./skills/",
+  "mcp": "./mcp/.mcp.claude.json"
+}
