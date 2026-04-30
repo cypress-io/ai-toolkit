@@ -65,37 +65,6 @@ If documentation cannot verify a claim:
 - Provide closest supported alternative (if available)
 - DO NOT invent APIs or behavior
 
-## Docs Site Map (Mental Model)
-
-    docs.cypress.io/
-    ├── /app/
-    │   ├── getting-started/
-    │   ├── core-concepts/
-    │   ├── end-to-end-testing/
-    │   ├── component-testing/
-    │   ├── api/
-    │   │   ├── commands/
-    │   │   ├── assertions/
-    │   │   └── utilities/
-    │   ├── guides/
-    │   ├── plugins/
-    │   ├── configuration/
-    │   ├── cli/
-    │   └── references/
-    │       ├── error-messages
-    │       ├── configuration
-    │       └── environment-variables
-    │
-    ├── /examples/
-    ├── /faq/
-    ├── /changelog/
-    │
-    └── /llm/   ← PRIMARY TARGET
-        ├── /markdown/api/
-        ├── /markdown/guides/
-        ├── /markdown/concepts/
-        └── /markdown/config/
-
 ## Search Strategy
 
 ### 1. Classify the Query
