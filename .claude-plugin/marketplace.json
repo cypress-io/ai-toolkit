@@ -4,7 +4,8 @@
   "description": "Cypress plugin marketplace for Claude Code",
   "owner": {
     "name": "Cypress.io",
-    "email": "support@cypress.io"
+    "email": "support@cypress.io",
+    "url": "https://www.cypress.io"
   },
   "plugins": [
     {
@@ -13,11 +14,11 @@
       "version": "1.0.0",
       "author": {
         "name": "Cypress.io",
-        "email": "support@cypress.io"
+        "email": "support@cypress.io",
+        "url": "https://www.cypress.io"
       },
       "source": "./",
-      "category": "productivity",
-      "homepage": "https://github.com/cypress-io/ai-toolkit"
+      "category": "productivity"
     }
   ]
 }
