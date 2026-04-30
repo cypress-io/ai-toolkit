@@ -20,5 +20,5 @@
   "repository": "https://github.com/cypress-io/ai-toolkit",
   "homepage": "https://www.cypress.io",
   "skills": "./skills/",
-  "mcp": "./mcp/.mcp.claude.json"
+  "mcpServers": "./mcp/.mcp.claude.json"
 }
