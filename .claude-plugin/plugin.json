@@ -10,7 +10,6 @@
   },
   "license": "MIT",
   "keywords": [
-    "cursor",
     "plugin",
     "cypress",
     "ai",
