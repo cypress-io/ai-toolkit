@@ -42,6 +42,14 @@ The community will help shape what gets prioritized. If you're already unlocking
 
 ## Getting started
 
+The Cypress AI toolkit is published as a plugin for both Claude and Cursor. This is the easiest way to install and configure the various capabilities in this package and also enables an auto-update capability.
+
+_Note: Listings in the Claude and Cursor official plugin marketplaces are currently pending. This README will be updated once they are available. Until then, this repository can be cloned and installed as a local plugin in your agent of choice._
+
+### Manual Installation
+
+If you're using another agent or prefer to pick-and-choose you can pick the portions of this repository you want.
+
 1. Install the skills using the [`skills`](https://skills.sh/) package:
 
    ```sh
@@ -51,6 +59,8 @@ The community will help shape what gets prioritized. If you're already unlocking
 2. Prompt your AI tool as you normally would. The skills will activate automatically when relevant, or invoke one directly with a slash command (e.g. `/cypress-author`).
 
 For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
+
+3. The Cypress Cloud MCP configuration can be copied into your agent, or you can follow the [configuration instructions here](https://docs.cypress.io/cloud/integrations/cloud-mcp).
 
 ## Who this is for
 
