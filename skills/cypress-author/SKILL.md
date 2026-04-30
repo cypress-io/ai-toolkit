@@ -5,7 +5,7 @@ model: inherit
 background: false
 allowed-tools: Read, Edit
 metadata:
-  version: 1.0.1
+  version: 1.0.0
 ---
 
 # Cypress Author

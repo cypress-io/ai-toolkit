@@ -5,7 +5,7 @@ model: inherit
 background: false
 allowed-tools: Read
 metadata:
-  version: 1.0.1
+  version: 1.0.0
 ---
 
 # Cypress Explain

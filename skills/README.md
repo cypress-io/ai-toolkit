@@ -22,7 +22,6 @@ Or install a specific skill with:
 ```sh
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-author
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-explain
-npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
@@ -64,16 +63,6 @@ This skill translates Cypress commands and patterns into plain language, surface
 
 > How does cy.intercept() work, and when should I use cy.wait('@alias') with it?
 
-### [`cypress-docs`](./cypress-docs)
-Helps your agent use Cypress documentation more effectively and reliably by using LLM-optimized resources and supplying guidance on how to parse and extract information while grounding answers in verifiable information.
-
-This skill is meant to help inform and support other Cypress skills.
-
-#### Example
-
-**Define a Cypress API:**
-
-> Define the Cypress `cy.prompt` API
 
 ## Troubleshooting
 
