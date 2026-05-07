@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cypress",
+  "description": "Cypress plugin marketplace for Claude Code",
+  "owner": {
+    "name": "Cypress.io",
+    "email": "support@cypress.io",
+    "url": "https://www.cypress.io"
+  },
+  "plugins": [
+    {
+      "name": "cypress",
+      "description": "Create, update, and fix Cypress tests. Connect to Cypress Cloud to see test results and use data to manage your test suite.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Cypress.io",
+        "email": "support@cypress.io",
+        "url": "https://www.cypress.io"
+      },
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
