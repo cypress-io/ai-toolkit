@@ -51,15 +51,21 @@ _Note: Listings in the Claude and Cursor official plugin marketplaces are curren
 
 If you're using another agent or prefer to pick-and-choose you can pick the portions of this repository you want.
 
-1. Install the skills using the [`skills`](https://skills.sh/) package:
+1. Install the skills using command-line tools
 
+ * [`skills`](https://skills.sh/) package:
    ```sh
    npx skills add cypress-io/ai-toolkit
    ```
+  
+  * [`GitHub CLI`](https://cli.github.com/manual/gh_skill):
+    ```sh
+    gh skill install cypress-io/ai-toolkit
+    ```
 
 2. Prompt your AI tool as you normally would. The skills will activate automatically when relevant, or invoke one directly with a slash command (e.g. `/cypress-author`).
 
-For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
+    For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
 
 3. The Cypress Cloud MCP configuration can be copied into your agent, or you can follow the [configuration instructions here](https://docs.cypress.io/cloud/integrations/cloud-mcp).
 
@@ -90,7 +96,7 @@ Any change to a skill should have a corresponding semver update to the `version`
 Changes to any functional toolkit content (skills and mcp, not documentation for example) should update the `version` metadata under `.cursor-plugin` and `.claude-plugin` so that plugin marketplaces can see and update accordingly.
 
 ### Post-PR Actions
-After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above.
+After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above - this likely will *not* match the version of individual skills, but should be thought of as a "package" version.
 
 ## License
 

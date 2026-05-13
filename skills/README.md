@@ -8,8 +8,12 @@ For full documentation — available skills, example prompts, troubleshooting, a
 
 ## Installation
 
-### Install via skills (recommended)
-The [`skills`](https://skills.sh/) package is the fastest way to install Cypress skills.
+### Install via plugin (recommended)
+
+Coming soon; skills will be published as Cursor and Claude plugins which can be managed from within those tools. This will enable easier installation and automatic updates.
+
+### Install via skills
+The [`skills`](https://skills.sh/) package is the fastest way to install Cypress skills directly.
 
 Install all skills by running:
 
@@ -26,6 +30,26 @@ npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
+
+### Install via GitHub CLI
+
+The GitHub CLI has recently introduced tooling for agent skills.
+
+Install all skills by running:
+
+```sh
+gh skill install cypress-io/ai-toolkit
+```
+
+You can also install individual skills:
+
+```sh
+gh skill install cypress-io/ai-toolkit cypress-author
+gh skill install cypress-io/ai-toolkit cypress-explain
+gh skill install cypress-io/ai-toolkit cypress-docs
+```
+
+See [GitHub](https://cli.github.com/manual/gh_skill) for full documentation, including how to keep skills up-to-date.
 
 ### Manually
 
