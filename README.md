@@ -83,6 +83,15 @@ If you've built something that makes AI tools smarter about Cypress, this is the
 
 Read the [contributing guide](./CONTRIBUTING.md) to get started.
 
+## Releases
+### PR Checks
+Any change to a skill should have a corresponding semver update to the `version` frontmatter field in the `SKILL.md` file.
+
+Changes to any functional toolkit content (skills and mcp, not documentation for example) should update the `version` metadata under `.cursor-plugin` and `.claude-plugin` so that plugin marketplaces can see and update accordingly.
+
+### Post-PR Actions
+After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above.
+
 ## License
 
 [MIT](./LICENSE)
