@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.cypress.mcp/cypress-cloud",
+  "version": "1.0.0",
+  "title": "Cypress Cloud MCP",
+  "description": "Direct access to Cypress tests results and accessibility reports in your AI workflow.",
+  "repository": {
+    "url": "https://github.com/cypress-io/ai-toolkit",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.cypress.io/mcp"
+    }
+  ]
+}
