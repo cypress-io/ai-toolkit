@@ -3,7 +3,7 @@
   "name": "io.cypress.mcp/cypress-cloud",
   "version": "1.0.0",
   "title": "Cypress Cloud MCP",
-  "description": "Direct access to Cypress tests results and accessibility reports in your AI workflow.",
+  "description": "Direct access to Cypress test results and App Quality reports in your AI workflow.",
   "repository": {
     "url": "https://github.com/cypress-io/ai-toolkit",
     "source": "github"
