@@ -43,9 +43,15 @@ The community will help shape what gets prioritized. If you're already unlocking
 
 ## Getting started
 
-The Cypress AI toolkit is published as a plugin for both Claude and Cursor. This is the easiest way to install and configure the various capabilities in this package and also enables an auto-update capability.
+### Plugin
 
-_Note: Listings in the Claude and Cursor official plugin marketplaces are currently pending. This README will be updated once they are available. Until then, this repository can be cloned and installed as a local plugin in your agent of choice._
+The Cypress AI toolkit is published as a plugin for installation into your agent. This is the easiest way to install and configure the various capabilities in this package and also enables an auto-update capability.
+
+_Note: Our listing in the Cursor official plugin marketplace is currently pending. This README will be updated once it is available. Until then, this repository can be cloned and installed as a local plugin in your agent of choice._
+
+#### Claude
+
+The plugin is published in the Claude Community Plugins marketplace - see the the [instructions here](https://github.com/anthropics/claude-plugins-community#using-this-marketplace) for configuring your Claude instance to use this marketplace. Once the marketplace is configured you can search for the `cypress` plugin.
 
 ### Manual Installation
 
