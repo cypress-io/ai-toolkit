@@ -21,6 +21,14 @@ The Cypress AI Toolkit gives your AI tools the Cypress-specific context they nee
 
 ## What's in the toolkit
 
+### Model Context Protocol (MCP)
+
+The Cypress Cloud MCP server connects your AI coding assistants directly to Cypress Cloud, giving them access to data regarding your application's health and stability.
+
+More information about the Cypress Cloud MCP is available [here](https://docs.cypress.io/cloud/integrations/cloud-mcp).
+
+_Note:_ The MCP connection will utilize OAuth by default. If you would prefer to use a Personal Access Token (PAT) you will need to adjust the `.mcp.json` file for your agent.
+
 ### Skills
 
 Skills are instruction sets your AI tool loads to apply Cypress-specific knowledge when generating or reviewing test code. They fill the gap between what an AI learned during training and what current, well-written Cypress tests actually look like.
