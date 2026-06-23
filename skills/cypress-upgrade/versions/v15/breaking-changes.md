@@ -141,9 +141,14 @@ More info: [Preprocessors API docs](https://on.cypress.io/preprocessors-api) and
 
 ## `@cypress/webpack-batteries-included-preprocessor` no longer shims all Webpack 4 built-ins
 
-The default file preprocessor no longer shims all built-ins previously provided by Webpack v4 — this reduces security vulnerabilities and bundle size. It still ships with **some** built-ins: `buffer`, `path`, `process`, `os`, and `stream`.
+To better align with best practices (and reduce security vulnerabilities and bundle size), the default file preprocessor, `@cypress/webpack-batteries-included-preprocessor`, no longer includes certain browser built-ins that Webpack 4 provided automatically. (Addresses [#31039](https://github.com/cypress-io/cypress/issues/31039).)
 
-**Action:** If other built-ins are required, install `@cypress/webpack-batteries-included-preprocessor` independently and configure them via [Webpack's `resolve.fallback`](https://webpack.js.org/configuration/resolve/#resolvefallback).
+**Removed built-ins:** `assert`, `constants`, `crypto`, `domain`, `events`, `http`, `https`, `punycode`, `querystring`, `string_decoder`, `sys`, `timers`, `tty`, `url`, `util`, `vm`, and `zlib`.
+
+**Still shipped by default:** Because many users share files between their Cypress tests and Node context, the preprocessor continues to ship built-in support for `buffer`, `path`, `process`, `os`, and `stream`.
+
+**Detect:** Spec files (or files they import) that rely on any of the removed built-ins — e.g. `require('crypto')` / `import ... from 'crypto'`, `querystring`, `url`, `util`, `zlib`, etc.
+**Action:** If a removed built-in is required, install `@cypress/webpack-batteries-included-preprocessor` independently and configure it via [Webpack's `resolve.fallback`](https://webpack.js.org/configuration/resolve/#resolvefallback), per the [`@cypress/webpack-batteries-included-preprocessor` README](https://github.com/cypress-io/cypress/blob/@cypress/webpack-batteries-included-preprocessor-v3.0.7/npm/webpack-batteries-included-preprocessor/README.md).
 
 Example providing the `querystring` built-in:
 
