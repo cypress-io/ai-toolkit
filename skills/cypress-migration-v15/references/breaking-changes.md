@@ -1,6 +1,6 @@
 # Cypress v15.0 breaking changes
 
-Reference detail for the `cypress-v15-migration` skill. Each section describes one breaking change: what to detect and how to fix it. See the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
+Reference detail for the `cypress-migration-v15` skill. Each section describes one breaking change: what to detect and how to fix it. See the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
 
 ## Node.js 20, 22 and 24+ support
 

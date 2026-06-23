@@ -1,5 +1,5 @@
 ---
-name: cypress-v15-migration
+name: cypress-migration-v15
 description: "Migrates a Cypress project to Cypress v15. Use when the user asks to upgrade, migrate, or update Cypress to v15 (15.0), check v15 compatibility, or audit a project for v15 breaking changes. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress 15 upgrade. Prefer cypress-author when the user only wants to write or fix tests, not migrate versions."
 model: inherit
 background: false

@@ -27,7 +27,7 @@ Or install a specific skill with:
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-author
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-explain
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
-npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-v15-migration
+npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-migration-v15
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
@@ -48,7 +48,7 @@ You can also install individual skills:
 gh skill install cypress-io/ai-toolkit cypress-author
 gh skill install cypress-io/ai-toolkit cypress-explain
 gh skill install cypress-io/ai-toolkit cypress-docs
-gh skill install cypress-io/ai-toolkit cypress-v15-migration
+gh skill install cypress-io/ai-toolkit cypress-migration-v15
 ```
 
 See [GitHub](https://cli.github.com/manual/gh_skill) for full documentation, including how to keep skills up-to-date.
@@ -101,7 +101,7 @@ This skill is meant to help inform and support other Cypress skills.
 
 > Define the Cypress `cy.prompt` API
 
-### [`cypress-v15-migration`](./cypress-v15-migration)
+### [`cypress-migration-v15`](./cypress-migration-v15)
 Guides a project through upgrading to Cypress v15. It runs a precheck for supported `cypress`, Node.js, glibc, Webpack, and Angular versions, applies the v15.0 code changes it can automate (such as `Cypress.SelectorPlayground` → `Cypress.ElementSelector` and the `cy.exec()` `code` → `exitCode` rename), and reports anything you must resolve yourself before grounding next steps in the official migration guide.
 
 #### Example
@@ -109,7 +109,7 @@ Guides a project through upgrading to Cypress v15. It runs a precheck for suppor
 **Migrate to Cypress v15:**
 
 ```skill
-/cypress-v15-migration Upgrade this project to Cypress v15 and tell me what I need to change.
+/cypress-migration-v15 Upgrade this project to Cypress v15 and tell me what I need to change.
 ```
 
 ## Troubleshooting
