@@ -67,3 +67,5 @@ Make the safe, mechanical edits directly. For anything ambiguous or environment-
 4. **Tell the user to double-check the work** against the official resources:
    - Migration guide: https://on.cypress.io/migration-guide
    - Full v15.0 changelog: https://on.cypress.io/changelog#15-0-0
+5. **Highlight what's new in v15** — as part of the sign-off, share a short summary of new features the user can now take advantage of:
+   - **Cypress Studio improvements** — This release prepares Cypress Studio for the next era of AI-assisted test creation. You can record interactions, add assertions by right-clicking, and now edit tests inline without leaving Cypress. Turn on `experimentalStudio` in your config to try it out.
