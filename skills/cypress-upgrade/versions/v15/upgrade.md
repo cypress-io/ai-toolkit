@@ -19,6 +19,7 @@ Assume you are running within a project that already has Cypress installed.
    - **glibc** — If running on Linux, run `ldd --version` to read the glibc version. Prebuilt Linux binaries are no longer compatible with distributions based on glibc `< 2.31`; flag this since the user must update their distribution.
    - **Webpack 4** — Cypress v15 supports only Webpack `5+`. Flag for upgrade (workaround in the reference if the user declines).
    - **Angular 17** (`@angular/cli` / `@angular/core`) — Component testing requires Angular `18.0.0+`. Flag for upgrade (workaround in the reference if the user declines).
+   - **zone.js** below `0.14.0` — `@cypress/angular` now requires `zone.js` `0.14.0+`. Flag for upgrade in projects using Angular component testing.
 4. **Locate the Cypress config** — Find `cypress.config.js` or `cypress.config.ts`. If it cannot be found, prompt the user for its location before continuing.
 
 ### 2. Upgrade the Cypress package
@@ -43,6 +44,7 @@ Assume you are running within a project that already has Cypress installed.
    - `cy.exec(...)` results reading `.its('code')` → `.its('exitCode')`.
    - `cy.stub(object, name, fn)` (3-argument signature) → `cy.stub(object, name).callsFake(fn)`.
    - Angular `import { mount } from 'cypress/angular'` → `'@cypress/angular'` only when applying the Angular-17 workaround.
+   - For Angular component testing, ensure `zone.js` is `0.14.0+` (now required by `@cypress/angular`); update it if lower.
    - Webpack dev server / preprocessor and batteries-included built-in changes, only where they apply to this project.
 
 Make the safe, mechanical edits directly. For anything ambiguous or environment-dependent (Node/glibc/Webpack/Angular upgrades), do not guess — surface it in the report.
@@ -56,7 +58,7 @@ Make the safe, mechanical edits directly. For anything ambiguous or environment-
 
 ### 5. Share findings back with the user
 
-1. **Print every version that is outside Cypress v15 support** (Cypress, Node.js, glibc, Webpack, Angular) with the current value and the required value, so the user knows their next steps.
+1. **Print every version that is outside Cypress v15 support** (Cypress, Node.js, glibc, Webpack, Angular, zone.js) with the current value and the required value, so the user knows their next steps.
 2. **Summarize what you did** — the resolved target version installed, the code changes you made, and anything you could not safely automate.
 3. **Report verification results** — whether `cypress verify`, the version check, and any test run passed or failed.
 4. **Tell the user to double-check the work** against the official resources:

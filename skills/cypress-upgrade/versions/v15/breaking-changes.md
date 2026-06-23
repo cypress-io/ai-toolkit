@@ -183,6 +183,13 @@ With [LTS end](https://angular.dev/reference/releases#actively-supported-version
 **Detect:** `@angular/cli` / `@angular/core` on version 17 in a project with component testing.
 **Action:** Recommend upgrading to Angular `18.0.0+`. If the user declines, apply the workaround below.
 
+## `@cypress/angular` requires zone.js `0.14.0+`
+
+`@cypress/angular` now requires a minimum of `zone.js` `0.14.0`. (Addresses [#31582](https://github.com/cypress-io/cypress/issues/31582).) This applies to projects using Angular component testing.
+
+**Detect:** In a project with Angular component testing, check the resolved `zone.js` version in `package.json` / the lockfile. Flag it if it is below `0.14.0`.
+**Action:** Update `zone.js` to `0.14.0` or newer (e.g. `npm install --save-dev zone.js@^0.14.0`).
+
 ### Workaround — continue using Angular below 18.0.0
 
 > The pinned `@cypress/angular@3` test harness is deprecated and no longer supported by Cypress. It is a temporary workaround until you can migrate to Angular v18.0.0+.
