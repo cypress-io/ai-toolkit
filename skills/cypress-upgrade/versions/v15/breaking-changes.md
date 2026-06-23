@@ -35,6 +35,25 @@ After:
 cy.exec('rake db:seed').its('exitCode').should('eq', 0)
 ```
 
+## `cy.stub()` 3-argument signature removed
+
+The deprecated 3-argument signature of [`cy.stub()`](https://on.cypress.io/stub) — `cy.stub(object, name, fn)` — is no longer supported. Use `cy.stub(object, name).callsFake(fn)` instead. (Addresses [#31346](https://github.com/cypress-io/cypress/issues/31346).)
+
+**Detect:** `cy.stub(...)` calls passing a third argument — `cy.stub(obj, 'method', fn)`.
+**Action:** Replace the third argument with a chained `.callsFake(fn)`.
+
+Before:
+
+```javascript
+cy.stub(user, 'getName', () => 'Jane')
+```
+
+After:
+
+```javascript
+cy.stub(user, 'getName').callsFake(() => 'Jane')
+```
+
 ## Selector Playground API renamed to Element Selector
 
 `Cypress.SelectorPlayground` has been renamed to [`Cypress.ElementSelector`](https://on.cypress.io/element-selector-api). The `onElement` function has also been **removed** as an option to the `defaults` method. This reflects its use beyond the Selector Playground (e.g. Cypress Studio).

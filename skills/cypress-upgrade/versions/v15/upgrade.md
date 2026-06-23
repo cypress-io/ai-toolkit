@@ -41,6 +41,7 @@ Assume you are running within a project that already has Cypress installed.
 3. **Apply the code changes** from [./breaking-changes.md](./breaking-changes.md). At minimum, grep for and update:
    - `Cypress.SelectorPlayground.defaults` → `Cypress.ElementSelector.defaults` (and drop the removed `onElement` option).
    - `cy.exec(...)` results reading `.its('code')` → `.its('exitCode')`.
+   - `cy.stub(object, name, fn)` (3-argument signature) → `cy.stub(object, name).callsFake(fn)`.
    - Angular `import { mount } from 'cypress/angular'` → `'@cypress/angular'` only when applying the Angular-17 workaround.
    - Webpack dev server / preprocessor and batteries-included built-in changes, only where they apply to this project.
 
