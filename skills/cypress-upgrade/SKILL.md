@@ -5,7 +5,7 @@ model: inherit
 background: false
 allowed-tools: Read, Edit, Grep, Glob, Bash
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Cypress Upgrade

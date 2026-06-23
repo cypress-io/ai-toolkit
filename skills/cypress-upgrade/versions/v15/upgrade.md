@@ -1,4 +1,4 @@
-# Migrating to Cypress v15
+# Upgrading to Cypress v15
 
 Version-specific path for the `cypress-upgrade` skill. Follow this flow to upgrade a project to Cypress v15. The **resolved target version** is supplied by the router: the exact version the user named (e.g. `15.16.0`), or the latest `15.x` release (`cypress@15`) if they named only the major. See [./breaking-changes.md](./breaking-changes.md) for the full detail of each change, the official [migration guide](https://on.cypress.io/migration-guide), and the [v15.0 changelog](https://on.cypress.io/changelog#15-0-0).
 
