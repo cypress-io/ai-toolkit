@@ -36,6 +36,11 @@ Each supported target major version has its own directory under [./versions/](./
 |--|--|
 | **v15** (15.0) | [./versions/v15/upgrade.md](./versions/v15/upgrade.md) |
 
+Carry the **resolved target version** into the version path so its install step knows exactly what to install:
+
+- If the user named a full version (e.g. `15.16.0`), the resolved target is that exact version.
+- If the user named only a major (e.g. "v15"), the resolved target is the latest release of that major (install as `cypress@15`).
+
 If the requested major version is **not listed above**, tell the user that a guided upgrade path for that version is not available in this skill — without confirming or denying that the version itself exists — point them to the official [migration guide](https://on.cypress.io/migration-guide) and [changelog](https://on.cypress.io/changelog), and stop. Do not improvise an upgrade for an unlisted version, and do not name or describe a major version that is not in the table.
 
 ### 3. Sign-off
