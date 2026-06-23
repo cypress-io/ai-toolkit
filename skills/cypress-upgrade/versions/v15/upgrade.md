@@ -18,6 +18,8 @@ Assume you are running within a project that already has Cypress installed.
    - **Node.js** not on `20`, `22`, or `24+`. Check `.nvmrc`, `.node-version`, CI workflow files, `engines` in `package.json`, and Dockerfiles. Node 18 and 23 are no longer supported.
    - **glibc** — If running on Linux, run `ldd --version` to read the glibc version. Prebuilt Linux binaries are no longer compatible with distributions based on glibc `< 2.31`; flag this since the user must update their distribution.
    - **Webpack 4** — Cypress v15 supports only Webpack `5+`. Flag for upgrade (workaround in the reference if the user declines).
+   - **Vite 4** — `@cypress/vite-dev-server` now requires Vite `5+`. Flag Vite `4` for upgrade in projects using Vite component testing.
+   - **CommonJS Cypress config with Vite** — `@cypress/vite-dev-server` is now ESM-only. Flag a CommonJS Cypress config (`cypress.config.cjs`, or a `require`/`module.exports` config without `"type": "module"`) in a Vite component-testing project; it must move to an ESM context.
    - **Angular 17** (`@angular/cli` / `@angular/core`) — Component testing requires Angular `18.0.0+`. Flag for upgrade (workaround in the reference if the user declines).
    - **zone.js** below `0.14.0` — `@cypress/angular` now requires `zone.js` `0.14.0+`. Flag for upgrade in projects using Angular component testing.
 4. **Locate the Cypress config** — Find `cypress.config.js` or `cypress.config.ts`. If it cannot be found, prompt the user for its location before continuing.
@@ -46,6 +48,7 @@ Assume you are running within a project that already has Cypress installed.
    - Angular `import { mount } from 'cypress/angular'` → `'@cypress/angular'` only when applying the Angular-17 workaround.
    - For Angular component testing, ensure `zone.js` is `0.14.0+` (now required by `@cypress/angular`); update it if lower.
    - Webpack dev server / preprocessor and batteries-included built-in changes, only where they apply to this project.
+   - For Vite component testing: ensure `vite` is `5+`, and move a CommonJS Cypress config to an ESM context since `@cypress/vite-dev-server` is now ESM-only.
 
 Make the safe, mechanical edits directly. For anything ambiguous or environment-dependent (Node/glibc/Webpack/Angular upgrades), do not guess — surface it in the report.
 
@@ -58,7 +61,7 @@ Make the safe, mechanical edits directly. For anything ambiguous or environment-
 
 ### 5. Share findings back with the user
 
-1. **Print every version that is outside Cypress v15 support** (Cypress, Node.js, glibc, Webpack, Angular, zone.js) with the current value and the required value, so the user knows their next steps.
+1. **Print every version that is outside Cypress v15 support** (Cypress, Node.js, glibc, Webpack, Vite, Angular, zone.js) with the current value and the required value, so the user knows their next steps.
 2. **Summarize what you did** — the resolved target version installed, the code changes you made, and anything you could not safely automate.
 3. **Report verification results** — whether `cypress verify`, the version check, and any test run passed or failed.
 4. **Tell the user to double-check the work** against the official resources:

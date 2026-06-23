@@ -176,6 +176,20 @@ module.exports = (on) => {
 }
 ```
 
+## `@cypress/vite-dev-server` is now ESM-only
+
+`@cypress/vite-dev-server` (used for Vite-based component testing) is now an **ESM-only** package and can no longer be used from a CommonJS context.
+
+**Detect:** A project doing Vite component testing whose Cypress config is CommonJS — e.g. a `cypress.config.cjs`, or a `cypress.config.js` using `require(...)` / `module.exports` (no `"type": "module"` in `package.json`) — that imports or otherwise pulls in `@cypress/vite-dev-server`.
+**Action:** Move the Cypress config to an ESM context — convert it to `import`/`export default` (a `cypress.config.mjs`, or set `"type": "module"` in `package.json`), or use the TypeScript config (`cypress.config.ts`). Do not leave `@cypress/vite-dev-server` being `require()`d from CommonJS.
+
+## Vite 4 is no longer supported
+
+`@cypress/vite-dev-server` no longer supports Vite `4`. The minimum supported Vite version is now `5`.
+
+**Detect:** `vite` on version `4` in `package.json` / the lockfile in a project using Vite component testing.
+**Action:** Upgrade `vite` to `5` or newer (e.g. `npm install --save-dev vite@^5`). Review the [Vite migration guide](https://vite.dev/guide/migration) for any Vite 4 → 5 changes in your own config.
+
 ## Angular 17 component testing is no longer supported
 
 With [LTS end](https://angular.dev/reference/releases#actively-supported-versions) for Angular 17, the minimum Angular version for component testing is now `18.0.0`.
