@@ -14,21 +14,21 @@ Flag anything outside the supported range during the precheck.
 
 The Cypress 15 binary will fail to install on an unsupported environment.
 
-| Dependency | Supported | Notes |
-|--|--|--|
-| Node.js | 20, 22, 24+ | 18 and 23 are no longer supported. Cannot be safely automated — the user must update Node. |
-| glibc (Linux) | ≥ 2.31 | Check via `ldd --version`. Prebuilt binaries require glibc 2.31+; the user must update their distribution. |
+| Dependency | Supported | Where to check | Notes |
+|--|--|--|--|
+| Node.js | 20, 22, 24+ | `.nvmrc`, `.node-version`, `engines` in `package.json`, CI workflow files, Dockerfiles | 18 and 23 are no longer supported. Cannot be safely automated — the user must update Node. |
+| glibc (Linux) | ≥ 2.31 | Run `ldd --version` | Prebuilt binaries require glibc 2.31+; the user must update their distribution. |
 
 ### Component-testing dependencies — flag, but proceed with the install
 
 These affect whether **component testing** runs, not whether the Cypress binary installs. Only relevant if the project uses component testing. Workarounds for declining an upgrade are in [./breaking-changes.md](./breaking-changes.md).
 
-| Dependency | Supported | Notes |
-|--|--|--|
-| Webpack | 5+ | Webpack 4 dropped. |
-| Vite | 5+ | Vite 4 dropped; `@cypress/vite-dev-server` is now ESM-only (CommonJS Cypress config must move to ESM). |
-| Angular (`@angular/core`, `@angular/cli`) | 18.0.0+ | Angular 17 dropped. |
-| zone.js | 0.14.0+ | Required by `@cypress/angular`. |
+| Dependency | Supported | Where to check | Notes |
+|--|--|--|--|
+| Webpack | 5+ | `package.json` / lockfile | Webpack 4 dropped. |
+| Vite | 5+ | `package.json` / lockfile | Vite 4 dropped; `@cypress/vite-dev-server` is now ESM-only (CommonJS Cypress config must move to ESM). |
+| Angular | 18.0.0+ | `@angular/core` / `@angular/cli` in `package.json` / lockfile | Angular 17 dropped. |
+| zone.js | 0.14.0+ | `package.json` / lockfile | Required by `@cypress/angular`. |
 
 ## Links
 

@@ -2,7 +2,7 @@
 
 This is the **version-agnostic** procedure for upgrading a Cypress project to a newer major version. Every version path under [`../versions/`](../versions/) uses it. Read it together with the target version's two data files:
 
-- `../versions/<target-major>/overview.md` — the support matrix (prerequisite major; supported Node, glibc, bundler, and framework versions), and the migration/changelog/announcement links. This file intentionally hardcodes **no** version thresholds — take every concrete value from `overview.md`.
+- `../versions/<target-major>/overview.md` — the support matrix (prerequisite major; the set of supported runtime, system, and dependency versions for that target), and the migration/changelog/announcement links. This file intentionally hardcodes **no** version thresholds or dependency list — take every concrete value, and the set of dependencies to check, from `overview.md`.
 - `../versions/<target-major>/breaking-changes.md` — the detailed code/config changes to detect and apply.
 
 Throughout, `<target>` is the resolved target version supplied by the router: the exact version the user named (e.g. `15.16.0`), or the latest release of the major (e.g. `cypress@15`).
@@ -19,15 +19,12 @@ Assume you are running within a project that already has Cypress installed.
 
 1. **Package manager** — Identify the package manager in use (npm, yarn, or pnpm) from the lockfile (`package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`). Use it to read installed versions and to phrase any install/upgrade commands.
 2. **Cypress version** — Check the installed `cypress` version (typically in `devDependencies`). If it is **not on the prerequisite major** named in `overview.md` (the major immediately below the target), stop and recommend the user upgrade to the latest of that major first, then re-run this path.
-3. **Flag dependencies needing attention** — Using the support matrix in `overview.md`, inspect the project and flag (for the report in phase 5) anything outside the supported range. `overview.md` classifies each dependency as an **install blocker** (halts the upgrade until resolved) or a **component-testing dependency** (flag but proceed). Where to look:
-   - **Node.js** — `.nvmrc`, `.node-version`, `engines` in `package.json`, CI workflow files, and Dockerfiles.
-   - **glibc** (Linux only) — run `ldd --version` and compare against the glibc threshold in `overview.md`.
-   - **Bundlers and frameworks** (e.g. Webpack, Vite, Angular, zone.js) — `package.json` and the lockfile. Only relevant when the project uses component testing.
+3. **Flag dependencies needing attention** — Work through **each row** of the support matrix in `overview.md`. For every dependency, look where its **Where to check** column says, compare the project's value against the **Supported** range, and flag anything outside it (for the report in phase 5). Do not assume a fixed set of dependencies or detection methods — the matrix varies by target version; only check what `overview.md` actually lists. `overview.md` classifies each dependency as an **install blocker** (halts the upgrade until resolved) or a **component-testing dependency** (flag but proceed; only relevant when the project uses component testing).
 4. **Locate the Cypress config** — Find `cypress.config.js` or `cypress.config.ts` (or `.mjs`/`.cjs`). If it cannot be found, prompt the user for its location before continuing.
 
 ### 2. Upgrade the Cypress package
 
-1. **Check for install blockers first.** Do **not** run the install if the precheck found any dependency that `overview.md` marks as an **install blocker** (commonly an unsupported Node.js version, or glibc below the threshold on Linux) — the binary install will fail. Stop, surface the blocker (see phase 5), and have the user resolve it before upgrading, unless the user explicitly asks to proceed anyway, in which case warn that the install and verification will likely fail. Component-testing dependencies are **not** install blockers; proceed with the install but keep them flagged.
+1. **Check for install blockers first.** Do **not** run the install if the precheck found any dependency that `overview.md` marks as an **install blocker** — the binary install will fail. Stop, surface the blocker (see phase 5), and have the user resolve it before upgrading, unless the user explicitly asks to proceed anyway, in which case warn that the install and verification will likely fail. Dependencies `overview.md` marks as component-testing are **not** install blockers; proceed with the install but keep them flagged.
 2. **Bump the `cypress` devDependency to the resolved target version** using the detected package manager. `<target>` is the exact version the router resolved (e.g. `15.16.0`) or the major (e.g. `15`) for the latest in that line:
    - **npm:** `npm install --save-dev cypress@<target>`
    - **yarn:** `yarn add --dev cypress@<target>`
@@ -37,7 +34,7 @@ Assume you are running within a project that already has Cypress installed.
 
 1. **Detect component testing** — Grep the Cypress config for a `component` block inside `defineConfig` to know whether component-testing changes apply.
 2. **Find spec files** — Use the `specPattern` from the Cypress config (and support files) to locate the test files to scan.
-3. **Apply the code changes** from `breaking-changes.md` — grep for each documented pattern and apply the change. Make the safe, mechanical edits directly. For anything ambiguous or environment-dependent (Node/glibc/bundler/framework upgrades), do not guess — surface it in the report.
+3. **Apply the code changes** from `breaking-changes.md` — grep for each documented pattern and apply the change. Make the safe, mechanical edits directly. For anything ambiguous or environment-dependent (runtime, system, or dependency upgrades the user must perform), do not guess — surface it in the report.
 
 ### 4. Verify the upgrade
 
