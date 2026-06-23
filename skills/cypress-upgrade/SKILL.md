@@ -31,7 +31,7 @@ Each supported target major version has its own directory under [./versions/](./
 
 | Target version | Path |
 |--|--|
-| **v15** (15.0) | [./versions/v15/v15.md](./versions/v15/v15.md) |
+| **v15** (15.0) | [./versions/v15/upgrade.md](./versions/v15/upgrade.md) |
 
 If the requested major version is **not listed above**, tell the user that a guided migration path for that version is not yet available in this skill, point them to the official [migration guide](https://on.cypress.io/migration-guide) and [changelog](https://on.cypress.io/changelog), and stop. Do not improvise a migration for an unlisted version.
 
