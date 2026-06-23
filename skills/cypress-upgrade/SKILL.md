@@ -1,6 +1,6 @@
 ---
 name: cypress-upgrade
-description: "Upgrades a Cypress project to a newer major version of Cypress (version-to-version, e.g. v14 -> v15). Use when the user asks to upgrade, migrate, or update Cypress to a specific major version (e.g. v15), check compatibility with a major version, or audit a project for a major-version's breaking changes. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress major-version upgrade. Prefer cypress-author when the user only wants to write or fix tests; this skill does not migrate projects from another framework (e.g. Playwright) to Cypress."
+description: "Upgrades a Cypress project to a newer major version of Cypress (version-to-version, e.g. v14 -> v15). Use when the user asks to upgrade, migrate, or update Cypress to a specific version, whether named as a major (e.g. 'v15', 'Cypress 15') or as a full version string (e.g. '15.0.0', '15.16.0') - derive the major from the version. Also use to check compatibility with a target version or audit a project for a major-version's breaking changes. Example: a project on 14.x asking to move to 15.16.0 should trigger this skill and follow the v15 path. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress version upgrade. Prefer cypress-author when the user only wants to write or fix tests; this skill does not migrate projects from another framework (e.g. Playwright) to Cypress."
 model: inherit
 background: false
 allowed-tools: Read, Edit, Grep, Glob, Bash
@@ -20,10 +20,11 @@ You are an expert QA automation engineer guiding a Cypress major-version upgrade
 
 ### 1. Determine the target major version
 
-Decide which major version the user is migrating **to**:
+Decide which major version the user is migrating **to**, then map it to a path in the table below using its **major** number:
 
-- If the user names a version (e.g. "v15", "Cypress 15", "15.0"), use it.
-- If the user does not name a version, check the installed `cypress` version (typically in `devDependencies`) and target the next supported major above it, or ask the user which major version they want to migrate to.
+- If the user names a major version (e.g. "v15", "Cypress 15"), use it.
+- If the user names a full or partial version string (e.g. "15.0", "15.16.0", "15.2.1"), **derive the major** from it — `15.16.0` → major **v15** — and use the v15 path. A specific patch/minor does not change which path applies; the breaking changes are defined at the major-version boundary.
+- If the user does not name a version, check the installed `cypress` version (typically in `devDependencies`) and target the next supported major above it, or ask the user which version they want to upgrade to.
 
 ### 2. Route to the version-specific path
 
