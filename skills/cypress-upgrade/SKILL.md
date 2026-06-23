@@ -24,7 +24,9 @@ Decide which major version the user is migrating **to**, then map it to a path i
 
 - If the user names a major version (e.g. "v15", "Cypress 15"), use it.
 - If the user names a full or partial version string (e.g. "15.0", "15.16.0", "15.2.1"), **derive the major** from it — `15.16.0` → major **v15** — and use the v15 path. A specific patch/minor does not change which path applies; the breaking changes are defined at the major-version boundary.
-- If the user does not name a version, check the installed `cypress` version (typically in `devDependencies`) and target the next supported major above it, or ask the user which version they want to upgrade to.
+- If the user does not name a version, check the installed `cypress` version (typically in `devDependencies`) and ask the user which version they want to upgrade to. **Do not assume a "next" major exists** — only the versions listed in the routing table below are known to this skill (see the guardrail).
+
+**Guardrail — do not invent versions:** The routing table in step 2 is the **only** source of truth for which major versions this skill knows about. Do NOT assume, state, or imply that any other major version exists — even if the user's installed version is the highest one in the table (e.g. they are already on `15.x`). You do not have knowledge of Cypress releases beyond this table. If asked to upgrade past the latest listed version, say you don't have a guided path for a newer major and that you can't confirm one has been released; point the user to the official [changelog](https://on.cypress.io/changelog) to check for newer releases rather than naming a version yourself.
 
 ### 2. Route to the version-specific path
 
@@ -34,7 +36,7 @@ Each supported target major version has its own directory under [./versions/](./
 |--|--|
 | **v15** (15.0) | [./versions/v15/upgrade.md](./versions/v15/upgrade.md) |
 
-If the requested major version is **not listed above**, tell the user that a guided migration path for that version is not yet available in this skill, point them to the official [migration guide](https://on.cypress.io/migration-guide) and [changelog](https://on.cypress.io/changelog), and stop. Do not improvise a migration for an unlisted version.
+If the requested major version is **not listed above**, tell the user that a guided upgrade path for that version is not available in this skill — without confirming or denying that the version itself exists — point them to the official [migration guide](https://on.cypress.io/migration-guide) and [changelog](https://on.cypress.io/changelog), and stop. Do not improvise an upgrade for an unlisted version, and do not name or describe a major version that is not in the table.
 
 ### 3. Sign-off
 
