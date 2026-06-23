@@ -28,15 +28,17 @@ Decide which major version the user is migrating **to**, then map it to a path i
 
 **Guardrail — do not invent versions:** The routing table in step 2 is the **only** source of truth for which major versions this skill knows about. Do NOT assume, state, or imply that any other major version exists — even if the user's installed version is the highest one in the table (e.g. they are already on `15.x`). You do not have knowledge of Cypress releases beyond this table. If asked to upgrade past the latest listed version, say you don't have a guided path for a newer major and that you can't confirm one has been released; point the user to the official [changelog](https://on.cypress.io/changelog) to check for newer releases rather than naming a version yourself.
 
-### 2. Route to the version-specific path
+### 2. Run the upgrade
 
-Each supported target major version has its own directory under [./versions/](./versions/). Read and follow that version's entry file, then return here for the sign-off.
+The procedure is the same for every major version and lives in [./shared/upgrade-flow.md](./shared/upgrade-flow.md). Each supported target major has a directory under [./versions/](./versions/) holding only its **data**: `overview.md` (support matrix + links) and `breaking-changes.md` (code/config changes).
 
-| Target version | Path |
+Confirm the target major is in the table below, then **follow [./shared/upgrade-flow.md](./shared/upgrade-flow.md)**, reading the matching version directory for every concrete value:
+
+| Target major | Version data |
 |--|--|
-| **v15** (15.0) | [./versions/v15/upgrade.md](./versions/v15/upgrade.md) |
+| **v15** (15.0) | [./versions/v15/](./versions/v15/) — [overview.md](./versions/v15/overview.md), [breaking-changes.md](./versions/v15/breaking-changes.md) |
 
-Carry the **resolved target version** into the version path so its install step knows exactly what to install:
+Carry the **resolved target version** into the shared flow so its install step knows exactly what to install:
 
 - If the user named a full version (e.g. `15.16.0`), the resolved target is that exact version.
 - If the user named only a major (e.g. "v15"), the resolved target is the latest release of that major (install as `cypress@15`).

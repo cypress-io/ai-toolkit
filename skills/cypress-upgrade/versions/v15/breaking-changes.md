@@ -1,20 +1,8 @@
 # Cypress v15.0 breaking changes
 
-Reference detail for the `cypress-upgrade` skill's v15 path ([./upgrade.md](./upgrade.md)). Each section describes one breaking change: what to detect and how to fix it. See the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
+Detailed code/config changes for the `cypress-upgrade` skill's v15 path — each section describes one breaking change: what to detect and how to fix it. This file is the reference consulted by the shared flow's "Make updates" phase ([../../shared/upgrade-flow.md](../../shared/upgrade-flow.md)). The version **support matrix** (Node, glibc, bundler/framework thresholds) and links live in [./overview.md](./overview.md). See also the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
 
-## Node.js 20, 22 and 24+ support
-
-Cypress requires [Node.js](https://nodejs.org/en) to install the Cypress binary. The supported versions are now Node.js **20, 22, 24 and above**. Node.js **18 and 23 are no longer supported**. See [Node's release schedule](https://github.com/nodejs/Release).
-
-**Detect:** `.nvmrc`, `.node-version`, `engines` in `package.json`, CI workflow files, and Dockerfiles.
-**Action:** Flag in the report. The user must update their Node.js version; this cannot be safely automated.
-
-## Unsupported Linux distributions (glibc < 2.31)
-
-Prebuilt binaries for Linux are no longer compatible with Linux distributions based on glibc `< 2.31`. This is in line with Node.js's support for Linux in 20+.
-
-**Detect:** On Linux, run `ldd --version` to read the glibc version.
-**Action:** If glibc `< 2.31`, flag that the user must update their distribution to install Cypress 15+.
+> Environment-only requirements (Node.js and glibc) carry no code change and are covered by the support matrix in [./overview.md](./overview.md); they are not repeated here.
 
 ## `cy.exec()` `code` property renamed to `exitCode`
 
