@@ -27,7 +27,7 @@ Or install a specific skill with:
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-author
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-explain
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
-npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-migrate
+npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-upgrade
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
@@ -48,7 +48,7 @@ You can also install individual skills:
 gh skill install cypress-io/ai-toolkit cypress-author
 gh skill install cypress-io/ai-toolkit cypress-explain
 gh skill install cypress-io/ai-toolkit cypress-docs
-gh skill install cypress-io/ai-toolkit cypress-migrate
+gh skill install cypress-io/ai-toolkit cypress-upgrade
 ```
 
 See [GitHub](https://cli.github.com/manual/gh_skill) for full documentation, including how to keep skills up-to-date.
@@ -101,17 +101,17 @@ This skill is meant to help inform and support other Cypress skills.
 
 > Define the Cypress `cy.prompt` API
 
-### [`cypress-migrate`](./cypress-migrate)
-Guides a project through upgrading to a newer major version of Cypress. It determines the target major version and routes to a version-specific path that runs a precheck (supported `cypress`, Node.js, glibc, and framework versions), applies the breaking-change code edits it can automate, and reports anything you must resolve yourself before grounding next steps in the official migration guide.
+### [`cypress-upgrade`](./cypress-upgrade)
+Guides a project through upgrading to a newer major version of Cypress (version-to-version, e.g. v14 → v15). It determines the target major version and routes to a version-specific path that runs a precheck (supported `cypress`, Node.js, glibc, and framework versions), applies the breaking-change code edits it can automate, and reports anything you must resolve yourself before grounding next steps in the official migration guide.
 
-Migration paths live under [`./cypress-migrate/versions/`](./cypress-migrate/versions); **v15** is the path available today, and more major versions will be added over time.
+Upgrade paths live under [`./cypress-upgrade/versions/`](./cypress-upgrade/versions); **v15** is the path available today, and more major versions will be added over time.
 
 #### Example
 
-**Migrate to Cypress v15:**
+**Upgrade to Cypress v15:**
 
 ```skill
-/cypress-migrate Upgrade this project to Cypress v15 and tell me what I need to change.
+/cypress-upgrade Upgrade this project to Cypress v15 and tell me what I need to change.
 ```
 
 ## Troubleshooting

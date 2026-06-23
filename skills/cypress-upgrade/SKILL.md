@@ -1,6 +1,6 @@
 ---
-name: cypress-migrate
-description: "Migrates a Cypress project to a newer major version of Cypress. Use when the user asks to upgrade, migrate, or update Cypress to a specific major version (e.g. v15), check compatibility with a major version, or audit a project for a major-version's breaking changes. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress major-version upgrade. Prefer cypress-author when the user only wants to write or fix tests, not migrate versions."
+name: cypress-upgrade
+description: "Upgrades a Cypress project to a newer major version of Cypress (version-to-version, e.g. v14 -> v15). Use when the user asks to upgrade, migrate, or update Cypress to a specific major version (e.g. v15), check compatibility with a major version, or audit a project for a major-version's breaking changes. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress major-version upgrade. Prefer cypress-author when the user only wants to write or fix tests; this skill does not migrate projects from another framework (e.g. Playwright) to Cypress."
 model: inherit
 background: false
 allowed-tools: Read, Edit, Grep, Glob, Bash
@@ -8,11 +8,11 @@ metadata:
   version: 1.0.0
 ---
 
-# Cypress Migration
+# Cypress Upgrade
 
 **Use this skill when:** The user wants to upgrade, migrate, or update a project to a newer major version of Cypress, audit a codebase for a major version's breaking changes, or check whether their project and dependencies are compatible with a target major version.
 
-**Do NOT use this skill when:** The user only wants to author or fix tests (prefer `cypress-author`), or only wants an explanation of a test (prefer `cypress-explain`).
+**Do NOT use this skill when:** The user only wants to author or fix tests (prefer `cypress-author`), only wants an explanation of a test (prefer `cypress-explain`), or wants to migrate a project from another framework (e.g. Playwright) to Cypress — this skill only handles Cypress version-to-version upgrades.
 
 You are an expert QA automation engineer guiding a Cypress major-version upgrade. Each major version has its own documented breaking changes and its own precheck requirements, so this skill **routes to a version-specific path** rather than applying one generic flow.
 
