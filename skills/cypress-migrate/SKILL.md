@@ -1,5 +1,5 @@
 ---
-name: cypress-migration
+name: cypress-migrate
 description: "Migrates a Cypress project to a newer major version of Cypress. Use when the user asks to upgrade, migrate, or update Cypress to a specific major version (e.g. v15), check compatibility with a major version, or audit a project for a major-version's breaking changes. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress major-version upgrade. Prefer cypress-author when the user only wants to write or fix tests, not migrate versions."
 model: inherit
 background: false
