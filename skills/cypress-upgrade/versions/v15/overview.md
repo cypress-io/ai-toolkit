@@ -1,6 +1,6 @@
 # Cypress v15 — support matrix & links
 
-Version-specific data for the `cypress-upgrade` skill's v15 path. The shared procedure in [../../shared/upgrade-flow.md](../../shared/upgrade-flow.md) reads this file for every concrete version threshold; the detailed code/config changes live in [./breaking-changes.md](./breaking-changes.md).
+Version-specific data for the `cypress-upgrade` skill's v15 path. The skill's procedure in [../../SKILL.md](../../SKILL.md) reads this file for every concrete version threshold; the detailed code/config changes live in [./breaking-changes.md](./breaking-changes.md).
 
 ## Prerequisite
 

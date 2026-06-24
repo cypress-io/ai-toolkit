@@ -1,8 +1,20 @@
 # Cypress v15.0 breaking changes
 
-Detailed code/config changes for the `cypress-upgrade` skill's v15 path — each section describes one breaking change: what to detect and how to fix it. This file is the reference consulted by the shared flow's "Make updates" phase ([../../shared/upgrade-flow.md](../../shared/upgrade-flow.md)). The version **support matrix** (Node, glibc, bundler/framework thresholds) and links live in [./overview.md](./overview.md). See also the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
+Detailed code/config changes for the `cypress-upgrade` skill's v15 path — each section describes one breaking change: what to detect and how to fix it. This file is the reference consulted by the "Make updates" phase in [../../SKILL.md](../../SKILL.md). The version **support matrix** (Node, glibc, bundler/framework thresholds) and links live in [./overview.md](./overview.md). See also the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
 
 > Environment-only requirements (Node.js and glibc) carry no code change and are covered by the support matrix in [./overview.md](./overview.md); they are not repeated here.
+
+## Contents
+
+- [`cy.exec()` `code` property renamed to `exitCode`](#cyexec-code-property-renamed-to-exitcode)
+- [`cy.stub()` 3-argument signature removed](#cystub-3-argument-signature-removed)
+- [Selector Playground API renamed to Element Selector](#selector-playground-api-renamed-to-element-selector)
+- [Webpack 4 is no longer supported](#webpack-4-is-no-longer-supported)
+- [`@cypress/webpack-batteries-included-preprocessor` no longer shims all Webpack 4 built-ins](#cypresswebpack-batteries-included-preprocessor-no-longer-shims-all-webpack-4-built-ins)
+- [`@cypress/vite-dev-server` is now ESM-only](#cypressvite-dev-server-is-now-esm-only)
+- [Vite 4 is no longer supported](#vite-4-is-no-longer-supported)
+- [Angular 17 component testing is no longer supported](#angular-17-component-testing-is-no-longer-supported)
+- [`@cypress/angular` requires zone.js `0.14.0+`](#cypressangular-requires-zonejs-0140)
 
 ## `cy.exec()` `code` property renamed to `exitCode`
 
