@@ -28,7 +28,7 @@ cy.exec('rake db:seed').its('exitCode').should('eq', 0) // after
 
 ## `cy.stub()` 3-argument signature removed
 
-The deprecated 3-argument signature of [`cy.stub()`](https://on.cypress.io/stub) — `cy.stub(object, name, fn)` — is no longer supported. Use `cy.stub(object, name).callsFake(fn)` instead. (Addresses [#31346](https://github.com/cypress-io/cypress/issues/31346).)
+The deprecated 3-argument signature of [`cy.stub()`](https://on.cypress.io/stub) — `cy.stub(object, name, fn)` — is no longer supported. Use `cy.stub(object, name).callsFake(fn)` instead.
 
 **Detect:** `cy.stub(...)` calls passing a third argument — `cy.stub(obj, 'method', fn)`.
 **Action:** Replace the third argument with a chained `.callsFake(fn)`.
