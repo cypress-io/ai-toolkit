@@ -50,6 +50,7 @@ Each supported target major has a directory under [./versions/](./versions/) hol
 
 | Target major | Version data |
 |--|--|
+| **v13** (13.0) | [overview.md](./versions/v13/overview.md), [breaking-changes.md](./versions/v13/breaking-changes.md) |
 | **v14** (14.0) | [overview.md](./versions/v14/overview.md), [breaking-changes.md](./versions/v14/breaking-changes.md) |
 | **v15** (15.0) | [overview.md](./versions/v15/overview.md), [breaking-changes.md](./versions/v15/breaking-changes.md) |
 
