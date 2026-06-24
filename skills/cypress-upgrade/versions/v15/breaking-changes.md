@@ -16,7 +16,7 @@ Detailed code/config changes for the `cypress-upgrade` skill's v15 path — each
 
 ## `cy.exec()` `code` property renamed to `exitCode`
 
-The `code` property on [`cy.exec()`](https://on.cypress.io/exec) has been renamed to `exitCode`.
+The `code` property on `cy.exec()` has been renamed to `exitCode`.
 
 **Detect:** `cy.exec(...)` chains that read `.its('code')` (or otherwise access the `code` property of the yielded result).
 **Action:** Rename `code` to `exitCode`.
@@ -40,7 +40,7 @@ cy.stub(user, 'getName').callsFake(() => 'Jane') // after
 
 ## Selector Playground API renamed to Element Selector
 
-`Cypress.SelectorPlayground` has been renamed to [`Cypress.ElementSelector`](https://on.cypress.io/element-selector-api). The `onElement` function has also been **removed** as an option to the `defaults` method. This reflects its use beyond the Selector Playground (e.g. Cypress Studio).
+`Cypress.SelectorPlayground` has been renamed to `Cypress.ElementSelector`. The `onElement` function has also been **removed** as an option to the `defaults` method. This reflects its use beyond the Selector Playground (e.g. Cypress Studio).
 
 **Detect:** `Cypress.SelectorPlayground` usage (commonly in support files).
 **Action:** Rename to `Cypress.ElementSelector`. Remove any `onElement` option passed to `defaults`.
@@ -54,7 +54,7 @@ Cypress.ElementSelector.defaults({ selectorPriority: ['class', 'id'] })
 
 ## Webpack 4 is no longer supported
 
-Cypress no longer supports Webpack `4` (it is unmaintained; Webpack `5` has been available since Q4 2020). This drops Webpack `4` support for:
+Cypress no longer supports Webpack `4`. This drops Webpack `4` support for:
 
 - **`@cypress/webpack-dev-server`** (component testing) — the most common case; requires an update to Webpack `5`. It also no longer supports Webpack Dev Server v4 — Cypress 14 shipped Webpack Dev Server v5 as the default, with `webpack-dev-server@4` as an option.
 - **`@cypress/webpack-preprocessor`** (end-to-end) — By default Cypress uses the [Webpack Batteries Included Preprocessor](https://github.com/cypress-io/cypress/blob/@cypress/webpack-batteries-included-preprocessor-v3.0.7/npm/webpack-batteries-included-preprocessor/README.md), which has used Webpack 5 since Cypress 13. This change likely does not apply unless you use `@cypress/webpack-preprocessor` as a standalone package.
@@ -167,7 +167,7 @@ module.exports = (on) => {
 
 ## Angular 17 component testing is no longer supported
 
-With [LTS end](https://angular.dev/reference/releases#actively-supported-versions) for Angular 17, the minimum Angular version for component testing is now `18.0.0`.
+The minimum Angular version for component testing is now `18.0.0`.
 
 **Detect:** `@angular/cli` / `@angular/core` on version 17 in a project with component testing.
 **Action:** Recommend upgrading to Angular `18.0.0+`. If the user declines, apply the workaround below.
