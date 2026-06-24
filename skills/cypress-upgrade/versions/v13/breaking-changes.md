@@ -5,11 +5,14 @@ Detailed code/config changes for the `cypress-upgrade` skill's v13 path — each
 ## Contents
 
 - [Test Replay enabled by default when recording](#test-replay-enabled-by-default-when-recording)
+- [Runner UI hidden during Test Replay runs](#runner-ui-hidden-during-test-replay-runs)
 - [`video` now defaults to false](#video-now-defaults-to-false)
 - [`videoUploadOnPasses` removed](#videouploadonpasses-removed)
 - [`videoCompression` now defaults to false](#videocompression-now-defaults-to-false)
+- [`nodeVersion` configuration option removed](#nodeversion-configuration-option-removed)
 - [`cy.readFile()` is now a query command](#cyreadfile-is-now-a-query-command)
 - [`.readFile()` can no longer be overwritten with `Cypress.Commands.overwrite()`](#readfile-can-no-longer-be-overwritten-with-cypresscommandsoverwrite)
+- [Module API, `after:run`, and `after:spec` result properties changed](#module-api-afterrun-and-afterspec-result-properties-changed)
 
 ## Test Replay enabled by default when recording
 
@@ -17,6 +20,16 @@ Cypress Cloud Test Replay is enabled by default when passing `--record` during `
 
 **Detect:** Recorded runs (`cypress run --record`) in a network-restricted environment (e.g. a strict VPN).
 **Action:** Allowlist `capture.cypress.io` so Test Replay data can be captured. No code change otherwise.
+
+## Runner UI hidden during Test Replay runs
+
+For Cypress Cloud runs with Test Replay enabled, the Cypress Runner UI is now hidden during the run to improve performance (the Runner no longer needs to render). Consequences:
+
+- Recorded video will not show the Runner.
+- A screenshot taken with `capture: 'runner'` is captured as if `capture: 'viewport'` were passed.
+
+**Detect:** Recorded Cloud runs with Test Replay that rely on the Runner being visible in video, or screenshots taken with `capture: 'runner'`.
+**Action:** Generally none. To restore the previous behavior and render the Runner during the run, pass `--runner-ui`.
 
 ## `video` now defaults to false
 
@@ -56,6 +69,13 @@ export default defineConfig({
 })
 ```
 
+## `nodeVersion` configuration option removed
+
+The deprecated `nodeVersion` configuration option has been removed.
+
+**Detect:** `nodeVersion` in the Cypress config.
+**Action:** Remove it. Cypress now always uses the Node.js it was launched with.
+
 ## `cy.readFile()` is now a query command
 
 `cy.readFile()` is now a query. Existing tests continue to work unchanged — no edits are required. The behavior change: it re-reads the file from disk if any upcoming command in the same chain fails, so assertions no longer have to be attached directly.
@@ -80,3 +100,10 @@ Now that `readFile` is a query, it must be overwritten with `Cypress.Commands.ov
 Cypress.Commands.overwrite('readFile', () => { /* ... */ })            // before — no longer works
 Cypress.Commands.overwriteQuery('readFile', function () { /* ... */ }) // after
 ```
+
+## Module API, `after:run`, and `after:spec` result properties changed
+
+The properties and values returned by the Module API, and included in the arguments to `after:run` and `after:spec` handlers, have been changed to be more consistent.
+
+**Detect:** Code that reads the Module API results (the `cypress.run(...)` return value) or the `after:run` / `after:spec` handler arguments in `setupNodeEvents`.
+**Action:** Review and update any code that depends on those properties or values against the v13 result shape (see the changelog).
