@@ -1,6 +1,6 @@
 ---
 name: cypress-upgrade
-description: "Upgrades a Cypress project to a newer major version of Cypress (version-to-version, e.g. v14 -> v15). Use when the user asks to upgrade, migrate, or update Cypress to a specific version, whether named as a major (e.g. 'v15', 'Cypress 15') or as a full version string (e.g. '15.0.0', '15.16.0') - derive the major from the version. Also use to check compatibility with a target version or audit a project for a major-version's breaking changes. Example: a project on 14.x asking to move to 15.16.0 should trigger this skill and follow the v15 path. Apply even when the user does not say 'Cypress' if the request is clearly about a Cypress version upgrade. Prefer cypress-author when the user only wants to write or fix tests; this skill does not migrate projects from another framework (e.g. Playwright) to Cypress."
+description: "Upgrades a Cypress project to a newer major version (version-to-version, e.g. v14 to v15). Use when the user asks to upgrade, migrate, or update Cypress to a target version, named either as a major ('v15', 'Cypress 15') or a full version ('15.16.0'), or to check compatibility or audit a project for a major version's breaking changes. Applies even when the user does not say 'Cypress' if the request is clearly a Cypress version upgrade. Does not migrate projects from another framework (e.g. Playwright) to Cypress; prefer cypress-author for writing or fixing tests."
 model: inherit
 background: false
 allowed-tools: Read, Edit, Grep, Glob, Bash
