@@ -21,16 +21,9 @@ The `code` property on [`cy.exec()`](https://on.cypress.io/exec) has been rename
 **Detect:** `cy.exec(...)` chains that read `.its('code')` (or otherwise access the `code` property of the yielded result).
 **Action:** Rename `code` to `exitCode`.
 
-Before:
-
 ```javascript
-cy.exec('rake db:seed').its('code').should('eq', 0)
-```
-
-After:
-
-```javascript
-cy.exec('rake db:seed').its('exitCode').should('eq', 0)
+cy.exec('rake db:seed').its('code').should('eq', 0)     // before
+cy.exec('rake db:seed').its('exitCode').should('eq', 0) // after
 ```
 
 ## `cy.stub()` 3-argument signature removed
@@ -40,16 +33,9 @@ The deprecated 3-argument signature of [`cy.stub()`](https://on.cypress.io/stub)
 **Detect:** `cy.stub(...)` calls passing a third argument — `cy.stub(obj, 'method', fn)`.
 **Action:** Replace the third argument with a chained `.callsFake(fn)`.
 
-Before:
-
 ```javascript
-cy.stub(user, 'getName', () => 'Jane')
-```
-
-After:
-
-```javascript
-cy.stub(user, 'getName').callsFake(() => 'Jane')
+cy.stub(user, 'getName', () => 'Jane')           // before
+cy.stub(user, 'getName').callsFake(() => 'Jane') // after
 ```
 
 ## Selector Playground API renamed to Element Selector
@@ -59,20 +45,11 @@ cy.stub(user, 'getName').callsFake(() => 'Jane')
 **Detect:** `Cypress.SelectorPlayground` usage (commonly in support files).
 **Action:** Rename to `Cypress.ElementSelector`. Remove any `onElement` option passed to `defaults`.
 
-Before:
-
 ```ts
-Cypress.SelectorPlayground.defaults({
-  selectorPriority: ['class', 'id'],
-})
-```
-
-After:
-
-```ts
-Cypress.ElementSelector.defaults({
-  selectorPriority: ['class', 'id'],
-})
+// before
+Cypress.SelectorPlayground.defaults({ selectorPriority: ['class', 'id'] })
+// after
+Cypress.ElementSelector.defaults({ selectorPriority: ['class', 'id'] })
 ```
 
 ## Webpack 4 is no longer supported
@@ -212,14 +189,7 @@ npm install --save-dev @cypress/angular@3
 
 Then, inside your component support file (e.g. `./cypress/support/component.(js|ts)`) or wherever the `mount` function is imported, add the `@` prefix.
 
-Before:
-
 ```ts
-import { mount } from 'cypress/angular'
-```
-
-After:
-
-```ts
-import { mount } from '@cypress/angular'
+import { mount } from 'cypress/angular'  // before
+import { mount } from '@cypress/angular' // after
 ```
