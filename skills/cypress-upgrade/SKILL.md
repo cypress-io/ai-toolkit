@@ -32,7 +32,7 @@ Decide which major version the user is migrating **to**, then map it to a path i
 
 The procedure is the same for every major version and lives in [./shared/upgrade-flow.md](./shared/upgrade-flow.md). Each supported target major has a directory under [./versions/](./versions/) holding only its **data**: `overview.md` (support matrix + links) and `breaking-changes.md` (code/config changes).
 
-Confirm the target major is in the table below, then **follow [./shared/upgrade-flow.md](./shared/upgrade-flow.md)**, reading the matching version directory for every concrete value:
+Confirm the target major is in the table below, then **you MUST read and follow [./shared/upgrade-flow.md](./shared/upgrade-flow.md)** in full, reading the matching version directory for every concrete value:
 
 | Target major | Version data |
 |--|--|

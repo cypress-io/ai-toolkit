@@ -1,6 +1,6 @@
 # Cypress upgrade flow (shared)
 
-This is the **version-agnostic** procedure for upgrading a Cypress project to a newer major version. Every version path under [`../versions/`](../versions/) uses it. Read it together with the target version's two data files:
+This is the **version-agnostic** procedure for upgrading a Cypress project to a newer major version. Every version path under [`../versions/`](../versions/) uses it. You MUST read and follow it together with the target version's two data files:
 
 - `../versions/<target-major>/overview.md` — the support matrix (prerequisite major; the set of supported runtime, system, and dependency versions for that target), and the migration/changelog/announcement links. This file intentionally hardcodes **no** version thresholds or dependency list — take every concrete value, and the set of dependencies to check, from `overview.md`.
 - `../versions/<target-major>/breaking-changes.md` — the detailed code/config changes to detect and apply.
