@@ -104,7 +104,7 @@ This skill is meant to help inform and support other Cypress skills.
 ### [`cypress-upgrade`](./cypress-upgrade)
 Guides a project through upgrading to a newer major version of Cypress (version-to-version, e.g. v14 → v15). It determines the target major version and routes to a version-specific path that runs a precheck (supported `cypress`, Node.js, glibc, and framework versions), applies the breaking-change code edits it can automate, and reports anything you must resolve yourself before grounding next steps in the official migration guide.
 
-Upgrade paths live under [`./cypress-upgrade/versions/`](./cypress-upgrade/versions); **v15** is the path available today, and more major versions will be added over time.
+Upgrade paths live under [`./cypress-upgrade/versions/`](./cypress-upgrade/versions); **v14 and v15** are the paths available today, and more major versions will be added over time.
 
 #### Example
 

@@ -50,6 +50,7 @@ Each supported target major has a directory under [./versions/](./versions/) hol
 
 | Target major | Version data |
 |--|--|
+| **v14** (14.0) | [overview.md](./versions/v14/overview.md), [breaking-changes.md](./versions/v14/breaking-changes.md) |
 | **v15** (15.0) | [overview.md](./versions/v15/overview.md), [breaking-changes.md](./versions/v15/breaking-changes.md) |
 
 You MUST read the matching version's `overview.md` and `breaking-changes.md` **in full** (do not preview or partial-read them) — you need the complete support matrix and the complete change list. This procedure intentionally hardcodes **no** version thresholds or dependency list; take every concrete value, and the set of dependencies to check, from `overview.md`.
@@ -99,7 +100,7 @@ Assume you are running within a project that already has Cypress installed.
 2. **Summarize what you did** — the resolved target version installed, the code changes you made, and anything you could not safely automate.
 3. **Report verification results** — whether `cypress verify`, the version check, and any test run passed or failed.
 4. **Tell the user to double-check the work** against the official resources linked in `overview.md` (migration guide and changelog).
-5. **Link the announcement** — share the announcement URL from `overview.md` for the full story on what's new.
+5. **Link the announcement** — if `overview.md` lists an announcement URL, share it for the full story on what's new.
 
 ### 8. Sign-off
 
