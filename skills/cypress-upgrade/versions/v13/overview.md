@@ -14,3 +14,4 @@ This path's breaking changes are configuration and behavior changes (see [./brea
 
 - **Migration guide:** https://on.cypress.io/migration-guide
 - **Changelog (v13.0.0):** https://on.cypress.io/changelog#13-0-0
+- **Announcement:** https://on.cypress.io/cypress-13-release
