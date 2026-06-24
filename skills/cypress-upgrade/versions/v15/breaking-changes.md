@@ -2,8 +2,6 @@
 
 Detailed code/config changes for the `cypress-upgrade` skill's v15 path — each section describes one breaking change: what to detect and how to fix it. This file is the reference consulted by the "Make updates" phase in [../../SKILL.md](../../SKILL.md). The version **support matrix** (Node, glibc, bundler/framework thresholds) and links live in [./overview.md](./overview.md). See also the full changelog at https://on.cypress.io/changelog#15-0-0 and the migration guide at https://on.cypress.io/migration-guide.
 
-> Environment-only requirements (Node.js and glibc) carry no code change and are covered by the support matrix in [./overview.md](./overview.md); they are not repeated here.
-
 ## Contents
 
 - [`cy.exec()` `code` property renamed to `exitCode`](#cyexec-code-property-renamed-to-exitcode)
