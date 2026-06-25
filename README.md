@@ -3,6 +3,12 @@
   <img src="./assets/cypress-logotype.svg#gh-dark-mode-only" alt="Cypress" width="240" />
 </p>
 
+<p align="center">
+  <a href="https://on.cypress.io/discord">
+    <img src="https://img.shields.io/badge/chat-on%20Discord-brightgreen" alt="Discord chat" />
+  </a>
+</p>
+
 # ✨ Cypress AI Toolkit
 
 Open-source Cypress AI skills, built by the Cypress team. Works with Claude, Cursor, GitHub Copilot, and more.
