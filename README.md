@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://on.cypress.io/discord">
-    <img src="https://img.shields.io/badge/chat-on%20Discord-brightgreen" alt="Discord chat"/>
+    <img src="https://img.shields.io/badge/chat-on%20Discord-brightgreen" alt="Discord chat" />
   </a>
 </p>
 
