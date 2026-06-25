@@ -34,4 +34,4 @@ These affect whether **component testing** runs, not whether the Cypress binary 
 
 - **Migration guide:** https://on.cypress.io/migration-guide
 - **Changelog (v15.0.0):** https://on.cypress.io/changelog#15-0-0
-- **Announcement:** https://on.cypress.io/cypress-15-upgrade
+- **Announcement:** https://on.cypress.io/cypress-15-release

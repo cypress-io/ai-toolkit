@@ -39,3 +39,4 @@ Only relevant if the project uses component testing. Cypress 14 dropped several 
 
 - **Migration guide:** https://on.cypress.io/migration-guide
 - **Changelog (v14.0.0):** https://on.cypress.io/changelog#14-0-0
+- **Announcement:** https://on.cypress.io/cypress-14-release
