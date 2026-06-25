@@ -1,0 +1,18 @@
+{
+  "name": "cypress-v14-upgrade-fixture",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Synthetic fixture: a Cypress 13 + React 17 (create-react-app) project ready to upgrade to v14.",
+  "scripts": {
+    "cy:run": "cypress run",
+    "ct:open": "cypress open-ct",
+    "ct:run": "cypress run-ct"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack-dev-server": "^3.11.3",
+    "typescript": "^4.9.5"
+  }
+}
