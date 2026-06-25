@@ -1,0 +1,22 @@
+{
+  "skills": ["cypress-upgrade"],
+  "query": "Upgrade this project to Cypress v14.",
+  "files": ["test-fixtures/cypress-upgrade/v14-upgrade"],
+  "expected_behavior": [
+    "Identifies the target major as v14 and follows the v14 path; confirms cypress is on the 13.x prerequisite.",
+    "Flags Node 16 (from .nvmrc) as an install blocker (minimum supported is 18).",
+    "Flags React 17 as below the component-testing minimum of 18.0.0.",
+    "Flags webpack-dev-server 3 as unsupported (v5 ships by default).",
+    "Flags framework: 'create-react-app' as no longer supported and recommends a real bundler with framework: 'react'.",
+    "Flags the removed config options experimentalSkipDomainInjection and experimentalFetchPolyfill.",
+    "Flags experimentalJustInTimeCompile as removed (justInTimeCompile is the default).",
+    "Identifies the before:browser:launch handler that treats the second argument as an array and notes the signature change.",
+    "Updates import { mount } from 'cypress/react18' to 'cypress/react'.",
+    "Flags the two-origin cy.visit interaction without cy.origin() and recommends wrapping the second-origin interaction in cy.origin().",
+    "Flags resourceType on cy.intercept as deprecated.",
+    "Flags Cypress.backend('firefox:force:gc') as removed.",
+    "Flags the about:blank win.fetch() call as unsupported and recommends cy.request() or visiting first.",
+    "Recommends replacing the open-ct / run-ct scripts with cypress open --component / cypress run --component.",
+    "Halts before installing because of the Node install blocker rather than silently proceeding."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "skills": ["cypress-upgrade"],
+  "query": "Upgrade this project to Cypress v13.",
+  "files": ["test-fixtures/cypress-upgrade/v13-upgrade"],
+  "expected_behavior": [
+    "Identifies the target major as v13 and follows the v13 path (versions/v13).",
+    "Confirms cypress is on 12.x and treats it as the valid prerequisite for v13.",
+    "Flags Node 14 (from .nvmrc) as an install blocker and recommends at least Node 18.",
+    "Flags TypeScript 3.9 as below the minimum supported TypeScript 4.x.",
+    "Flags the removed config options videoUploadOnPasses and nodeVersion in cypress.config.ts and recommends removing them.",
+    "Notes video: false and videoCompression are now defaults, and that video: false is redundant.",
+    "Identifies that the Module API / after:run / after:spec result properties changed and advises reviewing their usage.",
+    "Replaces Cypress.Commands.overwrite('readFile', ...) with Cypress.Commands.overwriteQuery('readFile', ...).",
+    "Leaves the cy.readFile().its().should() chain in read-file.cy.ts unchanged (no false-positive edit).",
+    "Reports Test Replay default-on with --record (allowlist capture.cypress.io) and that the Runner UI is hidden during Test Replay runs.",
+    "Halts before installing because of the Node install blocker rather than silently proceeding."
+  ]
+}

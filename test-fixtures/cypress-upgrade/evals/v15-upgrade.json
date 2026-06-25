@@ -1,0 +1,21 @@
+{
+  "skills": ["cypress-upgrade"],
+  "query": "Upgrade this project to Cypress 15.16.0.",
+  "files": ["test-fixtures/cypress-upgrade/v15-upgrade"],
+  "expected_behavior": [
+    "Derives the target major v15 from the full version 15.16.0 and follows the v15 path; confirms cypress is on the 14.x prerequisite.",
+    "Resolves the install target to the exact version 15.16.0.",
+    "Flags Node 18 (from .nvmrc) as an install blocker (v15 requires 20, 22, or 24+).",
+    "Flags Vite 4 as below the minimum supported Vite 5.",
+    "Flags Angular 17 as below the component-testing minimum of 18.0.0.",
+    "Flags zone.js 0.13 as below the required 0.14.0.",
+    "Flags webpack 4 as no longer supported.",
+    "Identifies the CommonJS cypress.config.js using @cypress/vite-dev-server as an ESM-only violation and recommends moving the config to an ESM context.",
+    "Renames Cypress.SelectorPlayground.defaults to Cypress.ElementSelector.defaults.",
+    "Updates cy.exec(...).its('code') to .its('exitCode').",
+    "Updates the 3-argument cy.stub(user, 'getName', fn) to cy.stub(user, 'getName').callsFake(fn).",
+    "Flags the querystring import as a built-in no longer shimmed by the batteries-included preprocessor.",
+    "Notes the glibc (< 2.31) and macOS checks are environment-dependent and reports them.",
+    "Halts before installing because of the Node install blocker rather than silently proceeding."
+  ]
+}

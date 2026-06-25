@@ -16,6 +16,8 @@ The package managers vary on purpose so the precheck's package-manager detection
 2. Invoke the skill toward the matching major, e.g. `/cypress-upgrade upgrade this project to v15`.
 3. Check the agent's findings and edits against that fixture's `README.md`, which lists every change it should catch.
 
+See [`TESTING.md`](./TESTING.md) for the full procedure (setup, grading, the install/verify nuance, and the iteration loop), and [`evals/`](./evals) for one machine-readable evaluation per fixture in the [best-practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) `skills`/`query`/`files`/`expected_behavior` format.
+
 ## Caveats
 
 - **These are detection fixtures, not runnable apps.** Dependencies are not installed and the version combinations are synthetic (e.g. a project may list both `webpack` and `vite` to exercise multiple detections). Do not `npm install` / run Cypress against them expecting a working suite.
