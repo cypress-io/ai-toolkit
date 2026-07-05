@@ -8,12 +8,12 @@ These same prompts are embedded as one-click "Copy Prompt" cards in the [Migrati
 
 1. Pick the prompt for the major version you're upgrading **to**.
 2. Paste it into your AI coding tool of choice (Claude Code, Cursor, GitHub Copilot, etc.) with your project open.
-3. Review the changes it proposes — treat the output as a draft, and confirm your tests pass in your environment.
+3. Review the changes it proposes. Treat the output as a draft, and confirm your tests pass in your environment.
 
 A few things to keep in mind:
 
 - **Upgrade one major at a time.** If you're several majors behind, run each version's prompt in sequence (e.g. 12 → 13, then 13 → 14, then 14 → 15). Each prompt checks this and stops if your project isn't on the expected starting major.
-- **Some changes can't be automated.** Node.js, OS, and framework version requirements are environment changes only you can make — the prompts instruct the AI to flag these rather than guess.
+- **Some changes can't be automated.** Node.js, OS, and framework version requirements are environment changes only you can make, so the prompts instruct the AI to flag these rather than guess.
 - **Use the official migration guide alongside.** These prompts are accelerators, not replacements for the [docs](https://docs.cypress.io/app/references/migration-guide).
 
 ## Prompt Library
