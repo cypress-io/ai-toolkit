@@ -49,6 +49,13 @@ Skills work with any AI tool that accepts custom instructions, including Claude,
 
 See the [skills documentation](./skills/README.md) for installation instructions, example prompts, and troubleshooting.
 
+### Prompt Library
+
+One-off tasks — like upgrading Cypress across a major version — don't need an installed skill. The [prompt library](./prompt-library) contains ready-to-paste prompts for these one-time jobs:
+
+- **[Cypress upgrade prompts](./prompt-library/cypress-upgrade/README.md)** — Upgrade a project one major version at a time (v13, v14, v15), with the AI reading the official migration guide and verifying the result. Also available as "Copy Prompt" cards in the [Migration Guide](https://docs.cypress.io/app/references/migration-guide) itself.
+- **[Cypress v16 migration prompts](./prompt-library/cypress-v16-migration/README.md)** — Prepare for v16's breaking changes today, like removing `Cypress.env()` usage.
+
 ### What's coming
 
 We're building toward a broader toolkit.
