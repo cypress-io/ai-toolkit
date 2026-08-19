@@ -68,17 +68,18 @@ need to diagnose.
 ```bash
 SPEC=cypress/e2e/login.cy.ts
 for attempt in $(seq 1 10); do
-  IFS='|' read -r _ before _ _ < <(tap_state)
+  while ! IFS='|' read -r _ before _ _ < <(tap_state); do sleep 2; done
   npx cypress tap run "$SPEC" || { echo "dispatch failed" >&2; exit 2; }
 
   fresh=0
   for _ in $(seq 1 150); do
-    IFS='|' read -r stage started_at _ ran_spec < <(tap_state)
-    case "$stage" in
-      passed|failed)
-        [ -n "$started_at" ] && [ "$started_at" != "$before" ] && [ "$ran_spec" = "$SPEC" ] \
-          && { fresh=1; break; } ;;
-    esac
+    if IFS='|' read -r stage started_at _ ran_spec < <(tap_state); then
+      case "$stage" in
+        passed|failed)
+          [ -n "$started_at" ] && [ "$started_at" != "$before" ] && [ "$ran_spec" = "$SPEC" ] \
+            && { fresh=1; break; } ;;
+      esac
+    fi
     sleep 2
   done
   [ "$fresh" -eq 1 ] || { echo "no fresh verdict on attempt $attempt" >&2; exit 2; }

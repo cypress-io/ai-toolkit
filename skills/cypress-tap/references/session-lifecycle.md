@@ -198,10 +198,10 @@ Two things weaken `startedAt` as a signal, and both have bitten real sessions:
   issued, and a short spec can have *finished* inside that window. In an authoring loop the
   watcher's run and yours race, and the poll happily reports the watcher's. When you have just
   written the spec, drain that run first and take the baseline afterwards.
-- **A blank read is not a change.** A transient failure yields empty fields rather than an
-  error, several times a session in practice. The `tap_state` helper returns empty on purpose
-  so the loop waits; your comparison must require a non-empty value before it decides anything.
-  Treating `""` as "different from the baseline" ends the poll instantly on a phantom verdict.
+- **A blank read is not a change.** A transient failure can yield empty fields several times a
+  session. The `tap_state` helper rejects blank or malformed reads, and the baseline loop retries
+  until one succeeds. Verdict comparisons must still require a non-empty `startedAt`; treating
+  `""` as a changed run identity can end the poll on a phantom verdict.
 - **Reads can be partial, not just blank.** Measured: `{"status":"spec not selected"}` with no
   `pid`, `projectRoot` or anything else, sandwiched between five complete reads seconds either
   side. One field arriving is no guarantee its siblings did, so check each field you branch on

@@ -100,30 +100,35 @@ at least two seconds and do not make separate status calls per field.
 
 ```bash
 tap_state () {
-  npx cypress tap status --json 2>/dev/null | node -e "
+  local json
+  json=$(npx cypress tap status --json 2>/dev/null) || return 1
+  printf '%s' "$json" | node -e "
     try {
       const v = JSON.parse(require('fs').readFileSync(0, 'utf8'))
-      process.stdout.write([v.status ?? '', v.startedAt ?? '', v.pid ?? '', v.spec ?? ''].join('|'))
-    } catch {}
+      if (!v || typeof v.status !== 'string' || !v.status) process.exit(1)
+      if (['passed', 'failed'].includes(v.status) && (!v.startedAt || !v.spec)) process.exit(1)
+      console.log([v.status, v.startedAt ?? '', v.pid ?? '', v.spec ?? ''].join('|'))
+    } catch { process.exit(1) }
   "
 }
 
 SPEC=cypress/e2e/login.cy.ts
-IFS='|' read -r _ before _ _ < <(tap_state)
+while ! IFS='|' read -r _ before _ _ < <(tap_state); do sleep 2; done
 npx cypress tap run "$SPEC" || exit 1
 
 fresh=0
 for _ in $(seq 1 120); do
-  IFS='|' read -r stage started_at _ ran_spec < <(tap_state)
-  case "$stage" in
-    passed|failed)
-      if [ -n "$started_at" ] && [ "$started_at" != "$before" ] \
-        && [ "$ran_spec" = "$SPEC" ]; then
-        fresh=1
-        break
-      fi
-      ;;
-  esac
+  if IFS='|' read -r stage started_at _ ran_spec < <(tap_state); then
+    case "$stage" in
+      passed|failed)
+        if [ -n "$started_at" ] && [ "$started_at" != "$before" ] \
+          && [ "$ran_spec" = "$SPEC" ]; then
+          fresh=1
+          break
+        fi
+        ;;
+    esac
+  fi
   sleep 2
 done
 [ "$fresh" -eq 1 ] || { echo "no fresh verdict" >&2; exit 1; }
@@ -133,7 +138,9 @@ npx cypress tap reporter
 ```
 
 Copy `SPEC` from `tap specs`; do not guess paths. This snippet uses process substitution
-(`< <(...)`) and therefore requires bash or zsh, not POSIX `sh`.
+(`< <(...)`) and therefore requires bash or zsh, not POSIX `sh`. Baseline capture retries until
+it gets a structurally complete status; otherwise a transient blank read could make the previous
+run's verdict appear fresh after dispatch.
 
 ## Critical correctness rules
 
