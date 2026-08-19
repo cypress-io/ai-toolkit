@@ -6,25 +6,27 @@ assume the session is selected and the fresh-verdict polling workflow from `SKIL
 ## Author a spec against the real app
 
 `tap` can read the app only after a spec has settled. Start with a temporary probe spec that
-navigates to the state you need:
+navigates to the state you need. Create `cypress/e2e/_probe.cy.js`:
 
-```bash
-cat > cypress/e2e/_probe.cy.js <<'SPEC'
+```javascript
 it('probe', () => {
   cy.visit('/checkout')
 })
-SPEC
+```
 
-npx cypress tap run cypress/e2e/_probe.cy.js
-# Wait for a fresh verdict before reading the app.
+Run the probe using the fresh-verdict workflow in `SKILL.md`. After it reaches a matching
+`passed` or `failed` verdict, read the app:
+
+```bash
 npx cypress tap aria
 npx cypress tap dom --selector 'form'
 npx cypress tap inspect --selector '[data-cy=pay]'
 ```
 
-Read `aria` first for roles, accessible names, values, and control states. Use `dom` for exact
-text and attributes. Use `inspect` for attributes, styles, box geometry, and the accessibility
-node.
+Read `aria` first for roles, accessible names, live form-control values, and control states.
+Use `dom` for exact text—including live-region and toast text—and HTML attributes. Use
+`inspect` for attributes, styles, box geometry, and the accessibility node, but not for a
+control's live value.
 
 To discover selectors, deliberately make a broad read:
 
@@ -63,35 +65,9 @@ npx cypress tap reporter --test-id r4
 ## Hunt a flake
 
 Rerun in a bounded loop and stop on the first failure. Another run overwrites the result you
-need to diagnose.
-
-```bash
-SPEC=cypress/e2e/login.cy.ts
-for attempt in $(seq 1 10); do
-  while ! IFS='|' read -r _ before _ _ < <(tap_state); do sleep 2; done
-  npx cypress tap run "$SPEC" || { echo "dispatch failed" >&2; exit 2; }
-
-  fresh=0
-  for _ in $(seq 1 150); do
-    if IFS='|' read -r stage started_at _ ran_spec < <(tap_state); then
-      case "$stage" in
-        passed|failed)
-          [ -n "$started_at" ] && [ "$started_at" != "$before" ] && [ "$ran_spec" = "$SPEC" ] \
-            && { fresh=1; break; } ;;
-      esac
-    fi
-    sleep 2
-  done
-  [ "$fresh" -eq 1 ] || { echo "no fresh verdict on attempt $attempt" >&2; exit 2; }
-
-  echo "attempt $attempt -> $stage"
-  [ "$stage" = "failed" ] && { echo "failed on attempt $attempt"; exit 1; }
-done
-echo "no failure in 10 attempts"
-```
-
-Exit nonzero when the sought failure occurs so a supervising harness does not label the hunt
-successful. "No failure" is absence of evidence, not proof that the spec is stable.
+need to diagnose. Apply the fresh-verdict workflow before evaluating each attempt, preserve the
+first failed result, and return a nonzero outcome when the sought failure occurs. Completing the
+requested attempts without a failure is not proof that the spec is stable.
 
 If Cypress retries a test, `reporter --test-id` defaults to the latest attempt, which may pass:
 
@@ -106,15 +82,10 @@ load rather than an assertion that needs a longer timeout.
 
 ## Diagnose a failure
 
-First capture the failed test id. Guard JSON parsing because a failed command leaves stdout
-empty:
+First capture the failed test id:
 
 ```bash
-if ! out=$(npx cypress tap reporter --json); then exit 1; fi
-printf '%s' "$out" | node -pe "
-  const v = JSON.parse(require('fs').readFileSync(0))
-  const tests = [...(v.tests || []), ...(v.suites || []).flatMap(s => s.tests || [])]
-  tests.filter(t => t.state === 'failed').map(t => t.id).join(' ')"
+npx cypress tap reporter
 ```
 
 Then inspect the test, failing command, and app at that command's snapshot:
@@ -122,7 +93,7 @@ Then inspect the test, failing command, and app at that command's snapshot:
 ```bash
 npx cypress tap reporter --test-id r4
 npx cypress tap command --test-id r4 --command-id 4
-npx cypress tap command --test-id r4 --command-id 4 --json > /tmp/tap-command.json
+npx cypress tap command --test-id r4 --command-id 4 --json > .tap-command.json
 npx cypress tap pin --test-id r4 --command-id 4
 npx cypress tap inspect --selector '.action-disabled'
 npx cypress tap pin --clear
@@ -138,7 +109,8 @@ Use `command` to confirm that the row has snapshots, then `pin` it. While pinned
 
 - `aria` shows structure and control state.
 - `dom` shows markup and text.
-- `inspect` shows one element's attributes, styles, geometry, and accessibility node.
+- `inspect` shows one element's attributes, styles, geometry, and accessibility node, but may
+  omit its live form-control value.
 
 Run `pin --clear` afterward. If uncertain, `status` reports the active pin as `⚲ PINNED` in the
 human output and as `pinned` in JSON.
