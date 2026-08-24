@@ -28,6 +28,7 @@ npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-author
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-explain
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-tap
+npx skills add https://github.com/cypress-io/ai-toolkit --skill cy-cloud
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
@@ -49,6 +50,7 @@ gh skill install cypress-io/ai-toolkit cypress-author
 gh skill install cypress-io/ai-toolkit cypress-explain
 gh skill install cypress-io/ai-toolkit cypress-docs
 gh skill install cypress-io/ai-toolkit cypress-tap
+gh skill install cypress-io/ai-toolkit cy-cloud
 ```
 
 See [GitHub](https://cli.github.com/manual/gh_skill) for full documentation, including how to keep skills up-to-date.
@@ -111,6 +113,17 @@ Use it when authoring or debugging Cypress tests against an existing `cypress op
 **Diagnose a failing spec:**
 
 > Run the checkout spec in my open Cypress session, diagnose the failure, and inspect the app at the failing command.
+
+### [`cy-cloud`](./cy-cloud)
+Investigates Cypress Cloud organizations, projects, runs, specs, tests, failure screenshots, and Test Replay data through the `cy-cloud` CLI.
+
+Use it to triage recorded failures and flakes from a Cypress Cloud URL or test ID. It requires Node.js 22.21.0 or later, the Cypress Cloud CLI, authentication, and an organization with the CLI integration enabled.
+
+#### Example
+
+**Investigate a recorded failure:**
+
+> Diagnose why this Cypress Cloud test failed, inspect its failed attempt and Test Replay data, and report the most likely root cause.
 
 ## Troubleshooting
 
