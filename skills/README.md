@@ -27,6 +27,7 @@ Or install a specific skill with:
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-author
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-explain
 npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-docs
+npx skills add https://github.com/cypress-io/ai-toolkit --skill cypress-tap
 ```
 
 See [skills.sh](https://skills.sh/) for full documentation, including how to update and remove skills. Note that the update check in the `skills` package only tracks project-level installs, not global ones.
@@ -47,6 +48,7 @@ You can also install individual skills:
 gh skill install cypress-io/ai-toolkit cypress-author
 gh skill install cypress-io/ai-toolkit cypress-explain
 gh skill install cypress-io/ai-toolkit cypress-docs
+gh skill install cypress-io/ai-toolkit cypress-tap
 ```
 
 See [GitHub](https://cli.github.com/manual/gh_skill) for full documentation, including how to keep skills up-to-date.
@@ -98,6 +100,17 @@ This skill is meant to help inform and support other Cypress skills.
 **Define a Cypress API:**
 
 > Define the Cypress `cy.prompt` API
+
+### [`cypress-tap`](./cypress-tap)
+Drives a running Cypress open-mode session through `cypress tap` so your agent can run and rerun specs, inspect reporter and command logs, diagnose failures, and query or rewind the app under test without GUI interaction.
+
+Use it when authoring or debugging Cypress tests against an existing `cypress open` session. It requires Cypress 15.21 or later and a Chromium-family browser.
+
+#### Example
+
+**Diagnose a failing spec:**
+
+> Run the checkout spec in my open Cypress session, diagnose the failure, and inspect the app at the failing command.
 
 ## Troubleshooting
 

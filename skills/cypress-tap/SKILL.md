@@ -8,6 +8,8 @@ description: >-
   discovering selectors, diagnosing failures, or verifying test behavior
   without GUI interaction. Not for one-shot headless runs. Requires Cypress
   15.21+, a Chromium-family browser, and a running `cypress open` session.
+metadata:
+  version: 1.0.0
 ---
 
 # Driving Cypress with `cypress tap`
