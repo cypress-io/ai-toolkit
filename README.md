@@ -45,7 +45,7 @@ Five skills are available now:
 - **[`cypress-explain`](./skills/README.md#cypress-explain)** — Helps you understand, describe, and critique existing tests. Use it when auditing a suite, onboarding a new team member, or investigating a brittle test before rewriting it.
 - **[`cypress-docs`](./skills/README.md#cypress-docs)** - Helps your agent research and retrieve information about Cypress more efficiently and reliably.
 - **[`cypress-tap`](./skills/README.md#cypress-tap)** — Drives a running Cypress open-mode session to run specs, inspect results, diagnose failures, and query the app under test without GUI interaction.
-- **[`cy-cloud`](./skills/README.md#cy-cloud)** — Investigates Cypress Cloud runs, tests, failures, screenshots, and Test Replay data through the Cypress Cloud CLI.
+- **[`cypress-cloud-cli`](./skills/README.md#cypress-cloud-cli)** — Investigates Cypress Cloud runs, tests, failures, screenshots, and Test Replay data through the Cypress Cloud CLI.
 
 Skills work with any AI tool that accepts custom instructions, including Claude, Cursor, and GitHub Copilot.
 
