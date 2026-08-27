@@ -204,7 +204,7 @@ cy-cloud replay info --testId <uuid> --attempt <failedAttemptNumber> 2>/dev/null
 ```
 
 `replay info` has no availability boolean. A successful response means replay data resolved; an
-error means it is unavailable or inaccessible.
+error means it is not yet available or inaccessible.
 
 With no filters, `replay timeline` returns the 25 commands leading to the failure, the failed
 command, and XHR/Fetch network events. Start with this default:
