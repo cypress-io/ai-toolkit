@@ -47,7 +47,7 @@ Never print, echo, read back, or commit tokens. Never inspect
 `~/.config/cy-cloud/auth.json` or `cypress.env.json`; use `cy-cloud status`.
 
 The organization must have the Cypress Cloud CLI integration enabled. A response saying it is not
-enabled requires an organization administrator; it cannot be fixed with another CLI command.
+enabled requires action from an organization administrator; it cannot be fixed with another CLI command.
 
 ## Discover instead of guessing
 
