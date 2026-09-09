@@ -1,0 +1,75 @@
+{
+  "name": "cypress-cloud-mcp-integration",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Connect GitHub Copilot and other VS Code agents to Cypress Cloud via MCP.",
+  "keywords": [
+    "cloud",
+    "copilot",
+    "cypress",
+    "mcp",
+    "model context protocol",
+    "testing"
+  ],
+  "homepage": "https://on.cypress.io/cloud-mcp",
+  "bugs": {
+    "url": "https://github.com/cypress-io/ai-toolkit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cypress-io/ai-toolkit.git",
+    "directory": "vscode-cloud-mcp"
+  },
+  "main": "./out/extension.js",
+  "workspaces": [],
+  "scripts": {
+    "compile": "tsc -p ./",
+    "package": "vsce package --no-dependencies",
+    "test": "yarn compile && node --test out/*.test.js",
+    "vscode:prepublish": "yarn compile",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.0",
+    "@types/vscode": "1.101.0",
+    "@vscode/vsce": "3.9.2",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "vscode": "^1.101.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Testing"
+  ],
+  "contributes": {
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "cypress-cloud-mcp",
+        "label": "Cypress Cloud"
+      }
+    ],
+    "commands": [
+      {
+        "command": "cypressCloudMcp.connect",
+        "title": "Cypress Cloud MCP: Connect"
+      },
+      {
+        "command": "cypressCloudMcp.openDocs",
+        "title": "Cypress Cloud MCP: Open Documentation"
+      }
+    ]
+  },
+  "displayName": "Cypress Cloud MCP Integration",
+  "icon": "media/icon.png",
+  "publisher": "cypress-io"
+}
