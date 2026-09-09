@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, it } from 'node:test'
 
@@ -74,6 +74,7 @@ describe('extension manifest', () => {
   it('uses Cypress-managed links and the public toolkit repository', () => {
     assert.equal(manifest.homepage, 'https://on.cypress.io/cloud-mcp')
     assert.equal(manifest.license, 'MIT')
+    assert.equal(existsSync(path.join(__dirname, '..', 'LICENSE')), true)
     assert.equal(
       manifest.repository?.url,
       'https://github.com/cypress-io/ai-toolkit.git'

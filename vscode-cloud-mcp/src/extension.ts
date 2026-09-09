@@ -16,6 +16,12 @@ const createServerDefinition = (): vscode.McpHttpServerDefinition =>
     vscode.Uri.parse(PRODUCTION_MCP_URL)
   )
 
+const markWelcomeShown = async (
+  context: vscode.ExtensionContext
+): Promise<void> => {
+  await context.globalState.update(WELCOME_SHOWN_KEY, true)
+}
+
 const openMcpServers = async (): Promise<void> => {
   await vscode.commands.executeCommand(MCP_SERVER_LIST_COMMAND)
 }
@@ -25,6 +31,8 @@ const showWelcome = async (context: vscode.ExtensionContext): Promise<void> => {
     return
   }
 
+  await markWelcomeShown(context)
+
   const connect = 'Connect'
   const choice = await vscode.window.showInformationMessage(
     'Connect Cypress Cloud MCP to make its tools available in Chat.',
@@ -33,7 +41,6 @@ const showWelcome = async (context: vscode.ExtensionContext): Promise<void> => {
 
   if (choice === connect) {
     await openMcpServers()
-    await context.globalState.update(WELCOME_SHOWN_KEY, true)
   }
 }
 
@@ -44,6 +51,7 @@ export function activate(context: vscode.ExtensionContext): void {
       resolveMcpServerDefinition: (server) => server,
     }),
     vscode.commands.registerCommand('cypressCloudMcp.connect', async () => {
+      await markWelcomeShown(context)
       await openMcpServers()
     }),
     vscode.commands.registerCommand('cypressCloudMcp.openDocs', async () => {

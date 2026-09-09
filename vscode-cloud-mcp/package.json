@@ -5,6 +5,7 @@
   "publisher": "Cypress-io",
   "displayName": "Cypress Cloud MCP Integration",
   "description": "Connect GitHub Copilot and other VS Code agents to Cypress Cloud via MCP.",
+  "license": "MIT",
   "keywords": [
     "cloud",
     "copilot",
