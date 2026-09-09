@@ -5,7 +5,7 @@ Thank you for helping improve this project. Contributions make the toolkit more 
 ## Ways to contribute
 
 - **Skills** — Add a new skill under `skills/` or refine an existing one (clearer prompts, better examples, narrower scope).
-- **VS Code extension** — Improve the [Cypress Cloud MCP Integration](./vscode-cloud-mcp/README.md) under `vscode-cloud-mcp/`.
+- **VS Code extension** — Improve the [Cypress Cloud MCP Integration](https://marketplace.visualstudio.com/items?itemName=Cypress-io.cypress-cloud-mcp-integration) (`Cypress-io.cypress-cloud-mcp-integration`) under `vscode-cloud-mcp/`.
 - **Documentation** — Improve the root [README](./README.md) or other guides.
 - **Feedback** — [Open an issue](https://github.com/cypress-io/ai-toolkit/issues) to report problems, suggest enhancements, or describe workflows we should support.
 

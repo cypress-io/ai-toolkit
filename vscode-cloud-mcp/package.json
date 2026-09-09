@@ -1,7 +1,9 @@
 {
   "name": "cypress-cloud-mcp-integration",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "private": true,
+  "publisher": "Cypress-io",
+  "displayName": "Cypress Cloud MCP Integration",
   "description": "Connect GitHub Copilot and other VS Code agents to Cypress Cloud via MCP.",
   "keywords": [
     "cloud",
@@ -69,7 +71,5 @@
       }
     ]
   },
-  "displayName": "Cypress Cloud MCP Integration",
-  "icon": "media/icon.png",
-  "publisher": "cypress-io"
+  "icon": "media/icon.png"
 }

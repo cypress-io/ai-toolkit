@@ -16,8 +16,10 @@ type PackageManifest = {
   homepage: string
   license: string
   name: string
+  publisher: string
   repository?: { url?: string; directory?: string }
   scripts: Record<string, string>
+  version: string
 }
 
 const manifest = JSON.parse(
@@ -26,8 +28,14 @@ const manifest = JSON.parse(
 
 describe('extension manifest', () => {
   it('uses the available Marketplace identity', () => {
+    assert.equal(manifest.publisher, 'Cypress-io')
     assert.equal(manifest.name, 'cypress-cloud-mcp-integration')
     assert.equal(manifest.displayName, 'Cypress Cloud MCP Integration')
+    assert.equal(manifest.version, '1.0.0')
+    assert.equal(
+      `${manifest.publisher}.${manifest.name}`,
+      'Cypress-io.cypress-cloud-mcp-integration'
+    )
   })
 
   it('contributes the MCP provider and connection command', () => {

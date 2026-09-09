@@ -33,7 +33,7 @@ The Cypress Cloud MCP server connects your AI coding assistants directly to Cypr
 
 More information about the Cypress Cloud MCP is available [here](https://docs.cypress.io/cloud/integrations/cloud-mcp).
 
-For VS Code and GitHub Copilot, install the [Cypress Cloud MCP Integration](./vscode-cloud-mcp/README.md) extension. It registers the hosted Cypress Cloud MCP server in VS Code and uses VS Code's native OAuth flow.
+For VS Code and GitHub Copilot, install the [Cypress Cloud MCP Integration](https://marketplace.visualstudio.com/items?itemName=Cypress-io.cypress-cloud-mcp-integration) extension (`Cypress-io.cypress-cloud-mcp-integration`). It registers the hosted Cypress Cloud MCP server in VS Code and uses VS Code's native OAuth flow. See the [extension README](./vscode-cloud-mcp/README.md) for local development.
 
 _Note:_ The MCP connection will utilize OAuth by default. If you would prefer to use a Personal Access Token (PAT) you will need to adjust the `.mcp.json` file for your agent.
 
@@ -91,7 +91,7 @@ If you're using another agent or prefer to pick-and-choose you can pick the port
 
     For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
 
-3. The Cypress Cloud MCP configuration can be copied into your agent, or you can follow the [configuration instructions here](https://docs.cypress.io/cloud/integrations/cloud-mcp). In VS Code, install the [Cypress Cloud MCP Integration](./vscode-cloud-mcp/README.md) extension instead.
+3. The Cypress Cloud MCP configuration can be copied into your agent, or you can follow the [configuration instructions here](https://docs.cypress.io/cloud/integrations/cloud-mcp). In VS Code, install the [Cypress Cloud MCP Integration](https://marketplace.visualstudio.com/items?itemName=Cypress-io.cypress-cloud-mcp-integration) extension (`Cypress-io.cypress-cloud-mcp-integration`) instead.
 
 ## Who this is for
 

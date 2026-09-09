@@ -1,4 +1,6 @@
-# Cypress Cloud MCP
+# Cypress Cloud MCP Integration
+
+Marketplace ID: [`Cypress-io.cypress-cloud-mcp-integration`](https://marketplace.visualstudio.com/items?itemName=Cypress-io.cypress-cloud-mcp-integration)
 
 Connect GitHub Copilot and other VS Code agents to
 [Cypress Cloud](https://on.cypress.io/cloud-mcp) through the
