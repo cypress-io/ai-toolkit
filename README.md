@@ -41,8 +41,6 @@ Use the first-class installer for your agent when one exists:
 | [Cypress Cursor Plugin](#plugin) | For Cursor users |
 | [Cypress VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Cypress-io.vscode-cypress-cloud-mcp) (`Cypress-io.vscode-cypress-cloud-mcp`) | For VS Code and GitHub Copilot users |
 
-See the [extension README](./vscode-cloud-mcp/README.md) for local development of the VS Code extension.
-
 _Note:_ The MCP connection will utilize OAuth by default. If you would prefer to use a Personal Access Token (PAT) you will need to adjust the `.mcp.json` file for your agent.
 
 ### Skills
@@ -131,7 +129,7 @@ Changes to any functional toolkit content (skills and mcp, not documentation for
 After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above - this likely will *not* match the version of individual skills, but should be thought of as a "package" version.
 
 VS Code extension changes are built, packed, and published separately. See
-[Build, pack, and release](./vscode-cloud-mcp/README.md#build-pack-and-release)
+[Pack and release](./vscode-cloud-mcp/README.md#pack-and-release)
 in the extension README.
 
 ## License

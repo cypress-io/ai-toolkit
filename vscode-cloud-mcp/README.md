@@ -39,34 +39,12 @@ native MCP authentication flow.
 The extension connects only to `https://mcp.cypress.io/mcp`. User and workspace
 settings cannot redirect authentication to another server.
 
-## Local development
-
-This directory is a VS Code extension, not an MCP JSON definition, so it lives
-next to `mcp/` rather than inside it. Open `vscode-cloud-mcp/` as the workspace
-folder (or use the launch config in `.vscode/launch.json`) so
-`--extensionDevelopmentPath` points at this package:
-
-1. Run `yarn` and `yarn compile` in `vscode-cloud-mcp/`.
-2. Press F5 (**Run Extension**) to launch an Extension Development Host.
-3. In the new window, run **Cypress Cloud MCP: Connect** and start the
-   **Cypress Cloud** MCP server.
-
-## Build, pack, and release
+## Pack and release
 
 Run these commands from `vscode-cloud-mcp/`. Yarn uses the pinned
 `@vscode/vsce` in this package — do not call `npx vsce` or `yarn publish`
-(that publishes to npm).
-
-### Build
-
-```sh
-yarn
-yarn compile
-yarn test
-```
-
-`yarn watch` rebuilds on change. `yarn vscode:prepublish` also compiles, and
-`vsce` runs it automatically before packing or publishing.
+(that publishes to npm). `vsce` compiles via `yarn vscode:prepublish` before
+packing or publishing.
 
 ### Pack
 
