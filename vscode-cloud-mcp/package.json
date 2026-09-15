@@ -1,10 +1,10 @@
 {
-  "name": "cypress-cloud-mcp-integration",
+  "name": "vscode-cypress-cloud-mcp",
   "version": "1.0.0",
   "private": true,
   "publisher": "Cypress-io",
-  "displayName": "Cypress Cloud MCP Integration",
-  "description": "Connect GitHub Copilot and other VS Code agents to Cypress Cloud via MCP.",
+  "displayName": "VSCode Cypress Cloud MCP",
+  "description": "Give GitHub Copilot and other VS Code agents a window into Cypress Cloud test results via MCP.",
   "license": "MIT",
   "keywords": [
     "cloud",
@@ -24,7 +24,6 @@
     "directory": "vscode-cloud-mcp"
   },
   "main": "./out/extension.js",
-  "workspaces": [],
   "scripts": {
     "compile": "tsc -p ./",
     "package": "vsce package --no-dependencies",

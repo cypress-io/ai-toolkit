@@ -29,12 +29,12 @@ const manifest = JSON.parse(
 describe('extension manifest', () => {
   it('uses the available Marketplace identity', () => {
     assert.equal(manifest.publisher, 'Cypress-io')
-    assert.equal(manifest.name, 'cypress-cloud-mcp-integration')
-    assert.equal(manifest.displayName, 'Cypress Cloud MCP Integration')
-    assert.equal(manifest.version, '1.0.0')
+    assert.equal(manifest.name, 'vscode-cypress-cloud-mcp')
+    assert.equal(manifest.displayName, 'VSCode Cypress Cloud MCP')
+    assert.match(manifest.version, /^\d+\.\d+\.\d+$/)
     assert.equal(
       `${manifest.publisher}.${manifest.name}`,
-      'Cypress-io.cypress-cloud-mcp-integration'
+      'Cypress-io.vscode-cypress-cloud-mcp'
     )
   })
 
@@ -89,6 +89,9 @@ describe('extension manifest', () => {
   it('uses pinned build dependencies and Yarn-provided tooling', () => {
     assert.match(manifest.devDependencies['@types/vscode'], /^\d+\.\d+\.\d+$/)
     assert.match(manifest.devDependencies['@vscode/vsce'], /^\d+\.\d+\.\d+$/)
+    assert.equal(manifest.scripts.package, 'vsce package --no-dependencies')
+    assert.equal(manifest.scripts.release, 'vsce publish --no-dependencies')
     assert.doesNotMatch(manifest.scripts.package, /\bnpx\b/)
+    assert.doesNotMatch(manifest.scripts.release, /\bnpx\b/)
   })
 })

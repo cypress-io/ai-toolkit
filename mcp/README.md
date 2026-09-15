@@ -4,4 +4,12 @@ This directory contains the MCP configuration for each agent type - unfortunatel
 
 These MCP definitions default to use OAuth - you can instead use a Personal Access Token (PAT) by following instructions [here](https://docs.cypress.io/cloud/integrations/cloud-mcp#Configure-AI-Assistant).
 
-For VS Code and GitHub Copilot, use the [Cypress Cloud MCP Integration](https://marketplace.visualstudio.com/items?itemName=Cypress-io.cypress-cloud-mcp-integration) extension (`Cypress-io.cypress-cloud-mcp-integration`) instead of copying these JSON files.
+Use the first-class installer for your agent when one exists, instead of copying these JSON files:
+
+| Tool | When to use |
+| --- | --- |
+| [Cypress Claude Connector](https://docs.cypress.io/cloud/integrations/cloud-mcp#Claude-Desktop) | For Claude Desktop app users |
+| [Cypress Cursor Plugin](../README.md#plugin) | For Cursor users |
+| [Cypress VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Cypress-io.vscode-cypress-cloud-mcp) | For VS Code users |
+
+The VS Code extension source lives in [`../vscode-cloud-mcp`](../vscode-cloud-mcp/) because it is a VS Code package (with its own `package.json` and Extension Host launch config), not an MCP JSON definition.
