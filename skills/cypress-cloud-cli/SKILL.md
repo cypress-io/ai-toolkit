@@ -2,7 +2,7 @@
 name: cypress-cloud-cli
 description: Runs the cy-cloud CLI to inspect Cypress Cloud organizations, projects, runs, specs, tests, failure screenshots, and Test Replay data. Use when the user mentions Cypress Cloud, cy-cloud, cypress-cloud-cli, a Cloud run or test URL, failing or flaky Cypress tests, Test Replay, run triage, Cloud artifacts, or asks why a recorded test failed.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Cypress Cloud CLI
@@ -117,8 +117,11 @@ Read only the references required for the current task:
   [investigation.md](references/investigation.md).
 - **Query Test Replay:** read [investigation.md](references/investigation.md) and
   [test-replay.md](references/test-replay.md).
+- **Inspect the app itself (DOM, ARIA, computed styles, a live screenshot) at a moment in the test, or
+  find which command changed an element:** read [replay-view.md](references/replay-view.md).
 - **Diagnose why a recorded test failed:** read [investigation.md](references/investigation.md),
-  [test-replay.md](references/test-replay.md), and [diagnosis.md](references/diagnosis.md).
+  [test-replay.md](references/test-replay.md), [replay-view.md](references/replay-view.md) when the
+  timeline alone does not explain the symptom, and [diagnosis.md](references/diagnosis.md).
 
 ## Cache and common recovery
 
