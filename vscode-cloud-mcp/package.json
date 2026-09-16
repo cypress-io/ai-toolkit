@@ -4,7 +4,7 @@
   "private": true,
   "publisher": "Cypress-io",
   "displayName": "VSCode Cypress Cloud MCP",
-  "description": "Give GitHub Copilot and other VS Code agents a window into Cypress Cloud test results via MCP.",
+  "description": "Connect to the Cypress Cloud MCP in VSCode agents to Cypress Cloud via MCP.",
   "license": "MIT",
   "keywords": [
     "cloud",
