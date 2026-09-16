@@ -1,7 +1,5 @@
 # Cypress Cloud MCP
 
-Marketplace ID: [`Cypress-io.vscode-cypress-cloud-mcp`](https://marketplace.visualstudio.com/items?itemName=Cypress-io.vscode-cypress-cloud-mcp)
-
 Connect to
 [Cypress Cloud](https://on.cypress.io/cloud) through the [Cypress Cloud MCP](https://on.cypress.io/cloud-mcp) to give GitHub Copilot and other VS Code agents a window into your application's health and stability.
 
