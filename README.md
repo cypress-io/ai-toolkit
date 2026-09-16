@@ -35,10 +35,10 @@ More information about the Cypress Cloud MCP is available [here](https://docs.cy
 
 Use the first-class installer for your agent when one exists:
 
-| Tool | When to use |
-| --- | --- |
-| [Cypress Claude Connector](https://docs.cypress.io/cloud/integrations/cloud-mcp#Claude-Desktop) | For Claude Desktop app users |
-| [Cypress Cursor Plugin](#plugin) | For Cursor users |
+| Tool                                                                                                                                                         | When to use                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
+| [Cypress Claude Connector](https://docs.cypress.io/cloud/integrations/cloud-mcp#Claude-Desktop)                                                              | For Claude Desktop app users         |
+| [Cypress Cursor Plugin](#plugin)                                                                                                                             | For Cursor users                     |
 | [Cypress VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Cypress-io.vscode-cypress-cloud-mcp) (`Cypress-io.vscode-cypress-cloud-mcp`) | For VS Code and GitHub Copilot users |
 
 _Note:_ The MCP connection will utilize OAuth by default. If you would prefer to use a Personal Access Token (PAT) you will need to adjust the `.mcp.json` file for your agent.
@@ -83,19 +83,20 @@ If you're using another agent or prefer to pick-and-choose you can pick the port
 
 1. Install the skills using command-line tools
 
- * [`skills`](https://skills.sh/) package:
-   ```sh
-   npx skills add cypress-io/ai-toolkit
-   ```
-  
-  * [`GitHub CLI`](https://cli.github.com/manual/gh_skill):
-    ```sh
-    gh skill install cypress-io/ai-toolkit
-    ```
+- [`skills`](https://skills.sh/) package:
+
+  ```sh
+  npx skills add cypress-io/ai-toolkit
+  ```
+
+- [`GitHub CLI`](https://cli.github.com/manual/gh_skill):
+  ```sh
+  gh skill install cypress-io/ai-toolkit
+  ```
 
 2. Prompt your AI tool as you normally would. The skills will activate automatically when relevant, or invoke one directly with a slash command (e.g. `/cypress-author`).
 
-    For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
+   For manual installation, example prompts, and more, see the [skills documentation](./skills/README.md) or the [Cypress AI Skills docs](https://docs.cypress.io/app/tooling/ai-skills).
 
 3. Connect Cypress Cloud MCP with the installer for your agent (see the [MCP table](#model-context-protocol-mcp) above). You can also copy the configuration from [`mcp/`](./mcp/) or follow the [configuration instructions here](https://docs.cypress.io/cloud/integrations/cloud-mcp).
 
@@ -120,17 +121,18 @@ If you've built something that makes AI tools smarter about Cypress, this is the
 Read the [contributing guide](./CONTRIBUTING.md) to get started.
 
 ## Releases
+
 ### PR Checks
+
 Any change to a skill should have a corresponding semver update to the `version` frontmatter field in the `SKILL.md` file.
 
 Changes to any functional toolkit content (skills and mcp, not documentation for example) should update the `version` metadata under `.cursor-plugin` and `.claude-plugin` so that plugin marketplaces can see and update accordingly.
 
 ### Post-PR Actions
-After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above - this likely will *not* match the version of individual skills, but should be thought of as a "package" version.
 
-VS Code extension changes are built, packed, and published separately. See
-[Pack and release](./vscode-cloud-mcp/README.md#pack-and-release)
-in the extension README.
+After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above - this likely will _not_ match the version of individual skills, but should be thought of as a "package" version.
+
+VS Code extension changes are built, packed, and published separately.
 
 ## License
 
