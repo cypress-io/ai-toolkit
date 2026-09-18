@@ -128,10 +128,6 @@ Changes to any functional toolkit content (skills and mcp, not documentation for
 ### Post-PR Actions
 After an update with skill changes is merged run `gh skill publish` **from the `main` branch**. Preview changes with `--dry-run`. Version to match the plugin version above - this likely will *not* match the version of individual skills, but should be thought of as a "package" version.
 
-VS Code extension changes are built, packed, and published separately. See
-[Pack and release](./vscode-cloud-mcp/README.md#pack-and-release)
-in the extension README.
-
 ## License
 
 [MIT](./LICENSE)

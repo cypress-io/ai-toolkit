@@ -21,7 +21,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/cypress-io/ai-toolkit.git",
-    "directory": "vscode-cloud-mcp"
+    "directory": "mcp/vscode-cloud-mcp"
   },
   "main": "./out/extension.js",
   "scripts": {

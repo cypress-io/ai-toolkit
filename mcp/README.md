@@ -12,4 +12,4 @@ Use the first-class installer for your agent when one exists, instead of copying
 | [Cypress Cursor Plugin](../README.md#plugin) | For Cursor users |
 | [Cypress VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Cypress-io.vscode-cypress-cloud-mcp) | For VS Code users |
 
-Extension source: [`../vscode-cloud-mcp`](../vscode-cloud-mcp/).
+Extension source: [`./vscode-cloud-mcp`](./vscode-cloud-mcp/).
