@@ -79,7 +79,7 @@ describe('extension manifest', () => {
       manifest.repository?.url,
       'https://github.com/cypress-io/ai-toolkit.git'
     )
-    assert.equal(manifest.repository?.directory, 'vscode-cloud-mcp')
+    assert.equal(manifest.repository?.directory, 'mcp/vscode-cloud-mcp')
     assert.equal(
       manifest.bugs?.url,
       'https://github.com/cypress-io/ai-toolkit/issues'
