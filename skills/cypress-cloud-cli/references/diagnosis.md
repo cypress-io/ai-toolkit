@@ -1,7 +1,9 @@
 # Diagnosis
 
 Do not merely restate Cloud fields. Use this evidence order after reading
-[investigation.md](investigation.md) and, when replay is available, [test-replay.md](test-replay.md):
+[investigation.md](investigation.md) and, when replay is available, [test-replay.md](test-replay.md).
+When the timeline narrows the failure to an element but not to the command that changed it, add
+[replay-view.md](replay-view.md) to pin before/after a suspect command and diff the element's state.
 
 1. Test details and all attempts.
 2. Select the failed attempt and pass its `attemptNumber` via `--attempt` to every replay query.
@@ -27,6 +29,9 @@ For "element never appeared" failures, check in order:
 3. An expected request that never started.
 4. A console exception.
 5. Selector, timing, or rendering behavior visible in the screenshot and command timeline.
+6. If none of the above is conclusive, open a [replay view](replay-view.md), pin before/after each
+   suspect command near the element, and compare `inspect` output to find the command that left it
+   missing, stale, or misrendered.
 
 Report:
 

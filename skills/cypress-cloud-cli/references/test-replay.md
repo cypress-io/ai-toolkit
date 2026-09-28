@@ -96,4 +96,7 @@ that cache directory still exists.
 - Empty replay events: rerun with no filters, then `--commands`; use paged `--all` only when the
   investigation needs every category because task events can contain large payloads.
 
+When the timeline shows a symptom (missing/stale element, wrong layout) but not which command caused
+it, open a live viewer and inspect the app directly: read [replay-view.md](replay-view.md).
+
 To turn replay evidence into a root-cause conclusion, read [diagnosis.md](diagnosis.md).
