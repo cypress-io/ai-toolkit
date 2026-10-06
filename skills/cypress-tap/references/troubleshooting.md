@@ -17,8 +17,9 @@ older compatibility failures may also use stdout.
 
 `status` reports `not connected` with exit `0` for no session, a stale session, or an unknown
 pid. It exits `1` for errors such as an explicitly selected unsupported-browser session. Treat
-that as a failure, not a transient empty status. `sessions --json` distinguishes live pids and
-reports renderer health.
+that as a failure, not a transient empty status. With no session, `sessions --json` prints
+guidance prose instead of `[]` — parse defensively or use `status --json` for liveness.
+`sessions --json` distinguishes live pids and reports renderer health when sessions exist.
 
 Without `--session`, an unresponsive process can still win automatic selection. If healthy and
 wedged sessions coexist, bind `--session <pid>` to a responsive row. Do not raise `--timeout`
@@ -75,7 +76,8 @@ renaming/deleting the selected spec can remove them; inspect results before edit
 - A selector miss is successful: `dom` and `inspect` return `found:false`; `aria` returns an
   empty tree.
 - Selector ambiguity exits `1` with candidates on stdout. Use a unique selector or
-  `--at <0-based-index>`.
+  `--at <0-based-index>`. When probing several broad selectors in one shell line, join commands
+  with `;` — not `&&` — because ambiguity is exit `1` even though it is the useful outcome.
 - For a live form-control value, use `aria`; `dom` and `inspect` can show the initial HTML
   `value` attribute instead. For live-region or toast text, use `dom`; `aria` may omit its text.
 - If everything appears absent after a verdict, verify that the live frame contains the app.

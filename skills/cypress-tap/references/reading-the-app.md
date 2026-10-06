@@ -86,6 +86,9 @@ All three readers require exactly one selected element:
 - No matches: `dom` and `inspect` return `found:false` with exit `0`; `aria` returns an empty
   tree.
 
+When discovering selectors in a shell script, chain broad reads with `;` rather than `&&`. Zero
+matches exit `0` and ambiguity exits `1`; `&&` stops after the first ambiguous probe.
+
 Because an empty `aria` result can mean either no match or no accessibility node, use `dom` or
 `inspect` to establish element absence. In JSON, only `inspect` echoes the missed selector;
 `dom` returns only `{"found":false}`.
