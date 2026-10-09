@@ -18,6 +18,27 @@ metadata:
 inspect the reporter and command log, and read the app under test without GUI interaction.
 Use `cypress run` instead for a one-shot headless batch.
 
+## Core loop
+
+```bash
+npx cypress tap sessions                    # confirm a session; note pid if several exist
+npx cypress tap status                      # baseline startedAt + spec
+npx cypress tap run cypress/e2e/foo.cy.ts   # async — returns immediately
+# poll status until passed|failed for your spec with a changed startedAt
+npx cypress tap reporter
+npx cypress tap reporter --test-id r3       # one test: log, network, stubs, error
+```
+
+`run` is asynchronous. A stale verdict matches a fresh one on every field except `startedAt`,
+and a watcher rerun of the **selected** spec can advance `startedAt` without running your file.
+Gate on `startedAt`, `spec`, and a terminal status. Do not wait to observe `running` — fast
+specs can finish between polls. Copy-paste poller:
+[session-lifecycle.md](references/session-lifecycle.md). JSON field helpers:
+[json-recipes.md](references/json-recipes.md).
+
+In poll loops, prefer `./node_modules/.bin/cypress tap …` over `npx cypress tap …` when the
+project pins Cypress.
+
 ## Prerequisites
 
 - Confirm from package metadata or the lockfile that the resolved Cypress is 15.21.0+ and
@@ -42,6 +63,7 @@ Use `cypress run` instead for a one-shot headless batch.
   [reading-the-app.md](references/reading-the-app.md).
 - **Command failure, hang, wrong project, or surprising output:** read
   [troubleshooting.md](references/troubleshooting.md).
+- **Parse `--json` or script a poll:** read [json-recipes.md](references/json-recipes.md).
 - **One noninteractive batch:** use `cypress run`, not `tap`.
 
 Read only the references required for the current task.
@@ -59,7 +81,8 @@ Read only the references required for the current task.
 - `dom`, `aria`, `inspect`: read the settled app or currently pinned snapshot.
 
 All commands accept `--session <pid>`, `--json`, and `--timeout <ms>`. On a confirmed supported
-build, use `npx cypress tap <command> --help` for command-specific flags.
+build, use `npx cypress tap <command> --help` for command-specific flags. Help is generated from
+the live session contract — when help and this skill disagree, trust help.
 
 ## The non-negotiable verdict rule
 
@@ -94,8 +117,10 @@ diagnostic — `reporter` renders a failed build as an empty spec.
 ## Critical correctness rules
 
 1. **Target the intended session.** If several sessions exist, or auto-selection behaves oddly,
-   inspect `sessions` and pass `--session <pid>`. Auto-selection can choose another project or an
-   unresponsive session.
+   inspect `sessions` and pass `--session <pid>` on every call. Auto-selection can choose another
+   project or an unresponsive session. E2e and component testing use separate sessions: they can
+   share a `projectRoot` but expose different `specs` lists, and only `status` names which
+   session answered — other commands carry no pid in their output.
 2. **Preserve the binary location.** Cwd controls `npx` resolution on every call. When the
    project pins an older Cypress, run commands from a compatible checkout and pass
    `--session <pid>`.
@@ -121,10 +146,22 @@ diagnostic — `reporter` renders a failed build as an empty spec.
     `dom` and `inspect` can show the initial HTML `value` attribute, and `inspect` may omit the
     accessibility value. Use `dom` for exact live-region, toast, status, and label text because
     `aria` may omit descendant text.
+11. **Chain broad selector probes with `;`, not `&&`.** For `dom`/`aria`/`inspect`, zero matches
+    exit `0` while ambiguity exits `1`. A broad probe that enumerates matches is the useful
+    outcome; `&&` drops every follow-up command after the first ambiguous selector.
+12. **A passing verdict is not a full proof.** After green, read `reporter --test-id` and confirm
+    intercept match counts, stub usage, and that requests you care about were stubbed. See
+    [reading-results.md](references/reading-results.md) and [json-recipes.md](references/json-recipes.md).
 
 ## Output contract
 
-- Human output is for reading; `--json` is for parsing and may contain much more data.
+- Human output is for reading; `--json` is for parsing and may contain much more data. Default
+  rendering is usually better for one-off debugging: it inlines code frames and interleaves network
+  events in log order.
+- **Exit `0` is not success of your goal.** `tap` does not start Cypress. With no session,
+  `status` is `not connected` at exit `0`; `sessions` prints guidance instead of JSON. Selector
+  misses, empty `specs`, and unknown `--session` pids can also exit `0`. Branch on fields, not
+  silence.
 - `status` exits `0` for known lifecycle stages, including `not connected`. Discovery,
   compatibility, unsupported-browser, and renderer failures exit `1`, sometimes with no stdout;
   a poller must fail fast on that nonzero exit.
@@ -139,3 +176,15 @@ diagnostic — `reporter` renders a failed build as an empty spec.
 - After a fresh verdict and live-frame sanity check, independent app reads may run concurrently.
 - If bounded status polling fails, inspect `sessions` for `rendererResponsive: false`; restart a
   wedged renderer instead of increasing `--timeout`.
+
+## Route by symptom
+
+| Symptom | Read |
+| --- | --- |
+| Poll hangs or verdict may not be mine | [session-lifecycle.md](references/session-lifecycle.md) |
+| Edited a file; unsure what reran | [session-lifecycle.md](references/session-lifecycle.md) (file watcher) |
+| JSON key empty or guessed wrong | [json-recipes.md](references/json-recipes.md) |
+| Column / `e` row / test id meaning | [reading-results.md](references/reading-results.md) |
+| Test count ≠ expected `it`s | [reading-results.md](references/reading-results.md), [recipes.md](references/recipes.md) (component) |
+| Failure triage or pin looks wrong | [recipes.md](references/recipes.md), [reading-the-app.md](references/reading-the-app.md) |
+| Exit `1` but output looked fine | [troubleshooting.md](references/troubleshooting.md) |

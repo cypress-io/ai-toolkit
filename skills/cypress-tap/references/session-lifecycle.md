@@ -59,7 +59,7 @@ unknown pid. Get valid pids from `sessions`.
 | `not connected`        | No matching reachable session      | Start Cypress or keep waiting                |
 | `browser not selected` | Session is ready without a browser | `run` a spec; uncommon with `--browser`       |
 | `spec not selected`    | Browser is ready; nothing has run  | `specs`, then `run`                          |
-| `loading`              | The selected spec is building      | Wait                                         |
+| `loading`              | The selected spec is building      | Wait; no `results` or `totalTests` yet     |
 | `running`              | Tests are executing                | Reporter data is readable; app reads are not |
 | `passed` / `failed`    | Terminal verdict                   | Read results                                 |
 
@@ -68,8 +68,25 @@ are not lifecycle stages: `status` exits `1`, and stdout may be empty. Stop poll
 nonzero exit; only an exit-`0` payload with transiently missing fields should be retried.
 
 From `loading` onward, status includes the selected `spec` and `startedAt` (`null` while
-loading). It can also include counts, a build `error`, and the active `pinned` snapshot.
-A build failure is terminal `failed`; read `error` because no tests may exist.
+loading). Terminal stages add counts and may include a build `error` and the active `pinned`
+snapshot. During `loading` there are intentionally no counts — do not read missing `results` as
+"a clean sweep of zero tests." A build failure is terminal `failed`; read `error` because no
+tests may exist.
+
+## What the file watcher reruns
+
+Any watched file change rebuilds the session and reruns the **selected** spec — not necessarily
+the file you edited:
+
+| You change | What runs |
+| --- | --- |
+| The **selected** spec | That spec reruns; `startedAt` advances |
+| A **different** spec, a component, or a support file | The **selected** spec reruns anyway |
+| A **new** spec (appears in `specs`) | Nothing until you `run` it — it is not auto-selected |
+
+A fresh `startedAt` therefore does not prove your spec ran. Always gate polls on `spec` as well
+as `startedAt`. After editing a non-selected file, expect the selected spec's verdict unless you
+dispatch yours explicitly.
 
 ## Wait for the dispatched run
 
@@ -96,6 +113,34 @@ wait for it to settle before taking a baseline and dispatching another. Keep onl
 flight.
 
 The canonical fresh-verdict rules are in [SKILL.md](../SKILL.md).
+
+Do not gate on having observed `loading` or `running`. A fast spec can start and finish inside
+one poll interval; a "wait until running" loop times out on the quickest specs.
+
+### Copy-paste poller (no jq)
+
+Prefer the project binary in the loop; set `B` accordingly.
+
+```bash
+B=./node_modules/.bin/cypress
+SPEC="cypress/e2e/login.cy.ts"
+field() { python3 -c "import sys,json;v=json.load(sys.stdin).get('$1');print('' if v is None else v)"; }
+
+before=$($B tap status --json | field startedAt)
+$B tap run "$SPEC" --json > /dev/null
+for i in $(seq 1 90); do
+  out=$($B tap status --json)
+  st=$(printf '%s' "$out" | field status)
+  sa=$(printf '%s' "$out" | field startedAt)
+  sp=$(printf '%s' "$out" | field spec)
+  case "$st" in passed|failed) [ "$sp" = "$SPEC" ] && [ "$sa" != "$before" ] && break ;; esac
+  sleep 2
+done
+$B tap status
+```
+
+Never stamp wall-clock time and wait for `startedAt` to exceed it; watcher runs can finish
+between tool calls. More JSON pitfalls: [json-recipes.md](json-recipes.md).
 
 ## Timeouts and polling cost
 
