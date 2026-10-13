@@ -9,7 +9,7 @@ description: >-
   without GUI interaction. Not for one-shot headless runs. Requires Cypress
   15.21+, a Chromium-family browser, and a running `cypress open` session.
 metadata:
-  version: 1.0.0
+  version: 1.5.0
 ---
 
 # Driving Cypress with `cypress tap`
@@ -179,12 +179,12 @@ diagnostic — `reporter` renders a failed build as an empty spec.
 
 ## Route by symptom
 
-| Symptom | Read |
-| --- | --- |
-| Poll hangs or verdict may not be mine | [session-lifecycle.md](references/session-lifecycle.md) |
-| Edited a file; unsure what reran | [session-lifecycle.md](references/session-lifecycle.md) (file watcher) |
-| JSON key empty or guessed wrong | [json-recipes.md](references/json-recipes.md) |
-| Column / `e` row / test id meaning | [reading-results.md](references/reading-results.md) |
-| Test count ≠ expected `it`s | [reading-results.md](references/reading-results.md), [recipes.md](references/recipes.md) (component) |
-| Failure triage or pin looks wrong | [recipes.md](references/recipes.md), [reading-the-app.md](references/reading-the-app.md) |
-| Exit `1` but output looked fine | [troubleshooting.md](references/troubleshooting.md) |
+| Symptom                               | Read                                                                                                 |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Poll hangs or verdict may not be mine | [session-lifecycle.md](references/session-lifecycle.md)                                              |
+| Edited a file; unsure what reran      | [session-lifecycle.md](references/session-lifecycle.md) (file watcher)                               |
+| JSON key empty or guessed wrong       | [json-recipes.md](references/json-recipes.md)                                                        |
+| Column / `e` row / test id meaning    | [reading-results.md](references/reading-results.md)                                                  |
+| Test count ≠ expected `it`s           | [reading-results.md](references/reading-results.md), [recipes.md](references/recipes.md) (component) |
+| Failure triage or pin looks wrong     | [recipes.md](references/recipes.md), [reading-the-app.md](references/reading-the-app.md)             |
+| Exit `1` but output looked fine       | [troubleshooting.md](references/troubleshooting.md)                                                  |
