@@ -9,7 +9,7 @@ description: >-
   without GUI interaction. Not for one-shot headless runs. Requires Cypress
   15.21+, a Chromium-family browser, and a running `cypress open` session.
 metadata:
-  version: 1.5.0
+  version: 1.1.0
 ---
 
 # Driving Cypress with `cypress tap`
