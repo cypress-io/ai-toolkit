@@ -12,8 +12,10 @@ modified first. Copy a listed path exactly; files outside `specPattern` do not a
 `--json`, each entry carries the path as `relativePath`.
 
 `run` confirms dispatch only. Use the fresh-verdict workflow in `SKILL.md` before trusting
-status or reading the app. A build failure reaches `failed` with its diagnostic in
-`status.error`, possibly before tests exist.
+status or reading the app. A build failure is usually `failed` with its diagnostic in
+`status.error`, possibly before tests exist. Some compile or load failures instead surface as a
+synthetic test titled **An uncaught error was detected outside of a test** with empty
+`status.error` — read that test in `reporter`, not only `status.error`.
 
 ## Read the spec overview
 
@@ -50,8 +52,42 @@ events may be the cause even when the test body's final command looks suspicious
 When validating a newly authored test, also confirm:
 
 - command subjects and assertion messages match the intended elements;
-- stubbed routes have nonzero match counts;
+- stubbed routes have nonzero `numResponses` in `reporter --json` (`routes[]`);
+- stubs and spies show nonzero `callCount` in `agents[]` when they must run;
+- network event rows you expect to be intercepted end with `(stubbed)` in human output, or
+  `network.stubbed: true` in JSON — requests with no matching intercept have no `routes` row;
 - the commands describe the user flow the test was meant to exercise.
+
+Rendered `ROUTES` / `SPIES` columns map to JSON keys that are easy to confuse (`routes[].alias`
+vs `agents[].aliases`). See [json-recipes.md](json-recipes.md).
+
+Compare reported test count to the number of tests you expect, not raw `it(` lines — table-driven
+specs register one `it` per loop iteration. A shortfall often means a build failure or double
+registration (see [recipes.md](recipes.md), component section).
+
+For UI the user should see, confirm visibility separately: `have.text` and `contain.text` do not
+imply the element is visible (`visibility: hidden`, `opacity: 0`, and `display: none` can still
+pass). Intercept and route checks are blind to that — use `inspect` on the selector and assert
+visibility when it matters.
+
+## Command log and network rows
+
+Human reporter output interleaves command rows with event rows:
+
+- Numbered rows (`1`, `2`, …) and hook-qualified rows are Cypress commands.
+- `e` rows are events. A `(fetch)` / `(xhr)` row with a `network` payload is a request; human
+  output marks intercepted traffic with `(stubbed)`. A row with `network.stubbed: false` in JSON
+  hit the real network even when every `ROUTES` `#` is nonzero.
+- `(new url)` rows are navigations, not requests — they have no `network` key in JSON and never
+  show `(stubbed)`.
+
+The `ROUTES` table lists each `cy.intercept` registration. Column `#` (`numResponses`) is how
+many requests matched that intercept; `-` or zero means the test never exercised that path. A
+request with **no** matching intercept has **no** `ROUTES` row — the evidence is only in the `e`
+rows above.
+
+Confirm a terminal `status` before trusting `reporter` or `command` during an in-flight run;
+both can return partial data at exit `0`.
 
 ## Command ids
 

@@ -44,7 +44,19 @@ done: deleting or renaming the selected spec drops its in-memory results.
 
 Saving the active spec triggers Cypress's file watcher. Let that run settle before taking a
 new `startedAt` baseline and dispatching another run, or use the watcher's run as the run you
-inspect. Do not put both in flight.
+inspect. Do not put both in flight. Editing a support file or another spec still reruns whatever
+is **selected** — see the watcher table in [session-lifecycle.md](session-lifecycle.md).
+
+## Component specs
+
+Use a `--component` session; `specs` lists only that testing type's paths. The same fresh-verdict
+and post-green checks apply as for e2e.
+
+If `reporter` shows **more tests than you expect** — especially duplicate titles or a non-contiguous
+id sequence under one suite heading — the spec may be registering tests twice. Common causes:
+importing the component under test in a way that re-executes the spec file, or mounting patterns
+that register `it` blocks on every evaluation. Fix the spec structure; do not trust a green run
+until the reported count matches the tests you intend.
 
 ## Report a run
 
