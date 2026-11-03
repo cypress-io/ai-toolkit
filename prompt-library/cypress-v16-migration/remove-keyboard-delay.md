@@ -3,37 +3,56 @@ keystrokeDelay from 10ms to 0ms. I want to surface any timing
 sensitivity in my tests NOW, on the current version, so nothing
 surprises me on upgrade day.
 
-Background — keystrokeDelay has three levels of precedence
-(each overrides the one above):
-  1. Global:      Cypress.Keyboard.defaults({ keystrokeDelay: N })
-                  in a support file
+Background — keystrokeDelay has four sources, highest precedence first
+(each overrides the one below it):
+  1. Per-command: cy.type('text', { delay: N }) — always wins, on
+                  both the current version and v16; it is never
+                  overridden by config or Keyboard.defaults()
   2. Suite/test:  describe('...', { keystrokeDelay: N }, () => {})
                   it('...', { keystrokeDelay: N }, () => {})
-  3. Per-command: cy.type('text', { delay: N })
+  3. Config:      a keystrokeDelay entry in cypress.config — at the
+                  top level, or scoped under e2e: / component:
+  4. Global:      Cypress.Keyboard.defaults({ keystrokeDelay: N })
+                  in a support file
 
-IMPORTANT — why setting keystrokeDelay: 0 in cypress.config does NOT
-work on the current Cypress version:
+Levels 2 and 3 are both read through the same resolved config value, so
+a suite/test override wins over the cypress.config value when both are
+set. Level 4 only applies as a fallback when that resolved value is
+unset — and whether a resolved value of 0 counts as "set" is exactly
+what changes on v16 (see below).
+
+IMPORTANT — a non-zero override already matters today, not just after v16:
 cy.type() resolves its delay as: `config('keystrokeDelay') || Keyboard.getConfig().keystrokeDelay`
 
-The ONLY reliable way to get true 0ms behavior today is via Keyboard.defaults().
-(v16 fixes this and the config setting will work correctly post-upgrade.)
+Because `||` treats 0 as falsy, a config value of 0 is ignored today (use
+Keyboard.defaults(), or an explicit { delay: 0 } per command, instead).
+But a *non-zero* config or suite/test value is truthy, so it already
+overrides Keyboard.defaults() today — this isn't a v16-only regression.
 
-Step 1: Search all files for Cypress.Keyboard.defaults( and report any
-existing keystrokeDelay value. Also check cypress.config for a top-level
-keystrokeDelay entry and flag it if found.
+On v16, resolution switches to nullish coalescing
+(`config('keystrokeDelay') ?? Keyboard.getConfig().keystrokeDelay ?? 0`),
+so that same non-zero value keeps winning after the upgrade; only a
+value of exactly 0 changes behavior (ignored today, effective on v16).
 
-For each instance found, suggest setting it to 0 and note that setting
-keystrokeDelay inside a spec file will affect downstream specs unless it
-is reset after the spec completes.
+Step 1: Search all files for Cypress.Keyboard.defaults( and any existing
+keystrokeDelay value. Check cypress.config for a keystrokeDelay entry
+(top-level or under e2e:/component:), and specs for suite/test-level
+{ keystrokeDelay: N } options on describe(...)/it(...). Flag every
+instance found.
+
+Suggest zeroing or removing any non-zero value found: a config or
+suite/test override already outranks Keyboard.defaults() today (see
+above), and an existing non-zero Keyboard.defaults() call should simply
+match v16's new 0ms default. Note that setting keystrokeDelay inside a
+spec file affects downstream specs unless it's reset after the spec
+completes. Confirm every non-zero value is cleared before moving on to
+Step 2 — it will otherwise keep masking the change made there.
 
 Step 2: In the global support file for E2E tests and for component tests
 (verify the support file paths in the cypress.config file) — add the
 following line at the top, outside any describe/it/before blocks:
 
   Cypress.Keyboard.defaults({ keystrokeDelay: 0 })
-
-This is the only effective way to make the current Cypress version
-behave like v16 today.
 
 Step 3: Ask the user how they would like to verify the change:
 
