@@ -17,11 +17,13 @@ I'm preparing for a Cypress v16 upgrade. `Cypress.env()` was deprecated in v15.1
 
 **Step 4:** Check for `--env` CLI flags in `package.json` scripts, Makefile targets, CI config, or `.npmrc`. Any `--env KEY=val` flags that supply non-sensitive values should become `--expose KEY=val` (or `-x KEY=val`). List any you find and propose the updated command.
 
-**Step 5:** Check whether either of these plugins appear in `package.json`. They use `Cypress.env()` internally and must be upgraded before `allowCypressEnv: false` can be set without errors. Note: these major version bumps exist solely to drop `Cypress.env()` support — there are no other breaking changes, so they are safe to upgrade as part of this migration.
+**Step 5:** Check whether either of these plugins appear in `package.json`. They use `Cypress.env()` internally, which is removed entirely in v16, so they must be upgraded regardless of your `allowCypressEnv` plans. If you're still on 15.x and plan to enable `allowCypressEnv: false` (Step 6) before upgrading to v16, upgrade these plugins first — otherwise their remaining internal `Cypress.env()` calls will error once the option is set. Note: these major version bumps exist solely to drop `Cypress.env()` support — there are no other breaking changes, so they are safe to upgrade as part of this migration.
 
 - `@cypress/code-coverage` — upgrade to 4.0.0+. The only breaking change is moving the `codeCoverage` config key from `env:` to `expose:` in `cypress.config`. Also requires Node 20+.
 - `@cypress/grep` — upgrade to 6.0.0+. The only breaking change is moving grep-related keys (e.g. `grepTags`, `grep`) from `env:` to `expose:` in `cypress.config`, and updating any `--env grepTags="..."` CLI flags to `--expose grepTags="..."`.
 
-**Step 6:** Once all `Cypress.env()` calls are gone, add `allowCypressEnv: false` to the top-level `cypress.config` object (not inside `e2e:` or `component:`).
+**Step 6:** This step only applies if you are still on Cypress 15.x and have not yet upgraded to v16. Once all `Cypress.env()` calls are gone, add `allowCypressEnv: false` to the top-level `cypress.config` object (not inside `e2e:` or `component:`) to enforce the removal before upgrading.
+
+If you have already upgraded to Cypress v16, `allowCypressEnv` was removed as a config option — Cypress now logs a warning and ignores it. Remove any existing `allowCypressEnv` entry from `cypress.config` rather than adding one.
 
 Show me the before/after diff for every changed file.
