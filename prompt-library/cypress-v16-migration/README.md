@@ -31,7 +31,7 @@ A few things to keep in mind:
 | Prompt Goal | Change Explainer |
 |--|--|
 | [Remove Keyboard Delay](./remove-keyboard-delay.md) | The keyboard delay allows you to simulate real-user typing delays. Cypress v16's new default for Keyboard delay is 0ms, previously 10ms. This changed to improve test run performance. |
-| [Remove Cypress.env() usage](./remove-cypress-env-usage.md) | Cypress.env() was deprecated in v15.10.0 to reduce risk of accidentally exposing sensitive data. With data security top-of-mind, Cypress v16 no longer supports `Cypress.env()` and requires users to migrate to `cy.env()` to feed sensitive values into tests and use `Cypress.expose()` for non-sensitive values. See the [Migrating away from Cypress.env() guide](https://on.cypress.io/migration-guide#Migrating-away-from-Cypressenv) for more explanation.  |
+| [Remove Cypress.env() usage](./remove-cypress-env-usage.md) | Cypress.env() was deprecated in v15.10.0 to reduce risk of accidentally exposing sensitive data. With data security top-of-mind, Cypress v16 no longer supports `Cypress.env()` and requires users to migrate to `cy.env()` to feed sensitive values into tests and use `Cypress.expose()` for non-sensitive values. See the [Migrating away from Cypress.env() guide](https://on.cypress.io/migration-guide#Migrating-away-from-Cypressenv) for more explanation. Also works after you've already upgraded to v16.  |
 
 ## Have feedback on a prompt?
 

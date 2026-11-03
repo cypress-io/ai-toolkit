@@ -1,4 +1,4 @@
-I'm preparing for a Cypress v16 upgrade. `Cypress.env()` was deprecated in v15.10 and must be fully removed before v16.
+`Cypress.env()` was deprecated in v15.10 and is removed entirely in v16. I need it fully migrated away — whether I'm still preparing for the v16 upgrade or already on it.
 
 **Migration rules:**
 

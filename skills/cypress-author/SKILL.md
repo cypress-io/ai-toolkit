@@ -3,7 +3,7 @@ name: cypress-author
 description: "Creates, updates, and fixes Cypress tests (E2E/end-to-end and component tests). Use when the user asks to create tests, add tests, write tests, update tests, test this file/component, new spec, or fix a failing or flaky test. Apply even when the user does not say 'Cypress' (e.g. 'create tests for this file'). Prefer cypress-explain when the user only wants to explain or review tests without changing code."
 model: inherit
 background: false
-allowed-tools: Read, Edit, Write, Bash, Grep, WebFetch
+allowed-tools: Read, Edit, Write, Bash(npx cypress --version:*), Bash(npx cypress --help:*), Grep, Glob, WebFetch
 metadata:
   version: 1.0.2
 ---
