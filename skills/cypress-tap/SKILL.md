@@ -31,8 +31,10 @@ launching.
 **Which session to use:** run `tap sessions` first. It does not show whether a session is
 headless, so treat any session you did not start as possibly headed: driving it can bring its
 browser up over the user's work. Use it only if the user is working in it or asked you to;
-otherwise start your own headless one, then continue with the core loop. Drop `--headless` only
-if the user asks to watch.
+otherwise start your own headless one, then continue with the core loop, passing
+`--session <your pid>` on **every** `tap` call. Without it, auto-selection prefers the
+lowest-pid session for the cwd, which is usually the user's older one. Drop `--headless` only if
+the user asks to watch.
 
 **You own every process you start, and must stop it** before your final answer and on every
 failure path. A headless session is invisible, so a leaked one silently burns CPU and memory.
@@ -44,13 +46,16 @@ server you started.
 ## Core loop
 
 ```bash
-npx cypress tap sessions                    # confirm a session; note pid if several exist
-npx cypress tap status                      # baseline startedAt + spec
-npx cypress tap run cypress/e2e/foo.cy.ts   # async — returns immediately
+npx cypress tap sessions                    # confirm a session and note its pid
+npx cypress tap status --session <pid>      # baseline startedAt + spec
+npx cypress tap run cypress/e2e/foo.cy.ts --session <pid>   # async — returns immediately
 # poll status until passed|failed for your spec with a changed startedAt
-npx cypress tap reporter
-npx cypress tap reporter --test-id r3       # one test: log, network, stubs, error
+npx cypress tap reporter --session <pid>
+npx cypress tap reporter --test-id r3 --session <pid>       # one test: log, network, stubs, error
 ```
+
+Omit `--session` only when `tap sessions` lists exactly one session and it is the one you mean
+to drive.
 
 `run` is asynchronous. A stale verdict matches a fresh one on every field except `startedAt`,
 and a watcher rerun of the **selected** spec can advance `startedAt` without running your file.
