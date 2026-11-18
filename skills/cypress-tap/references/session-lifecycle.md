@@ -2,12 +2,10 @@
 
 ## Start a compatible session
 
-`tap` drives an existing `cypress open` process; it does not start Cypress:
-
-```bash
-npx cypress open --e2e --browser electron
-npx cypress open --component --browser electron
-```
+`tap` drives an existing `cypress open` process; it does not start Cypress. Agents should start
+one with `open --headless --e2e --browser electron` (or `--component`), in the background; read
+[session-launch-and-cleanup.md](session-launch-and-cleanup.md) before starting or stopping any
+session.
 
 Electron, Chrome, Chromium, and Edge are supported. Firefox and WebKit are listed by
 `sessions` but refused by other commands. Ensure the configured `baseUrl` server is running
@@ -62,6 +60,7 @@ unknown pid. Get valid pids from `sessions`.
 | `loading`              | The selected spec is building      | Wait; no `results` or `totalTests` yet     |
 | `running`              | Tests are executing                | Reporter data is readable; app reads are not |
 | `passed` / `failed`    | Terminal verdict                   | Read results                                 |
+| `error`                | Config or setup broke              | Fix config or restart; commands refuse it    |
 
 Unsupported browsers, unresponsive renderers, and other discovery or compatibility failures
 are not lifecycle stages: `status` exits `1`, and stdout may be empty. Stop polling on a
