@@ -8,7 +8,7 @@ older compatibility failures may also use stdout.
 
 | Symptom                   | Action                                                           |
 | ------------------------- | ---------------------------------------------------------------- |
-| No session found          | Start `cypress open --headless` (see launch-and-cleanup)         |
+| No session found          | Start `cypress open --headless --e2e --browser electron` (full command in session-launch-and-cleanup.md) |
 | Headless open fails       | Needs `--e2e`/`--component` and a browser; read the log          |
 | Stage `error`             | Fix config, browser, or spec; commands refuse it until it loads  |
 | Unknown flag `--headless` | Cypress is too old; tell the user                                |

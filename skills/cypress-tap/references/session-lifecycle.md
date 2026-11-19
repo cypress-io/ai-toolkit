@@ -103,6 +103,8 @@ previous run's complete verdict. For every explicit run:
      different observable state or that spec was observed in `loading` or `running`.
 5. Bound the polling loop.
 
+An exit-`0` `status: error` is not a transient state: stop polling and report it.
+
 Within exit-`0` responses, blank, malformed, and partial payloads can occur transiently. Reject
 them rather than treating missing fields as changed values. In particular, retry baseline
 capture before dispatch; a blank baseline would make the previous verdict appear fresh.
@@ -123,19 +125,23 @@ Prefer the project binary in the loop; set `B` accordingly.
 ```bash
 B=./node_modules/.bin/cypress
 SPEC="cypress/e2e/login.cy.ts"
+S="--session <session pid>"   # required whenever you started your own session
 field() { python3 -c "import sys,json;v=json.load(sys.stdin).get('$1');print('' if v is None else v)"; }
 
-before=$($B tap status --json | field startedAt)
-$B tap run "$SPEC" --json > /dev/null
+before=$($B tap status --json $S | field startedAt)
+$B tap run "$SPEC" --json $S > /dev/null
 for i in $(seq 1 90); do
-  out=$($B tap status --json)
+  out=$($B tap status --json $S)
   st=$(printf '%s' "$out" | field status)
   sa=$(printf '%s' "$out" | field startedAt)
   sp=$(printf '%s' "$out" | field spec)
-  case "$st" in passed|failed) [ "$sp" = "$SPEC" ] && [ "$sa" != "$before" ] && break ;; esac
+  case "$st" in
+    passed|failed) [ "$sp" = "$SPEC" ] && [ "$sa" != "$before" ] && break ;;
+    error) echo "session error"; break ;;   # config/setup broke: stop, read status, fix
+  esac
   sleep 2
 done
-$B tap status
+$B tap status $S
 ```
 
 Never stamp wall-clock time and wait for `startedAt` to exceed it; watcher runs can finish

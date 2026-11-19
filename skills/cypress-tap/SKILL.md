@@ -6,9 +6,9 @@ description: >-
   query or rewind the app under test through DOM, accessibility, styles, and
   snapshots. Use when authoring or debugging Cypress e2e or component specs,
   discovering selectors, diagnosing failures, or verifying test behavior
-  without GUI interaction. Not for one-shot headless runs. Requires Cypress
-  15.21+ and a Chromium-family browser; uses an existing `cypress open` session
-  or starts a headless one.
+  without GUI interaction. Not a substitute for `cypress run` batches. Requires
+  Cypress 15.21+ and a Chromium-family browser; uses an existing `cypress open`
+  session or starts a background `cypress open --headless` one.
 metadata:
   version: 1.2.0
 ---
@@ -38,8 +38,8 @@ the user asks to watch.
 
 **You own every process you start, and must stop it** before your final answer and on every
 failure path. A headless session is invisible, so a leaked one silently burns CPU and memory.
-Never stop a session you did not start. Background it, record its session pid, and stop it by
-that pid; the launch and stop procedures are in
+Never stop a session you did not start. Background it, record its launch pid and session pid, and stop the
+launch's process group by following the Stop procedure in
 [session-launch-and-cleanup.md](references/session-launch-and-cleanup.md). Also stop any dev
 server you started.
 
@@ -141,7 +141,9 @@ Blank and partial payloads from a successful `status` call occur transiently. Tr
 fields as "keep waiting," not as a state change. A nonzero `status` exit is a command failure,
 not a partial read: stop polling and report it.
 
-Only `passed` and `failed` are verdicts. A build failure is `failed` with the diagnostic in
+Only `passed` and `failed` are verdicts, but an exit-`0` `status: error` (config or setup broke)
+is a stop condition: stop polling, read `status`, and fix or restart rather than waiting out the
+loop. A build failure is `failed` with the diagnostic in
 `status.error`, possibly before any tests exist. `status` is the only surface that carries that
 diagnostic — `reporter` renders a failed build as an empty spec.
 
