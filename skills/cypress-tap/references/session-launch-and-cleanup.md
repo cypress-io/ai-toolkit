@@ -51,7 +51,7 @@ the group is still your Cypress launch; if it is not, skip the group kill and fa
 session pid:
 
 ```bash
-ps -o pgid=,command= -g <launch pid>     # expect npx/cypress open --headless; else skip
+ps -axo pgid=,pid=,command= | awk '$1==<launch pid>'   # expect npx/cypress open --headless; else skip
 kill -TERM -- -<launch pid>
 sleep 3                                  # give Cypress time to shut down cleanly
 npx --no-install cypress tap sessions   # confirm your session pid is gone
