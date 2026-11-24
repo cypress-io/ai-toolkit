@@ -6,14 +6,18 @@ older compatibility failures may also use stdout.
 
 ## Session problems
 
-| Symptom                 | Action                                                           |
-| ----------------------- | ---------------------------------------------------------------- |
-| No session found        | Start `cypress open`, select a testing type, then retry          |
-| Unknown `--session` pid | Run `tap sessions` and use a listed pid                          |
-| Session unreachable     | Confirm Cypress and its browser are still open                   |
-| No browser attached     | Run a listed spec; `run` can launch the browser                  |
-| Unsupported browser     | Reopen in Electron, Chrome, Chromium, or Edge                    |
-| Renderer not responding | Check `tap sessions`; select a responsive pid or restart Cypress |
+| Symptom                   | Action                                                           |
+| ------------------------- | ---------------------------------------------------------------- |
+| No session found          | Start `cypress open --headless --e2e --browser electron` (full command in session-launch-and-cleanup.md) |
+| Headless open fails       | Needs `--e2e`/`--component` and a browser; read the log          |
+| Stage `error`             | Fix config, browser, or spec; commands refuse it until it loads  |
+| Unknown flag `--headless` | Cypress is too old; tell the user                                |
+| Orphaned session          | Stop only your own; see launch-and-cleanup                       |
+| Unknown `--session` pid   | Run `tap sessions` and use a listed pid                          |
+| Session unreachable       | Confirm Cypress and its browser are still open                   |
+| No browser attached       | Run a listed spec; `run` can launch the browser                  |
+| Unsupported browser       | Reopen in Electron, Chrome, Chromium, or Edge                    |
+| Renderer not responding   | Check `tap sessions`; select a responsive pid or restart Cypress |
 
 `status` reports `not connected` with exit `0` for no session, a stale session, or an unknown
 pid. It exits `1` for errors such as an explicitly selected unsupported-browser session. Treat
@@ -24,6 +28,11 @@ guidance prose instead of `[]` — parse defensively or use `status --json` for 
 Without `--session`, an unresponsive process can still win automatic selection. If healthy and
 wedged sessions coexist, bind `--session <pid>` to a responsive row. Do not raise `--timeout`
 for polling; it does not repair a wedged renderer.
+
+## Cleanup of headless sessions
+
+Stop every session you started and confirm with `tap sessions`; see
+[session-launch-and-cleanup.md](session-launch-and-cleanup.md#stop).
 
 ## Version and binary mismatch
 

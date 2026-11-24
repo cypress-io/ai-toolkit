@@ -1,15 +1,16 @@
 ---
 name: cypress-tap
 description: >-
-  Drives a running Cypress open-mode session through `cypress tap` to run and
+  Drives a Cypress open-mode session through `cypress tap` to run and
   rerun specs, wait for fresh results, inspect reporter and command logs, and
   query or rewind the app under test through DOM, accessibility, styles, and
   snapshots. Use when authoring or debugging Cypress e2e or component specs,
   discovering selectors, diagnosing failures, or verifying test behavior
-  without GUI interaction. Not for one-shot headless runs. Requires Cypress
-  15.21+, a Chromium-family browser, and a running `cypress open` session.
+  without GUI interaction. Not a substitute for `cypress run` batches. Requires
+  Cypress 15.21+ and a Chromium-family browser; uses an existing `cypress open`
+  session or starts a background `cypress open --headless` one.
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Driving Cypress with `cypress tap`
@@ -18,16 +19,43 @@ metadata:
 inspect the reporter and command log, and read the app under test without GUI interaction.
 Use `cypress run` instead for a one-shot headless batch.
 
+## Launch headless and clean up (agents)
+
+A headed `cypress open` pops a window and a browser over the human's work and can steal focus on
+every run. If you must start the session yourself, **launch it with `--headless`, in the
+background** (it runs until stopped, so a foreground call never returns). The requirements, the
+launch command, and pid handling are in
+[session-launch-and-cleanup.md](references/session-launch-and-cleanup.md); read it before
+launching.
+
+**Which session to use:** run `tap sessions` first. It does not show whether a session is
+headless, so treat any session you did not start as possibly headed: driving it can bring its
+browser up over the user's work. Use it only if the user is working in it or asked you to;
+otherwise start your own headless one, then continue with the core loop, passing
+`--session <your pid>` on **every** `tap` call. Without it, auto-selection prefers the
+lowest-pid session for the cwd, which is usually the user's older one. Drop `--headless` only if
+the user asks to watch.
+
+**You own every process you start, and must stop it** before your final answer and on every
+failure path. A headless session is invisible, so a leaked one silently burns CPU and memory.
+Never stop a session you did not start. Background it, record its launch pid and session pid, and stop the
+launch's process group by following the Stop procedure in
+[session-launch-and-cleanup.md](references/session-launch-and-cleanup.md). Also stop any dev
+server you started.
+
 ## Core loop
 
 ```bash
-npx cypress tap sessions                    # confirm a session; note pid if several exist
-npx cypress tap status                      # baseline startedAt + spec
-npx cypress tap run cypress/e2e/foo.cy.ts   # async — returns immediately
+npx cypress tap sessions                    # confirm a session and note its pid
+npx cypress tap status --session <pid>      # baseline startedAt + spec
+npx cypress tap run cypress/e2e/foo.cy.ts --session <pid>   # async — returns immediately
 # poll status until passed|failed for your spec with a changed startedAt
-npx cypress tap reporter
-npx cypress tap reporter --test-id r3       # one test: log, network, stubs, error
+npx cypress tap reporter --session <pid>
+npx cypress tap reporter --test-id r3 --session <pid>       # one test: log, network, stubs, error
 ```
+
+Omit `--session` only when `tap sessions` lists exactly one session and it is the one you mean
+to drive.
 
 `run` is asynchronous. A stale verdict matches a fresh one on every field except `startedAt`,
 and a watcher rerun of the **selected** spec can advance `startedAt` without running your file.
@@ -45,15 +73,18 @@ project pins Cypress.
   contains `tap`. Do not use `tap --help` to probe an unknown older build; prereleases below the
   version floor may attempt session discovery instead of printing help.
 - The session must use Electron, Chrome, Chromium, or Edge. Firefox and WebKit are unsupported.
-- `cypress open` and any configured `baseUrl` dev server must already be running.
+- A `cypress open` session and any configured `baseUrl` dev server must be running. Choose or
+  start the session as described in "Launch headless and clean up" above; stop any dev server
+  you started.
 - The cwd chooses both the Cypress binary and the automatically selected session. When the
   target project pins an older Cypress, run `tap` from a compatible checkout and pass
   `--session <pid>` on every call.
 
 ## Route by task
 
-- **Start, select, or poll a session:** read
-  [session-lifecycle.md](references/session-lifecycle.md).
+- **Start or stop a session (launch headless, clean up):** read
+  [session-launch-and-cleanup.md](references/session-launch-and-cleanup.md).
+- **Select or poll a session:** read [session-lifecycle.md](references/session-lifecycle.md).
 - **Run a spec or read its results:** read [session-lifecycle.md](references/session-lifecycle.md)
   and [reading-results.md](references/reading-results.md).
 - **Author or inspect a spec:** read [recipes.md](references/recipes.md) and
@@ -110,7 +141,9 @@ Blank and partial payloads from a successful `status` call occur transiently. Tr
 fields as "keep waiting," not as a state change. A nonzero `status` exit is a command failure,
 not a partial read: stop polling and report it.
 
-Only `passed` and `failed` are verdicts. A build failure is `failed` with the diagnostic in
+Only `passed` and `failed` are verdicts, but an exit-`0` `status: error` (config or setup broke)
+is a stop condition: stop polling, read `status`, and fix or restart rather than waiting out the
+loop. A build failure is `failed` with the diagnostic in
 `status.error`, possibly before any tests exist. `status` is the only surface that carries that
 diagnostic — `reporter` renders a failed build as an empty spec.
 

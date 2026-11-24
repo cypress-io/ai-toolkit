@@ -106,7 +106,7 @@ This skill is meant to help inform and support other Cypress skills.
 ### [`cypress-tap`](./cypress-tap)
 Drives a running Cypress open-mode session through `cypress tap` so your agent can run and rerun specs, inspect reporter and command logs, diagnose failures, and query or rewind the app under test without GUI interaction.
 
-Use it when authoring or debugging Cypress tests against an existing `cypress open` session. It requires Cypress 15.21 or later and a Chromium-family browser.
+Use it when authoring or debugging Cypress tests against an existing `cypress open` session. It requires Cypress 15.21 or later and a Chromium-family browser. Agents are guided to start their own sessions with `cypress open --headless` so they don't take focus from the user, and to stop every session they start.
 
 #### Example
 
